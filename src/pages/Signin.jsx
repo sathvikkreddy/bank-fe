@@ -6,12 +6,12 @@ export default function Signin() {
   const navigate = useNavigate();
   const [fields, setFields] = useState({ mobile: "", pin: "" });
   useEffect(() => {
-    const signedIn = true;
+    const signedIn = false;
     if (signedIn) navigate("/");
   }, []);
   const onSignin = async (e, fields) => {
     e.preventDefault();
-    alert("signed in");
+    navigate("/");
     //   const res = await axios.post(
     //     "http://127.0.0.1:8787/api/v1/user/signin",
     //     fields,

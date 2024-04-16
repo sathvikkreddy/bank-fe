@@ -1,23 +1,60 @@
+import { useNavigate } from "react-router-dom";
+
 export default function Appbar() {
+  const navigate = useNavigate();
+
   return (
-    <div className="flex items-center h-12 px-4 border-b gap-4 lg:gap-8">
-      <div className="flex items-center gap-2 text-lg font-medium cursor-pointer">
-        <CircleDollarSignIcon className="w-4 h-4" />
-        <span>Pay</span>
+    <div className="flex items-center h-12 px-4 border-b gap-4 lg:gap-8 bg-gray-100 sticky top-0 z-50">
+      <div
+        className="flex items-center gap-2 text-lg font-thin cursor-pointer rounded-md"
+        onClick={() => {
+          navigate("/");
+        }}
+      >
+        The Bank App
       </div>
-      <div className="flex items-center gap-2 text-lg font-medium cursor-pointer">
-        <WalletIcon className="w-4 h-4" />
+      <div
+        className="flex items-center gap-2 text-lg cursor-pointer"
+        onClick={() => {
+          navigate("/transfer");
+        }}
+      >
+        <TransferIcon className="w-4 h-4" />
+        <span>Transfer</span>
+      </div>
+      <div
+        className="flex items-center gap-2 text-lg cursor-pointer"
+        onClick={() => {
+          navigate("/loan");
+        }}
+      >
+        <LoanIcon className="w-4 h-4" />
         <span>Loan</span>
       </div>
-      <div className="flex items-center gap-2 text-lg font-medium cursor-pointer">
-        <UmbrellaIcon className="w-4 h-4" />
+      <div
+        className="flex items-center gap-2 text-lg cursor-pointer"
+        onClick={() => {
+          navigate("/insurance");
+        }}
+      >
+        <InsuranceIcon className="w-4 h-4" />
         <span>Insurance</span>
       </div>
-      <div className="flex items-center gap-2 text-lg font-medium cursor-pointer">
+      <div
+        className="flex items-center gap-2 text-lg cursor-pointer"
+        onClick={() => {
+          navigate("/transactions");
+        }}
+      >
         <TransactionsIcon className="w-4 h-4" />
         <span>Txns</span>
       </div>
-      <div className="flex items-center gap-2 text-lg font-medium cursor-pointer">
+      <div
+        className="flex items-center gap-2 text-lg cursor-pointer"
+        onClick={() => {
+          navigate("/bills");
+        }}
+      >
         <BillsIcon className="w-4 h-4" />
         <span>Bills</span>
       </div>
@@ -26,21 +63,11 @@ export default function Appbar() {
           className="rounded-full cursor-pointer"
           size="icon"
           variant="ghost"
+          onClick={() => {
+            navigate("/profile");
+          }}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
-            />
-          </svg>
+          <ProfileIcon className="w-6 h-6" />
 
           <span className="sr-only">Open user menu</span>
         </div>
@@ -49,7 +76,28 @@ export default function Appbar() {
   );
 }
 
-function CircleDollarSignIcon(props) {
+function ProfileIcon(props) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+      />
+    </svg>
+  );
+}
+
+function TransferIcon(props) {
   return (
     <svg
       {...props}
@@ -112,7 +160,7 @@ function BillsIcon(props) {
   );
 }
 
-function UmbrellaIcon(props) {
+function InsuranceIcon(props) {
   return (
     <svg
       {...props}
@@ -133,7 +181,7 @@ function UmbrellaIcon(props) {
   );
 }
 
-function WalletIcon(props) {
+function LoanIcon(props) {
   return (
     <svg
       {...props}

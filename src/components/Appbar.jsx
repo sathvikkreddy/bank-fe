@@ -4,73 +4,74 @@ export default function Appbar() {
   const navigate = useNavigate();
 
   return (
-    <div className="flex items-center h-12 px-4 border-b gap-4 lg:gap-8 bg-gray-100 sticky top-0 z-50">
-      <div
-        className="flex items-center gap-2 text-lg font-thin cursor-pointer rounded-md"
-        onClick={() => {
-          navigate("/");
-        }}
-      >
-        The Bank App
-      </div>
-      <div
-        className="flex items-center gap-2 text-lg cursor-pointer"
-        onClick={() => {
-          navigate("/transfer");
-        }}
-      >
-        <TransferIcon className="w-4 h-4" />
-        <span>Transfer</span>
-      </div>
-      <div
-        className="flex items-center gap-2 text-lg cursor-pointer"
-        onClick={() => {
-          navigate("/loan");
-        }}
-      >
-        <LoanIcon className="w-4 h-4" />
-        <span>Loan</span>
-      </div>
-      <div
-        className="flex items-center gap-2 text-lg cursor-pointer"
-        onClick={() => {
-          navigate("/insurance");
-        }}
-      >
-        <InsuranceIcon className="w-4 h-4" />
-        <span>Insurance</span>
-      </div>
-      <div
-        className="flex items-center gap-2 text-lg cursor-pointer"
-        onClick={() => {
-          navigate("/transactions");
-        }}
-      >
-        <TransactionsIcon className="w-4 h-4" />
-        <span>Txns</span>
-      </div>
-      <div
-        className="flex items-center gap-2 text-lg cursor-pointer"
-        onClick={() => {
-          navigate("/bills");
-        }}
-      >
-        <BillsIcon className="w-4 h-4" />
-        <span>Bills</span>
-      </div>
-      <div className="ml-auto flex items-center gap-4">
+    <div className="flex flex-col h-screen justify-between border-r-2">
+      <div className="flex flex-col px-4 gap-8 sticky top-0 z-50">
         <div
-          className="rounded-full cursor-pointer"
+          className="flex text-lg font-thin bg-gray-100 p-3 mt-3 cursor-pointer rounded-md"
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          The Bank App
+        </div>
+        <div
+          className="flex items-center gap-2 text-lg cursor-pointer"
+          onClick={() => {
+            navigate("/transfer");
+          }}
+        >
+          <TransferIcon className="w-4 h-4" />
+          <span>Transfer</span>
+        </div>
+        <div
+          className="flex items-center gap-2 text-lg cursor-pointer"
+          onClick={() => {
+            navigate("/loan");
+          }}
+        >
+          <LoanIcon className="w-4 h-4" />
+          <span>Loan</span>
+        </div>
+        <div
+          className="flex items-center gap-2 text-lg cursor-pointer"
+          onClick={() => {
+            navigate("/insurance");
+          }}
+        >
+          <InsuranceIcon className="w-4 h-4" />
+          <span>Insurance</span>
+        </div>
+        <div
+          className="flex items-center gap-2 text-lg cursor-pointer"
+          onClick={() => {
+            navigate("/transactions");
+          }}
+        >
+          <TransactionsIcon className="w-4 h-4" />
+          <span>Transactions</span>
+        </div>
+        <div
+          className="flex items-center gap-2 text-lg cursor-pointer"
+          onClick={() => {
+            navigate("/bills");
+          }}
+        >
+          <BillsIcon className="w-4 h-4" />
+          <span>Bills</span>
+        </div>
+      </div>
+      <div className="flex p-4">
+        <div
+          className="rounded-full cursor-pointer flex items-center pr-2"
           size="icon"
           variant="ghost"
           onClick={() => {
             navigate("/profile");
           }}
         >
-          <ProfileIcon className="w-6 h-6" />
-
-          <span className="sr-only">Open user menu</span>
+          <ProfileIcon className="w-5 h-5" />
         </div>
+        <div className="text-lg">Profile</div>
       </div>
     </div>
   );

@@ -9,7 +9,15 @@ export default function Signup() {
     const signedIn = false;
     if (signedIn) navigate("/");
   }, []);
-  const [fields, setFields] = useState({ name: "", mobile: "", pin: "" });
+  const [fields, setFields] = useState({
+    firstName: "",
+    lastName: "",
+    phoneNumber: "",
+    pin: "",
+    email: "",
+    address: "",
+    dob: "",
+  });
   const onSignup = async (e, fields) => {
     e.preventDefault();
     navigate("/");
@@ -29,37 +37,81 @@ export default function Signup() {
   return (
     <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2">
-        <div className="flex-1 space-y-8 bg-white p-10">
+        <div className="flex-1 space-y-5 bg-white py-4 px-10">
           <div>
             <h2 className="text-2xl font-extrabold text-gray-900">
               Create an account
             </h2>
-            <p className="mt-2 text-sm text-gray-600">
+            <p className="mt-1 text-sm text-gray-600">
               Already have an account?
               <Link className="font-medium px-2 underline" to="/signin">
                 Signin
               </Link>
             </p>
           </div>
-          <div className="space-y-6">
+          <div className="space-y-2">
             <div>
               <label
                 className="block text-sm font-medium text-gray-700"
-                htmlFor="name"
+                htmlFor="firstName"
               >
-                Name
+                First Name
               </label>
               <div className="mt-1">
                 <input
-                  autoComplete="name"
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                  id="name"
-                  name="name"
-                  placeholder="Enter your name"
+                  autoComplete="firstName"
+                  className="appearance-none block w-full px-3 py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  id="firstName"
+                  name="firstName"
+                  placeholder="Enter your first name"
                   required
                   type="text"
                   onChange={(e) =>
-                    setFields((c) => ({ ...c, name: e.target.value }))
+                    setFields((c) => ({ ...c, firstName: e.target.value }))
+                  }
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                className="block text-sm font-medium text-gray-700"
+                htmlFor="lastName"
+              >
+                Last Name
+              </label>
+              <div className="mt-1">
+                <input
+                  autoComplete="lastName"
+                  className="appearance-none block w-full px-3 py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  id="lastName"
+                  name="name"
+                  placeholder="Enter your lastName"
+                  required
+                  type="text"
+                  onChange={(e) =>
+                    setFields((c) => ({ ...c, lastName: e.target.value }))
+                  }
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                className="block text-sm font-medium text-gray-700"
+                htmlFor="phoneNumber"
+              >
+                Phone Number
+              </label>
+              <div className="mt-1">
+                <input
+                  autoComplete="phoneNumber"
+                  className="appearance-none block w-full px-3 py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  id="phoneNumber"
+                  name="phoneNumber"
+                  placeholder="9846763253"
+                  required
+                  type="text"
+                  onChange={(e) =>
+                    setFields((c) => ({ ...c, phoneNumber: e.target.value }))
                   }
                 />
               </div>
@@ -69,19 +121,19 @@ export default function Signup() {
                 className="block text-sm font-medium text-gray-700"
                 htmlFor="email"
               >
-                Mobile
+                Email
               </label>
               <div className="mt-1">
                 <input
-                  autoComplete="mobile"
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                  id="mobile"
-                  name="mobile"
-                  placeholder="978....506"
+                  autoComplete="email"
+                  className="appearance-none block w-full px-3 py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  id="email"
+                  name="email"
+                  placeholder="johndoe@gmail.com"
                   required
                   type="text"
                   onChange={(e) =>
-                    setFields((c) => ({ ...c, mobile: e.target.value }))
+                    setFields((c) => ({ ...c, email: e.target.value }))
                   }
                 />
               </div>
@@ -89,14 +141,36 @@ export default function Signup() {
             <div>
               <label
                 className="block text-sm font-medium text-gray-700"
-                htmlFor="password"
+                htmlFor="dob"
+              >
+                Date Of Birth
+              </label>
+              <div className="mt-1">
+                <input
+                  autoComplete="dob"
+                  className="appearance-none block w-full px-3 py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  id="dob"
+                  name="dob"
+                  placeholder="31-01-2001"
+                  required
+                  type="text"
+                  onChange={(e) =>
+                    setFields((c) => ({ ...c, dob: e.target.value }))
+                  }
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                className="block text-sm font-medium text-gray-700"
+                htmlFor="pin"
               >
                 Pin
               </label>
               <div className="mt-1">
                 <input
                   autoComplete="pin"
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  className="appearance-none block w-full px-3 py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   id="pin"
                   name="pin"
                   placeholder="1234"
@@ -108,7 +182,7 @@ export default function Signup() {
                 />
               </div>
             </div>
-            <div>
+            <div classname="">
               <button
                 className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-black hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
                 type="submit"

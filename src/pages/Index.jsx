@@ -34,7 +34,7 @@ const Index = () => {
   }, []);
 
   return (
-    <div>
+    <div className="flex flex-row">
       <Appbar />
       <Routes>
         <Route path="/" element={<div>Home</div>} />

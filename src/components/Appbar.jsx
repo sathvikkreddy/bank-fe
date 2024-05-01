@@ -60,14 +60,16 @@ export default function Appbar() {
           <span>Bills</span>
         </div>
       </div>
-      <div className="flex p-4">
+      <div
+        className="flex p-4 cursor-pointer"
+        onClick={() => {
+          navigate("/profile");
+        }}
+      >
         <div
-          className="rounded-full cursor-pointer flex items-center pr-2"
+          className="rounded-full flex items-center pr-2"
           size="icon"
           variant="ghost"
-          onClick={() => {
-            navigate("/profile");
-          }}
         >
           <ProfileIcon className="w-5 h-5" />
         </div>

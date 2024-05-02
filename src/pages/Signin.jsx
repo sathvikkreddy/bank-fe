@@ -1,10 +1,17 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import {
+  validatePIN,
+  validatePhoneNumber,
+  validateSigninForm,
+} from "../inputValidators";
 
 export default function Signin() {
   const navigate = useNavigate();
   const [fields, setFields] = useState({ phoneNumber: "", pin: "" });
+  const [warnings, setWarnings] = useState({ phoneNumber: " ", pin: " " });
+  let isValidForm = validateSigninForm(warnings);
   useEffect(() => {
     const signedIn = false;
     if (signedIn) navigate("/");
@@ -46,7 +53,10 @@ export default function Signin() {
                 className="block text-sm font-medium text-gray-700"
                 htmlFor="phoneNumber"
               >
-                Phone Number
+                Phone Number{" "}
+                <span className="text-red-500 text-xs font-thin">
+                  {warnings.phoneNumber}
+                </span>
               </label>
               <div className="mt-1">
                 <input
@@ -57,9 +67,20 @@ export default function Signin() {
                   placeholder="9786452506"
                   required
                   type="text"
-                  onChange={(e) =>
-                    setFields((c) => ({ ...c, phoneNumber: e.target.value }))
-                  }
+                  onChange={(e) => {
+                    setFields((c) => ({ ...c, phoneNumber: e.target.value }));
+                    if (!validatePhoneNumber(e.target.value)) {
+                      setWarnings((c) => ({
+                        ...c,
+                        phoneNumber: "* must be 10 digits",
+                      }));
+                    } else {
+                      setWarnings((c) => ({
+                        ...c,
+                        phoneNumber: "",
+                      }));
+                    }
+                  }}
                 />
               </div>
             </div>
@@ -68,7 +89,10 @@ export default function Signin() {
                 className="block text-sm font-medium text-gray-700"
                 htmlFor="pin"
               >
-                Pin
+                Pin{" "}
+                <span className="text-red-500 text-xs font-thin">
+                  {warnings.pin}
+                </span>
               </label>
               <div className="mt-1">
                 <input
@@ -79,17 +103,31 @@ export default function Signin() {
                   placeholder="1234"
                   required
                   type="password"
-                  onChange={(e) =>
-                    setFields((c) => ({ ...c, pin: e.target.value }))
-                  }
+                  onChange={(e) => {
+                    setFields((c) => ({ ...c, pin: e.target.value }));
+                    if (!validatePIN(e.target.value)) {
+                      setWarnings((c) => ({
+                        ...c,
+                        pin: "* must be 4 numerics",
+                      }));
+                    } else {
+                      setWarnings((c) => ({
+                        ...c,
+                        pin: "",
+                      }));
+                    }
+                  }}
                 />
               </div>
             </div>
             <div>
               <button
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-black hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
+                className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md bg-black shadow-sm text-sm font-medium text-white ${
+                  isValidForm ? "cursor-pointer" : "cursor-not-allowed"
+                } hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black`}
                 type="submit"
                 onClick={(e) => onSignin(e, fields)}
+                disabled={!isValidForm}
               >
                 Sign In
               </button>

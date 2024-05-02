@@ -1,6 +1,16 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import {
+  validateAddress,
+  validateDOB,
+  validateEmail,
+  validateFirstName,
+  validateLastName,
+  validatePIN,
+  validatePhoneNumber,
+  validateSignupForm,
+} from "../inputValidators";
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -18,6 +28,16 @@ export default function Signup() {
     address: "",
     dob: "",
   });
+  const [warnings, setWarnings] = useState({
+    firstName: " ",
+    lastName: " ",
+    phoneNumber: " ",
+    pin: " ",
+    email: " ",
+    address: " ",
+    dob: " ",
+  });
+  let isValidForm = validateSignupForm(warnings);
   const onSignup = async (e, fields) => {
     e.preventDefault();
     navigate("/");
@@ -55,7 +75,10 @@ export default function Signup() {
                 className="block text-sm font-medium text-gray-700"
                 htmlFor="firstName"
               >
-                First Name
+                First Name{" "}
+                <span className="text-red-500 text-xs font-thin">
+                  {warnings.firstName}
+                </span>
               </label>
               <div className="mt-1">
                 <input
@@ -66,9 +89,20 @@ export default function Signup() {
                   placeholder="Enter your first name"
                   required
                   type="text"
-                  onChange={(e) =>
-                    setFields((c) => ({ ...c, firstName: e.target.value }))
-                  }
+                  onChange={(e) => {
+                    setFields((c) => ({ ...c, firstName: e.target.value }));
+                    if (!validateFirstName(e.target.value)) {
+                      setWarnings((c) => ({
+                        ...c,
+                        firstName: "* must be 3-15 alphabets",
+                      }));
+                    } else {
+                      setWarnings((c) => ({
+                        ...c,
+                        firstName: "",
+                      }));
+                    }
+                  }}
                 />
               </div>
             </div>
@@ -77,7 +111,10 @@ export default function Signup() {
                 className="block text-sm font-medium text-gray-700"
                 htmlFor="lastName"
               >
-                Last Name
+                Last Name{" "}
+                <span className="text-red-500 text-xs font-thin">
+                  {warnings.lastName}
+                </span>
               </label>
               <div className="mt-1">
                 <input
@@ -85,12 +122,23 @@ export default function Signup() {
                   className="appearance-none block w-full px-3 py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   id="lastName"
                   name="name"
-                  placeholder="Enter your lastName"
+                  placeholder="Enter your last name"
                   required
                   type="text"
-                  onChange={(e) =>
-                    setFields((c) => ({ ...c, lastName: e.target.value }))
-                  }
+                  onChange={(e) => {
+                    setFields((c) => ({ ...c, lastName: e.target.value }));
+                    if (!validateLastName(e.target.value)) {
+                      setWarnings((c) => ({
+                        ...c,
+                        lastName: "* must be 3-15 alphabets",
+                      }));
+                    } else {
+                      setWarnings((c) => ({
+                        ...c,
+                        lastName: "",
+                      }));
+                    }
+                  }}
                 />
               </div>
             </div>
@@ -99,7 +147,10 @@ export default function Signup() {
                 className="block text-sm font-medium text-gray-700"
                 htmlFor="phoneNumber"
               >
-                Phone Number
+                Phone Number{" "}
+                <span className="text-red-500 text-xs font-thin">
+                  {warnings.phoneNumber}
+                </span>
               </label>
               <div className="mt-1">
                 <input
@@ -110,9 +161,20 @@ export default function Signup() {
                   placeholder="9846763253"
                   required
                   type="text"
-                  onChange={(e) =>
-                    setFields((c) => ({ ...c, phoneNumber: e.target.value }))
-                  }
+                  onChange={(e) => {
+                    setFields((c) => ({ ...c, phoneNumber: e.target.value }));
+                    if (!validatePhoneNumber(e.target.value)) {
+                      setWarnings((c) => ({
+                        ...c,
+                        phoneNumber: "* must be 10 digits",
+                      }));
+                    } else {
+                      setWarnings((c) => ({
+                        ...c,
+                        phoneNumber: "",
+                      }));
+                    }
+                  }}
                 />
               </div>
             </div>
@@ -121,7 +183,10 @@ export default function Signup() {
                 className="block text-sm font-medium text-gray-700"
                 htmlFor="email"
               >
-                Email
+                Email{" "}
+                <span className="text-red-500 text-xs font-thin">
+                  {warnings.email}
+                </span>
               </label>
               <div className="mt-1">
                 <input
@@ -132,9 +197,20 @@ export default function Signup() {
                   placeholder="johndoe@gmail.com"
                   required
                   type="text"
-                  onChange={(e) =>
-                    setFields((c) => ({ ...c, email: e.target.value }))
-                  }
+                  onChange={(e) => {
+                    setFields((c) => ({ ...c, email: e.target.value }));
+                    if (!validateEmail(e.target.value)) {
+                      setWarnings((c) => ({
+                        ...c,
+                        email: "* must be a valid email",
+                      }));
+                    } else {
+                      setWarnings((c) => ({
+                        ...c,
+                        email: "",
+                      }));
+                    }
+                  }}
                 />
               </div>
             </div>
@@ -143,7 +219,10 @@ export default function Signup() {
                 className="block text-sm font-medium text-gray-700"
                 htmlFor="dob"
               >
-                Date Of Birth
+                Date Of Birth{" "}
+                <span className="text-red-500 text-xs font-thin">
+                  {warnings.dob}
+                </span>
               </label>
               <div className="mt-1">
                 <input
@@ -154,9 +233,56 @@ export default function Signup() {
                   placeholder="31-01-2001"
                   required
                   type="text"
-                  onChange={(e) =>
-                    setFields((c) => ({ ...c, dob: e.target.value }))
-                  }
+                  onChange={(e) => {
+                    setFields((c) => ({ ...c, dob: e.target.value }));
+                    if (!validateDOB(e.target.value)) {
+                      setWarnings((c) => ({
+                        ...c,
+                        dob: "* must be in DD-MM-YYYY format",
+                      }));
+                    } else {
+                      setWarnings((c) => ({
+                        ...c,
+                        dob: "",
+                      }));
+                    }
+                  }}
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                className="block text-sm font-medium text-gray-700"
+                htmlFor="address"
+              >
+                Address{" "}
+                <span className="text-red-500 text-xs font-thin">
+                  {warnings.address}
+                </span>
+              </label>
+              <div className="mt-1">
+                <input
+                  autoComplete="address"
+                  className="appearance-none block w-full px-3 py-1 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  id="address"
+                  name="address"
+                  placeholder="Enter address"
+                  required
+                  type="text"
+                  onChange={(e) => {
+                    setFields((c) => ({ ...c, pin: e.target.value }));
+                    if (!validateAddress(e.target.value)) {
+                      setWarnings((c) => ({
+                        ...c,
+                        address: "* must be less than 40 characters",
+                      }));
+                    } else {
+                      setWarnings((c) => ({
+                        ...c,
+                        address: "",
+                      }));
+                    }
+                  }}
                 />
               </div>
             </div>
@@ -165,7 +291,10 @@ export default function Signup() {
                 className="block text-sm font-medium text-gray-700"
                 htmlFor="pin"
               >
-                Pin
+                Pin{" "}
+                <span className="text-red-500 text-xs font-thin">
+                  {warnings.pin}
+                </span>
               </label>
               <div className="mt-1">
                 <input
@@ -176,17 +305,31 @@ export default function Signup() {
                   placeholder="1234"
                   required
                   type="password"
-                  onChange={(e) =>
-                    setFields((c) => ({ ...c, pin: e.target.value }))
-                  }
+                  onChange={(e) => {
+                    setFields((c) => ({ ...c, pin: e.target.value }));
+                    if (!validatePIN(e.target.value)) {
+                      setWarnings((c) => ({
+                        ...c,
+                        pin: "* must be 4 numerics",
+                      }));
+                    } else {
+                      setWarnings((c) => ({
+                        ...c,
+                        pin: "",
+                      }));
+                    }
+                  }}
                 />
               </div>
             </div>
-            <div classname="">
+            <div className="">
               <button
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-black hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
+                className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md bg-black shadow-sm text-sm font-medium text-white ${
+                  isValidForm ? "cursor-pointer" : "cursor-not-allowed"
+                } hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black`}
                 type="submit"
                 onClick={(e) => onSignup(e, fields)}
+                disabled={!isValidForm}
               >
                 Sign Up
               </button>

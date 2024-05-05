@@ -38,7 +38,12 @@ export default function Component() {
     if (transactionTypeFilter && transactionTypeFilter !== 'All' && transaction.transactionType !== transactionTypeFilter) {
       return false;
     }
-    if (dateRangeFilter && new Date(transaction.date).toLocaleDateString('en-US', { month: '2-digit', year: 'numeric' }) !== dateRangeFilter) {
+    const transactionDate = new Date(transaction.date);
+    const filterDate = new Date(dateRangeFilter);
+    const transactionMonthYearString = `${transactionDate.getMonth() + 1}/${transactionDate.getFullYear()}`;
+    const filterMonthYearString = `${filterDate.getMonth() + 1}/${filterDate.getFullYear()}`;
+    
+    if (dateRangeFilter && transactionMonthYearString !== filterMonthYearString) {
       return false;
     }
     return true;

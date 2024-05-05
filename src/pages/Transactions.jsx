@@ -129,7 +129,6 @@ export default function Component() {
     Transfer
   </button>
 </div>
-
         {showConfirmation && (
           <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
             <div className="bg-white p-8 rounded-md shadow-md">

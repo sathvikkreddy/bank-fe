@@ -1,17 +1,17 @@
 import React from "react";
-import { useState } from 'react';
+import { useState } from "react";
 export default function Component() {
-  const [senderAccount, setSenderAccount] = useState('');
-  const [receiverAccount, setReceiverAccount] = useState('');
-  const [amount, setAmount] = useState('');
-  const [transactionType, setTransactionType] = useState('');
+  const [senderAccount, setSenderAccount] = useState("");
+  const [receiverAccount, setReceiverAccount] = useState("");
+  const [amount, setAmount] = useState("");
+  const [transactionType, setTransactionType] = useState("");
   const [transactions, setTransactions] = useState([]);
-  const [transactionTypeFilter, setTransactionTypeFilter] = useState('');
-  const [dateRangeFilter, setDateRangeFilter] = useState('');
+  const [transactionTypeFilter, setTransactionTypeFilter] = useState("");
+  const [dateRangeFilter, setDateRangeFilter] = useState("");
   const [showConfirmation, setShowConfirmation] = useState(false);
   const handleTransfer = () => {
     if (!senderAccount || !receiverAccount || !amount || !transactionType) {
-      alert('Please fill all the details before transferring.');
+      alert("Please fill all the details before transferring.");
       return;
     }
     setShowConfirmation(true);
@@ -24,26 +24,37 @@ export default function Component() {
       transactionType,
       date: new Date().toLocaleDateString(),
       time: new Date().toLocaleTimeString(),
-      status: 'Successful', // Assuming status starts as pending
+      status: "Successful", // Assuming status starts as pending
     };
     setTransactions([...transactions, newTransaction]);
     // Clear input fields after transfer
-    setSenderAccount('');
-    setReceiverAccount('');
-    setAmount('');
-    setTransactionType('');
+    setSenderAccount("");
+    setReceiverAccount("");
+    setAmount("");
+    setTransactionType("");
     setShowConfirmation(false);
   };
   const filteredTransactions = transactions.filter((transaction) => {
-    if (transactionTypeFilter && transactionTypeFilter !== 'All' && transaction.transactionType !== transactionTypeFilter) {
+    if (
+      transactionTypeFilter &&
+      transactionTypeFilter !== "All" &&
+      transaction.transactionType !== transactionTypeFilter
+    ) {
       return false;
     }
     const transactionDate = new Date(transaction.date);
     const filterDate = new Date(dateRangeFilter);
-    const transactionMonthYearString = `${transactionDate.getMonth() + 1}/${transactionDate.getFullYear()}`;
-    const filterMonthYearString = `${filterDate.getMonth() + 1}/${filterDate.getFullYear()}`;
-    
-    if (dateRangeFilter && transactionMonthYearString !== filterMonthYearString) {
+    const transactionMonthYearString = `${
+      transactionDate.getMonth() + 1
+    }/${transactionDate.getFullYear()}`;
+    const filterMonthYearString = `${
+      filterDate.getMonth() + 1
+    }/${filterDate.getFullYear()}`;
+
+    if (
+      dateRangeFilter &&
+      transactionMonthYearString !== filterMonthYearString
+    ) {
       return false;
     }
     return true;
@@ -127,13 +138,13 @@ export default function Component() {
           </div>
         </div>
         <div className="flex justify-end mb-6">
-  <button
-    className="bg-gray-500 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded-md disabled:opacity-50 disabled:cursor-not-allowed"
-    onClick={handleTransfer}
-  >
-    Transfer
-  </button>
-</div>
+          <button
+            className="bg-gray-500 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded-md disabled:opacity-50 disabled:cursor-not-allowed"
+            onClick={handleTransfer}
+          >
+            Transfer
+          </button>
+        </div>
         {showConfirmation && (
           <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
             <div className="bg-white p-8 rounded-md shadow-md">
@@ -190,23 +201,45 @@ export default function Component() {
             <table className="w-full table-auto">
               <thead>
                 <tr className="bg-gray-100 dark:bg-gray-800">
-                  <th className="px-4 py-2 text-left text-sm font-medium">S.No.</th>
-                  <th className="px-4 py-2 text-left text-sm font-medium">Sender Account</th>
-                  <th className="px-4 py-2 text-left text-sm font-medium">Receiver Account</th>
-                  <th className="px-4 py-2 text-left text-sm font-medium">Transaction Type</th>
-                  <th className="px-4 py-2 text-left text-sm font-medium">Amount</th>
-                  <th className="px-4 py-2 text-left text-sm font-medium">Date</th>
-                  <th className="px-4 py-2 text-left text-sm font-medium">Time</th>
-                  <th className="px-4 py-2 text-left text-sm font-medium">Status</th>
+                  <th className="px-4 py-2 text-left text-sm font-medium">
+                    S.No.
+                  </th>
+                  <th className="px-4 py-2 text-left text-sm font-medium">
+                    Sender Account
+                  </th>
+                  <th className="px-4 py-2 text-left text-sm font-medium">
+                    Receiver Account
+                  </th>
+                  <th className="px-4 py-2 text-left text-sm font-medium">
+                    Transaction Type
+                  </th>
+                  <th className="px-4 py-2 text-left text-sm font-medium">
+                    Amount
+                  </th>
+                  <th className="px-4 py-2 text-left text-sm font-medium">
+                    Date
+                  </th>
+                  <th className="px-4 py-2 text-left text-sm font-medium">
+                    Time
+                  </th>
+                  <th className="px-4 py-2 text-left text-sm font-medium">
+                    Status
+                  </th>
                 </tr>
               </thead>
               <tbody>
                 {filteredTransactions.map((transaction, index) => (
                   <tr key={index} className="border-b dark:border-gray-700">
                     <td className="px-4 py-2 text-sm">{index + 1}</td>
-                    <td className="px-4 py-2 text-sm">{transaction.senderAccount}</td>
-                    <td className="px-4 py-2 text-sm">{transaction.receiverAccount}</td>
-                    <td className="px-4 py-2 text-sm">{transaction.transactionType}</td>
+                    <td className="px-4 py-2 text-sm">
+                      {transaction.senderAccount}
+                    </td>
+                    <td className="px-4 py-2 text-sm">
+                      {transaction.receiverAccount}
+                    </td>
+                    <td className="px-4 py-2 text-sm">
+                      {transaction.transactionType}
+                    </td>
                     <td className="px-4 py-2 text-sm">{transaction.amount}</td>
                     <td className="px-4 py-2 text-sm">{transaction.date}</td>
                     <td className="px-4 py-2 text-sm">{transaction.time}</td>

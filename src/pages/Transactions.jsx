@@ -1,6 +1,5 @@
 import React from "react";
 import { useState } from 'react';
-
 export default function Component() {
   const [senderAccount, setSenderAccount] = useState('');
   const [receiverAccount, setReceiverAccount] = useState('');
@@ -10,16 +9,13 @@ export default function Component() {
   const [transactionTypeFilter, setTransactionTypeFilter] = useState('');
   const [dateRangeFilter, setDateRangeFilter] = useState('');
   const [showConfirmation, setShowConfirmation] = useState(false);
-
   const handleTransfer = () => {
     if (!senderAccount || !receiverAccount || !amount || !transactionType) {
       alert('Please fill all the details before transferring.');
       return;
     }
-
     setShowConfirmation(true);
   };
-
   const confirmTransfer = () => {
     const newTransaction = {
       senderAccount,
@@ -30,7 +26,6 @@ export default function Component() {
       time: new Date().toLocaleTimeString(),
       status: 'Successful', // Assuming status starts as pending
     };
-
     setTransactions([...transactions, newTransaction]);
     // Clear input fields after transfer
     setSenderAccount('');
@@ -39,7 +34,6 @@ export default function Component() {
     setTransactionType('');
     setShowConfirmation(false);
   };
-
   const filteredTransactions = transactions.filter((transaction) => {
     if (transactionTypeFilter && transactionTypeFilter !== 'All' && transaction.transactionType !== transactionTypeFilter) {
       return false;
@@ -49,7 +43,6 @@ export default function Component() {
     }
     return true;
   });
-
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="bg-white dark:bg-gray-950 rounded-lg shadow-md p-6">

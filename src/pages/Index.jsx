@@ -8,6 +8,8 @@ import Transfer from "./Transfer";
 import Transactions from "./Transactions";
 import Insurance from "./Insurance";
 import Profile from "./Profile";
+import Home from "./Home";
+import Card from "../components/Card";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -34,17 +36,28 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="flex flex-row">
-      <Appbar />
-      <Routes>
-        <Route path="/" element={<div>Home</div>} />
-        <Route path="/transactions" element={<Transactions />} />
-        <Route path="/insurance" element={<Insurance />} />
-        <Route path="/transfer" element={<Transfer />} />
-        <Route path="/bills" element={<Bills />} />
-        <Route path="/loan" element={<Loan />} />
-        <Route path="/profile" element={<Profile />} />
-      </Routes>
+    <div className="flex w-full h-screen">
+      <div className="flex-none fixed top-0 left-0 h-full">
+        <Appbar />
+      </div>
+      <div className="flex-auto ml-[164px] overflow-y-auto">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <div className="w-full h-full">
+                <Card title={"Home"}>{"children"}</Card>
+              </div>
+            }
+          />
+          <Route path="/transactions" element={<Transactions />} />
+          <Route path="/insurance" element={<Insurance />} />
+          <Route path="/transfer" element={<Transfer />} />
+          <Route path="/bills" element={<Bills />} />
+          <Route path="/loan" element={<Loan />} />
+          <Route path="/profile" element={<Profile />} />
+        </Routes>
+      </div>
     </div>
   );
 };

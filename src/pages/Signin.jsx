@@ -11,6 +11,7 @@ export default function Signin() {
   const navigate = useNavigate();
   const [fields, setFields] = useState({ phoneNumber: "", pin: "" });
   const [warnings, setWarnings] = useState({ phoneNumber: " ", pin: " " });
+  const [errorMessage, setErrorMessage] = useState("");
   let isValidForm = validateSigninForm(warnings);
   useEffect(() => {
     const signedIn = false;
@@ -18,19 +19,29 @@ export default function Signin() {
   }, []);
   const onSignin = async (e, fields) => {
     e.preventDefault();
-    navigate("/");
-    //   const res = await axios.post(
-    //     "http://127.0.0.1:8787/api/v1/user/signin",
-    //     fields,
-    //     {
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //     }
-    //   );
-    //   const token = res.data.token;
-    //   localStorage.setItem("authorization", `Bearer ${token}`);
-    //   navigate("/blogs");
+    // navigate("/");
+    const reqBody = {
+      phoneNumber: Number(fields.phoneNumber),
+      pin: Number(fields.pin),
+    };
+    try {
+      const res = await axios.post(
+        "https://techbuzzers.somee.com/signin",
+        reqBody,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const token = res.data.token;
+      console.log(token);
+      localStorage.setItem("authorization", token);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      setErrorMessage(JSON.stringify(error.response.data));
+    }
   };
   return (
     <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
@@ -131,6 +142,9 @@ export default function Signin() {
               >
                 Sign In
               </button>
+            </div>
+            <div className="font-thin text-red-500 text-sm pt-4">
+              {errorMessage}
             </div>
           </div>
         </div>

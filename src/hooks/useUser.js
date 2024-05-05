@@ -1,12 +1,39 @@
 import axios from "axios";
+import { useState, useEffect } from "react";
 
-export default useUser = async () => {
-  const response = await axios.get("https://api.example.com/data", {
-    headers: {
-      Authorization: "Bearer YOUR_ACCESS_TOKEN",
-      "Content-Type": "application/json",
-    },
-  });
-  const user = response.body;
-  return user;
-};
+function useUserDetails() {
+  const [userDetails, setUserDetails] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      try {
+        // Replace this with your logic to fetch user details
+        const token = localStorage.getItem("authorization");
+        if (!token) new Error("Unauthorized");
+        setIsLoading(true);
+        const userResponse = await axios.get(
+          "https://techbuzzers.somee.com/GetAllUserDetails",
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: token,
+            },
+          }
+        );
+        setUserDetails(userResponse.data);
+      } catch (err) {
+        setError(err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchUserDetails();
+  }, []);
+
+  return { userDetails, isLoading, error };
+}
+
+export default useUserDetails;

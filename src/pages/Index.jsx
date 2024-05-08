@@ -40,7 +40,7 @@ const Index = () => {
       <div className="flex-none fixed top-0 left-0 h-full">
         <Appbar />
       </div>
-      <div className="flex-auto ml-[174px] overflow-y-auto">
+      <div className="flex-auto ml-[178px] overflow-y-auto">
         <Routes>
           <Route path="/" element={<HomeIndex />} />
           <Route path="/transactions" element={<TransactionsIndex />} />

@@ -4,10 +4,10 @@ export default function Appbar() {
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex-col h-full justify-between border-r-2">
+    <div className="flex flex-col h-full justify-between border-r shadow-md">
       <div className="flex flex-col px-4 gap-8 top-0 z-50">
         <div
-          className="flex text-lg font-thin bg-gray-100 p-3 mt-3 cursor-pointer rounded-md"
+          className="flex text-lg font-light bg-gray-300 p-3 mt-3 cursor-pointer rounded-md"
           onClick={() => {
             navigate("/");
           }}

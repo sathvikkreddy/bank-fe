@@ -1,5 +1,5 @@
 # React + Vite
 
 To run this locally
-npm i
+npm i, 
 npm run dev

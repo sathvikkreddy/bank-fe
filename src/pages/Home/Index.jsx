@@ -2,9 +2,11 @@ import React from "react";
 import Card from "../../components/Card";
 import PageTitle from "../../components/PageTitle";
 import Button from "../../components/Button";
-import { useNavigate } from "react-router-dom";
-
+import { json, useNavigate } from "react-router-dom";
+import useUser from "../../hooks/useUser";
+import { capitalize } from "../../utils/stringUtils";
 const Home = () => {
+  const { profile, isLoading, error } = useUser();
   const navigate = useNavigate();
   const handleManageAccountClick = () => {
     // navigate("/profile");
@@ -26,7 +28,7 @@ const Home = () => {
   const user = {
     userId: "USR59277434",
     userDetails: {
-      firstName: "Madam",
+      firstName: "yudd",
       lastName: "Curie",
       phoneNumber: 8309032688,
       email: "mcurie@curified.com",
@@ -52,32 +54,38 @@ const Home = () => {
       },
     ],
   };
-  return (
+  return isLoading ? (
+    <div>loading</div>
+  ) : (
     <div>
       <PageTitle title={"Home"} />
       <div className="font-light text-2xl p-2">
-        Welcome, {user.userDetails.firstName + " " + user.userDetails.lastName}
+        Welcome,{" "}
+        <span className="font-semibold">
+          {capitalize(profile.userDetails.firstName) +
+            " " +
+            capitalize(profile.userDetails.lastName)}
+        </span>
       </div>
-      <div className="flex gap-6 justify-around p-2">
+      <div className="flex gap-4 justify-around p-2">
         <div className="w-1/2 flex-1">
-          <Card title={`Account: ${user.accounts[0].accountName}`}>
+          <Card title={`Account: ${profile.accounts[0].accountName}`}>
             <div className="flex flex-col justify-between h-full">
               <div className="flex flex-col gap-4">
                 <div className="text-grey-500 text-xl font-light">
                   <span className="font-semibold">ID: </span>
-                  {user.accounts[0].id}
+                  {profile.accounts[0].id}
                 </div>
                 <div className="text-grey-500 text-xl font-light">
                   <span className="font-semibold">Balance: </span>
-                  {user.accounts[0].balance}
+                  {profile.accounts[0].balance}
                 </div>
-                {user.accounts[0].loans.length !== 0 ? (
+                {profile.accounts[0].loans.length !== 0 ? (
                   <div className="text-grey-500 flex gap-2 text-xl font-light">
                     <span className="font-semibold">Active Loans: </span>
-                    {user.accounts[0].loans.map((loan) => {
+                    {profile.accounts[0].loans.map((loan) => {
                       return <div key={loan.id}>{loan.name + ","}</div>;
                     })}
-                    {/* <Button title={"Manage"} onClick={handleManageLoansClick} /> */}
                   </div>
                 ) : null}
               </div>

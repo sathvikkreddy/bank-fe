@@ -37,6 +37,8 @@ export default function Signin() {
       const token = res.data.token;
       console.log(token);
       localStorage.setItem("authorization", token);
+      const localStorageToken = localStorage.getItem("authorization");
+      console.log("local storage token = ", localStorageToken);
       navigate("/");
     } catch (error) {
       console.log(error);
@@ -65,7 +67,7 @@ export default function Signin() {
                 htmlFor="phoneNumber"
               >
                 Phone Number{" "}
-                <span className="text-red-500 text-xs font-thin">
+                <span className="text-red-500 text-xs font-light">
                   {warnings.phoneNumber}
                 </span>
               </label>
@@ -101,7 +103,7 @@ export default function Signin() {
                 htmlFor="pin"
               >
                 Pin{" "}
-                <span className="text-red-500 text-xs font-thin">
+                <span className="text-red-500 text-xs font-light">
                   {warnings.pin}
                 </span>
               </label>
@@ -143,7 +145,7 @@ export default function Signin() {
                 Sign In
               </button>
             </div>
-            <div className="font-thin text-red-500 text-sm pt-4">
+            <div className="font-light text-red-500 text-sm pt-4">
               {errorMessage}
             </div>
           </div>

@@ -1,39 +1,42 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-function useUserDetails() {
-  const [userDetails, setUserDetails] = useState(null);
+function useUser() {
+  const [profile, setProfile] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchUserDetails = async () => {
-      try {
-        // Replace this with your logic to fetch user details
-        const token = localStorage.getItem("authorization");
-        if (!token) new Error("Unauthorized");
-        setIsLoading(true);
-        const userResponse = await axios.get(
-          "https://techbuzzers.somee.com/GetAllUserDetails",
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: token,
-            },
-          }
-        );
-        setUserDetails(userResponse.data);
-      } catch (err) {
-        setError(err);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+  const fetchUserDetails = async () => {
+    try {
+      const token = localStorage.getItem("authorization");
+      if (!token) throw new Error("Unauthorized: Token not found");
 
-    fetchUserDetails();
+      setIsLoading(true);
+      const userResponse = await axios.get(
+        "https://techbuzzers.somee.com/GetUserDetails",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      setProfile(userResponse.data);
+      setIsLoading(false);
+      return userResponse.data;
+    } catch (err) {
+      setError(err.message);
+      setIsLoading(false);
+      return null;
+    }
+  };
+
+  useEffect(() => {
+    fetchUserDetails().then();
   }, []);
 
-  return { userDetails, isLoading, error };
+  return { profile, isLoading, error };
 }
 
-export default useUserDetails;
+export default useUser;

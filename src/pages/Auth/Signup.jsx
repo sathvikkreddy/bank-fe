@@ -77,9 +77,6 @@ export default function Signup() {
           },
         }
       );
-      // const token = res.data.token;
-      // console.log("token:", token);
-      // localStorage.setItem("authorization", token);
       console.log("signup success");
       navigate("/signin");
     } catch (error) {
@@ -96,7 +93,7 @@ export default function Signup() {
             htmlFor="firstName"
           >
             First Name{" "}
-            <span className="text-red-500 text-xs font-thin">
+            <span className="text-red-500 text-xs font-light">
               {warnings.firstName}
             </span>
           </label>
@@ -133,7 +130,7 @@ export default function Signup() {
             htmlFor="lastName"
           >
             Last Name{" "}
-            <span className="text-red-500 text-xs font-thin">
+            <span className="text-red-500 text-xs font-light">
               {warnings.lastName}
             </span>
           </label>
@@ -170,7 +167,7 @@ export default function Signup() {
             htmlFor="fatherName"
           >
             Father Name{" "}
-            <span className="text-red-500 text-xs font-thin">
+            <span className="text-red-500 text-xs font-light">
               {warnings.fatherName}
             </span>
           </label>
@@ -206,7 +203,7 @@ export default function Signup() {
               htmlFor="address"
             >
               Address{" "}
-              <span className="text-red-500 text-xs font-thin">
+              <span className="text-red-500 text-xs font-light">
                 {warnings.address}
               </span>
             </label>
@@ -243,7 +240,7 @@ export default function Signup() {
               htmlFor="dob"
             >
               DOB{" "}
-              <span className="text-red-500 text-xs font-thin">
+              <span className="text-red-500 text-xs font-light">
                 {warnings.dob}
               </span>
             </label>
@@ -280,7 +277,7 @@ export default function Signup() {
               htmlFor="dob"
             >
               Gender{" "}
-              <span className="text-red-500 text-xs font-thin">
+              <span className="text-red-500 text-xs font-light">
                 {warnings.gender}
               </span>
             </label>
@@ -324,7 +321,7 @@ export default function Signup() {
             htmlFor="phoneNumber"
           >
             Phone Number{" "}
-            <span className="text-red-500 text-xs font-thin">
+            <span className="text-red-500 text-xs font-light">
               {warnings.phoneNumber}
             </span>
           </label>
@@ -361,7 +358,7 @@ export default function Signup() {
             htmlFor="email"
           >
             Email{" "}
-            <span className="text-red-500 text-xs font-thin">
+            <span className="text-red-500 text-xs font-light">
               {warnings.email}
             </span>
           </label>
@@ -398,7 +395,7 @@ export default function Signup() {
             htmlFor="aadhar"
           >
             Aadhar{" "}
-            <span className="text-red-500 text-xs font-thin">
+            <span className="text-red-500 text-xs font-light">
               {warnings.aadhar}
             </span>
           </label>
@@ -435,7 +432,7 @@ export default function Signup() {
             htmlFor="pan"
           >
             Pan{" "}
-            <span className="text-red-500 text-xs font-thin">
+            <span className="text-red-500 text-xs font-light">
               {warnings.pan}
             </span>
           </label>
@@ -472,7 +469,7 @@ export default function Signup() {
             htmlFor="pin"
           >
             Set your pin{" "}
-            <span className="text-red-500 text-xs font-thin">
+            <span className="text-red-500 text-xs font-light">
               {warnings.pin}
             </span>
           </label>
@@ -508,8 +505,8 @@ export default function Signup() {
   };
   const page3 = () => {
     function shortenString(str) {
-      if (str.length > 30) {
-        return str.substring(0, 30) + "...";
+      if (str.length > 28) {
+        return str.substring(0, 28) + "...";
       } else {
         return str;
       }
@@ -543,12 +540,12 @@ export default function Signup() {
           </div>
         </div>
         {isValidForm ? null : (
-          <div className="font-thin text-red-500 text-sm pt-4">
-            All fields must be valid to signup
+          <div className="font-light text-red-500 text-sm pt-4">
+            * All fields must be valid to signup
           </div>
         )}
         {
-          <div className="font-thin text-red-500 text-sm pt-4">
+          <div className="font-light text-red-500 text-sm pt-4">
             {errorMessage}
           </div>
         }

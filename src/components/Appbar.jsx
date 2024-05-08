@@ -17,15 +17,6 @@ export default function Appbar() {
         <div
           className="flex items-center gap-2 text-lg cursor-pointer"
           onClick={() => {
-            navigate("/transfer");
-          }}
-        >
-          <TransferIcon className="w-4 h-4" />
-          <span>Transfer</span>
-        </div>
-        <div
-          className="flex items-center gap-2 text-lg cursor-pointer"
-          onClick={() => {
             navigate("/loan");
           }}
         >

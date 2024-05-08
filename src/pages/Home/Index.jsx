@@ -1,7 +1,7 @@
 import React from "react";
-import Card from "../components/Card";
-import PageTitle from "../components/PageTitle";
-import Button from "../components/Button";
+import Card from "../../components/Card";
+import PageTitle from "../../components/PageTitle";
+import Button from "../../components/Button";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {

@@ -2,14 +2,14 @@ import React, { useEffect } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Appbar from "../components/Appbar";
 import axios from "axios";
-import Loan from "./Loan";
-import Bills from "./Bills";
-import Transfer from "./Transfer";
-import Transactions from "./Transactions";
-import Insurance from "./Insurance";
-import Profile from "./Profile";
-import Home from "./Home";
+import LoanIndex from "./Loan/Index";
+import BillIndex from "./Bill/Index";
+import TransactionsIndex from "./Transaction/Index";
+import InsuranceIndex from "./Insurance/Index";
+import ProfileIndex from "./Profile/Index";
+import HomeIndex from "./Home/Index";
 import Card from "../components/Card";
+import NotFound from "./NotFound";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -42,13 +42,13 @@ const Index = () => {
       </div>
       <div className="flex-auto ml-[174px] overflow-y-auto">
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/transactions" element={<Transactions />} />
-          <Route path="/insurance" element={<Insurance />} />
-          <Route path="/transfer" element={<Transfer />} />
-          <Route path="/bills" element={<Bills />} />
-          <Route path="/loan" element={<Loan />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/" element={<HomeIndex />} />
+          <Route path="/transactions" element={<TransactionsIndex />} />
+          <Route path="/insurance" element={<InsuranceIndex />} />
+          <Route path="/bills" element={<BillIndex />} />
+          <Route path="/loan" element={<LoanIndex />} />
+          <Route path="/profile" element={<ProfileIndex />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
     </div>

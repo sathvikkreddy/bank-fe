@@ -14,7 +14,7 @@ import {
   validatePan,
   validatePhoneNumber,
   validateSignupForm,
-} from "../inputValidators";
+} from "../../inputValidators";
 
 export default function Signup() {
   const navigate = useNavigate();

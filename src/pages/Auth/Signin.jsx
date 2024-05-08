@@ -5,7 +5,7 @@ import {
   validatePIN,
   validatePhoneNumber,
   validateSigninForm,
-} from "../inputValidators";
+} from "../../inputValidators";
 
 export default function Signin() {
   const navigate = useNavigate();

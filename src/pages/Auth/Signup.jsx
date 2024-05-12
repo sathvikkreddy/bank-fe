@@ -20,7 +20,7 @@ export default function Signup() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const signedIn = false;
+    const signedIn = true;
     if (signedIn) navigate("/");
   }, []);
   const [page, setPage] = useState(1);

@@ -1,28 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import Appbar from "../components/Appbar";
-const Index = () => {
+const Index = (props) => {
   const navigate = useNavigate();
   useEffect(() => {
-    // send request to /me api endpoint and set the signedIn accordingly
-    // const token = localStorage.getItem("token")
-    // const headers = {
-    //   "Authorization": token,
-    //   "Content-Type": "application/json",
-    // };
-    // axios.get("http://localhost:3000/me", { headers }).then((res) => {
-    //   let signedIn =false
-    //   if(res.status === 200) signedIn = true;
-    //   if (!signedIn) {
-    //     navigate("/signin");
-    //   }
-    // });
-
-    //hard code
-    const signedIn = true;
-    if (!signedIn) {
-      navigate("/signin");
-    }
+    const token = localStorage.getItem("token");
+    if (!token) navigate("/signin");
   }, []);
 
   return (

@@ -1,11 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  validatePIN,
-  validatePhoneNumber,
-  validateSigninForm,
-} from "../../inputValidators";
+import { validatePIN, validatePhoneNumber, validateSigninForm } from "../../inputValidators";
 
 export default function Signin() {
   const navigate = useNavigate();
@@ -14,8 +10,8 @@ export default function Signin() {
   const [errorMessage, setErrorMessage] = useState("");
   let isValidForm = validateSigninForm(warnings);
   useEffect(() => {
-    const signedIn = true;
-    if (signedIn) navigate("/");
+    const token = localStorage.getItem("token");
+    if (token) navigate("/");
   }, []);
   const onSignin = async (e, fields) => {
     e.preventDefault();
@@ -25,15 +21,11 @@ export default function Signin() {
       pin: Number(fields.pin),
     };
     try {
-      const res = await axios.post(
-        "https://techbuzzers.somee.com/signin",
-        reqBody,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const res = await axios.post("https://techbuzzers.somee.com/signin", reqBody, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       const token = res.data.token;
       console.log(token);
       localStorage.setItem("authorization", token);
@@ -50,9 +42,7 @@ export default function Signin() {
       <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2">
         <div className="flex-1 space-y-8 bg-white p-10">
           <div>
-            <h2 className="text-2xl font-extrabold text-gray-900">
-              Sign in into your account
-            </h2>
+            <h2 className="text-2xl font-extrabold text-gray-900">Sign in into your account</h2>
             <p className="mt-2 text-sm text-gray-600">
               Don't have an account?
               <Link className="font-medium underline px-2" to="/signup">
@@ -62,14 +52,8 @@ export default function Signin() {
           </div>
           <div className="space-y-3">
             <div>
-              <label
-                className="block text-sm font-medium text-gray-700"
-                htmlFor="phoneNumber"
-              >
-                Phone Number{" "}
-                <span className="text-red-500 text-xs font-light">
-                  {warnings.phoneNumber}
-                </span>
+              <label className="block text-sm font-medium text-gray-700" htmlFor="phoneNumber">
+                Phone Number <span className="text-red-500 text-xs font-light">{warnings.phoneNumber}</span>
               </label>
               <div className="mt-1">
                 <input
@@ -98,14 +82,8 @@ export default function Signin() {
               </div>
             </div>
             <div>
-              <label
-                className="block text-sm font-medium text-gray-700"
-                htmlFor="pin"
-              >
-                Pin{" "}
-                <span className="text-red-500 text-xs font-light">
-                  {warnings.pin}
-                </span>
+              <label className="block text-sm font-medium text-gray-700" htmlFor="pin">
+                Pin <span className="text-red-500 text-xs font-light">{warnings.pin}</span>
               </label>
               <div className="mt-1">
                 <input
@@ -134,38 +112,22 @@ export default function Signin() {
               </div>
             </div>
             <div>
-              <button
-                className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md bg-black shadow-sm text-sm font-medium text-white ${
-                  isValidForm ? "cursor-pointer" : "cursor-not-allowed"
-                } hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black`}
-                type="submit"
-                onClick={(e) => onSignin(e, fields)}
-                disabled={!isValidForm}
-              >
+              <button className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md bg-black shadow-sm text-sm font-medium text-white ${isValidForm ? "cursor-pointer" : "cursor-not-allowed"} hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black`} type="submit" onClick={(e) => onSignin(e, fields)} disabled={!isValidForm}>
                 Sign In
               </button>
             </div>
-            <div className="font-light text-red-500 text-sm pt-4">
-              {errorMessage}
-            </div>
+            <div className="font-light text-red-500 text-sm pt-4">{errorMessage}</div>
           </div>
         </div>
         <div className="flex items-center justify-center invisible sm:visible ">
           <div className="relative bg-gray-100 rounded-lg p-8 text-gray-600">
-            <svg
-              aria-hidden="true"
-              className="absolute top-0 right-0 h-8 w-8 text-gray-200 transform translate-x-1/2 -translate-y-1/2"
-              fill="currentColor"
-              viewBox="0 0 32 32"
-            >
+            <svg aria-hidden="true" className="absolute top-0 right-0 h-8 w-8 text-gray-200 transform translate-x-1/2 -translate-y-1/2" fill="currentColor" viewBox="0 0 32 32">
               <path d="M9.333 7h13.334C24.403 7 26 8.597 26 10.667v10.666C26 23.403 24.403 25 22.667 25H9.333C7.597 25 6 23.403 6 21.333V10.667C6 8.597 7.597 7 9.333 7z" />
             </svg>
             <p className="text-2xl font-extrabold">Team Tech Buzzers</p>
             <footer className="mt-4">
               <p className="text-4xl font-thin">The Bank App</p>
-              <p className="text-base font-thin text-gray-500 py-5">
-                Sign in to experience all the features and get benifits.
-              </p>
+              <p className="text-base font-thin text-gray-500 py-5">Sign in to experience all the features and get benifits.</p>
             </footer>
           </div>
         </div>

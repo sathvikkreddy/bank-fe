@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Signup from "./pages/Auth/Signup";
 import Signin from "./pages/Auth/Signin";
 import { Route, Routes } from "react-router-dom";
@@ -12,8 +11,6 @@ import ProfileIndex from "./pages/Profile/Index";
 import HomeIndex from "./pages/Home/Index";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <Routes>
       <Route path="/" element={<Index />}>

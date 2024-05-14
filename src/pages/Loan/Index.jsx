@@ -1,12 +1,12 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import NotFound from "../NotFound";
-import Goldloan from "./Goldloan";
+import Gold from "./Gold";
 const Loan = () => {
   return (
     <Routes>
       <Route path="/" element={<div>Loan</div>} />
-      <Route path="/goldloan" element={<Goldloan/>} />
+      <Route path="/goldloan" element={<Gold/>} />
       <Route path="/personalloan" element={<div>personalLoan</div>} />
       <Route path="*" element={<NotFound />} />
     </Routes>

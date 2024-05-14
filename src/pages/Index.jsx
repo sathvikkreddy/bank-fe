@@ -4,7 +4,7 @@ import Appbar from "../components/Appbar";
 const Index = (props) => {
   const navigate = useNavigate();
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("authorization");
     if (!token) navigate("/signin");
   }, []);
 

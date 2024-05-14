@@ -10,7 +10,7 @@ export default function Signin() {
   const [errorMessage, setErrorMessage] = useState("");
   let isValidForm = validateSigninForm(warnings);
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("authorization");
     if (token) navigate("/");
   }, []);
   const onSignin = async (e, fields) => {

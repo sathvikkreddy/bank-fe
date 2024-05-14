@@ -1,12 +1,16 @@
 import React from "react";
-import Button from "../../components/Button";
+import { Route, Routes } from "react-router-dom";
+import NotFound from "../NotFound";
 
 const Bills = () => {
   return (
-    <div>
-      Bills
-      <Button title={"Bills"} onClick={() => {}} />
-    </div>
+    <Routes>
+      <Route path="/" element={<div>Bills</div>} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+    // create your own pages by adding new <Route/> by default the path has /yourmodule, just specify page name for path
+    // Ex: for life insurance page in insurance add <Route path="/life" element={your component} />
+    // do not include full url in path like <Route path="/insurance/life" element={your component} />
   );
 };
 

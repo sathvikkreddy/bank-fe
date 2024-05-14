@@ -15,12 +15,11 @@ function App() {
     <Routes>
       <Route path="/" element={<Index />}>
         <Route path="/" element={<HomeIndex />} />
-        <Route path="/transactions" element={<TransactionsIndex />} />
-        <Route path="/insurance" element={<InsuranceIndex />} />
-        <Route path="/insurance/personal" element={<div>{"personal insurance"}</div>} />
-        <Route path="/bills" element={<BillIndex />} />
-        <Route path="/loan" element={<LoanIndex />} />
-        <Route path="/profile" element={<ProfileIndex />} />
+        <Route path="/transactions/*" element={<TransactionsIndex />} />
+        <Route path="/insurance/*" element={<InsuranceIndex />} />
+        <Route path="/bills/*" element={<BillIndex />} />
+        <Route path="/loan/*" element={<LoanIndex />} />
+        <Route path="/profile/*" element={<ProfileIndex />} />
       </Route>
       <Route exact path="/signup" element={<Signup />} />
       <Route exact path="/signin" element={<Signin />} />

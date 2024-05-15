@@ -3,10 +3,10 @@ import Card from "../../components/Card";
 import PageTitle from "../../components/PageTitle";
 import Button from "../../components/Button";
 import { json, useNavigate } from "react-router-dom";
-import useUser from "../../hooks/useUser";
+import useGetUser from "../../hooks/useGetUser";
 import { capitalize } from "../../utils/stringUtils";
 const Home = () => {
-  // const { profile, isLoading, error } = useUser();
+  const { profile, error, isLoading } = useGetUser();
   const navigate = useNavigate();
   const handleManageAccountClick = () => {
     // navigate("/profile");
@@ -15,9 +15,6 @@ const Home = () => {
   const handleActionClick = (link) => {
     console.log(link);
   };
-  const handleManageLoansClick = () => {
-    console.log("loan managed");
-  };
   const quickActions = [
     { name: "action1", link: "#" },
     { name: "action2", link: "#" },
@@ -25,48 +22,43 @@ const Home = () => {
     { name: "action4", link: "#" },
     { name: "action5", link: "#" },
   ];
-  const isLoading = false;
-  const profile = {
-    userId: "USR59277434",
-    userDetails: {
-      firstName: "yudd",
-      lastName: "Curie",
-      phoneNumber: 8309032688,
-      email: "mcurie@curified.com",
-      fatherName: "Father Curie",
-      adhaarNumber: 696969696969,
-      panNumber: "6969696969",
-      gender: "Female",
-      dob: "2002-11-21T00:00:00",
-      address: "48-477, ganesh nagar , chintal, quthubullapur , medchal.",
-      pin: 0,
-    },
-    accounts: [
-      {
-        id: "ACN16988738",
-        accountName: "DefaultAccount",
-        userId: "USR59277434",
-        balance: 5000,
-        transactions: [],
-        loans: [
-          { id: "1", name: "Personal" },
-          { id: "2", name: "Gold" },
-        ],
-      },
-    ],
-  };
+  // const isLoading = false;
+  // const profile = {
+  //   userId: "USR59277434",
+  //   userDetails: {
+  //     firstName: "yudd",
+  //     lastName: "Curie",
+  //     phoneNumber: 8309032688,
+  //     email: "mcurie@curified.com",
+  //     fatherName: "Father Curie",
+  //     adhaarNumber: 696969696969,
+  //     panNumber: "6969696969",
+  //     gender: "Female",
+  //     dob: "2002-11-21T00:00:00",
+  //     address: "48-477, ganesh nagar , chintal, quthubullapur , medchal.",
+  //     pin: 0,
+  //   },
+  //   accounts: [
+  //     {
+  //       id: "ACN16988738",
+  //       accountName: "DefaultAccount",
+  //       userId: "USR59277434",
+  //       balance: 5000,
+  //       transactions: [],
+  //       loans: [
+  //         { id: "1", name: "Personal" },
+  //         { id: "2", name: "Gold" },
+  //       ],
+  //     },
+  //   ],
+  // };
   return isLoading ? (
     <div>loading</div>
   ) : (
     <div>
       <PageTitle title={"Home"} />
       <div className="font-light text-2xl p-2">
-        Welcome,{" "}
-        <span className="font-semibold">
-          {capitalize(profile.userDetails.firstName) +
-            " " +
-            capitalize(profile.userDetails.lastName)}
-        </span>
+        Welcome, <span className="font-semibold">{capitalize(profile.userDetails.firstName) + " " + capitalize(profile.userDetails.lastName)}</span>
       </div>
       <div className="flex gap-4 justify-around p-2">
         <div className="w-1/2 flex-1">
@@ -91,10 +83,7 @@ const Home = () => {
                 ) : null}
               </div>
               <div>
-                <Button
-                  title={"Manage Account"}
-                  onClick={handleManageAccountClick}
-                />
+                <Button onClick={handleManageAccountClick} title={"Manage Account"} />
               </div>
             </div>
           </Card>
@@ -105,10 +94,7 @@ const Home = () => {
               <div className="col-span-10 gap-2 grid grid-cols-1">
                 {quickActions.map((action) => {
                   return (
-                    <div
-                      key={action.name}
-                      className="text-lg flex items-center"
-                    >
+                    <div key={action.name} className="text-lg flex items-center">
                       {action.name}
                     </div>
                   );

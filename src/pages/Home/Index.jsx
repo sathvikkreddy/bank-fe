@@ -3,27 +3,16 @@ import Card from "../../components/Card";
 import PageTitle from "../../components/PageTitle";
 import Button from "../../components/Button";
 import Dropdown from "../../components/Dropdown";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import { fetchUserDetails } from "../../utils/fetchUserDetails";
 import { fetchUserTransactions } from "../../utils/fetchUserTransactions";
 import { capitalize } from "../../utils/stringUtils";
 import { BalancesChart } from "../../components/BalancesChart";
 const Home = () => {
-  const [profile, setProfile] = useState(null);
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [transactions, setTransactions] = useState(null);
-  const [selectedAccount, setSelectedAccount] = useState(null);
-  useEffect(() => {
-    fetchUserDetails().then((profile) => {
-      setProfile(profile);
-      setSelectedAccount(profile.accounts[0]);
-      fetchUserTransactions().then((transactions) => {
-        setTransactions(transactions);
-        setIsLoading(false);
-      });
-    });
-  }, []);
+  const [profile, isLoading, transactions] = useOutletContext();
+  const [selectedAccount, setSelectedAccount] = useState(profile.accounts[0]);
+  console.log("profile = ", profile);
+  console.log("isLoading = ", isLoading);
   const navigate = useNavigate();
   const handleManageAccountClick = () => {
     // navigate("/profile");

@@ -1,12 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Card from "../../components/Card";
 import PageTitle from "../../components/PageTitle";
 import Button from "../../components/Button";
-import { json, useNavigate } from "react-router-dom";
-import useGetUser from "../../hooks/useGetUser";
+import Dropdown from "../../components/Dropdown";
+import { useNavigate } from "react-router-dom";
+import { fetchUserDetails } from "../../utils/fetchUserDetails";
+import { fetchUserTransactions } from "../../utils/fetchUserTransactions";
 import { capitalize } from "../../utils/stringUtils";
+import { BalancesChart } from "../../components/BalancesChart";
 const Home = () => {
-  const { profile, error, isLoading } = useGetUser();
+  const [profile, setProfile] = useState(null);
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [transactions, setTransactions] = useState(null);
+  const [selectedAccount, setSelectedAccount] = useState(null);
+  useEffect(() => {
+    fetchUserDetails().then((profile) => {
+      setProfile(profile);
+      setSelectedAccount(profile.accounts[0]);
+      fetchUserTransactions().then((transactions) => {
+        setTransactions(transactions);
+        setIsLoading(false);
+      });
+    });
+  }, []);
   const navigate = useNavigate();
   const handleManageAccountClick = () => {
     // navigate("/profile");
@@ -19,8 +36,6 @@ const Home = () => {
     { name: "action1", link: "#" },
     { name: "action2", link: "#" },
     { name: "action3", link: "#" },
-    { name: "action4", link: "#" },
-    { name: "action5", link: "#" },
   ];
   // const isLoading = false;
   // const profile = {
@@ -61,61 +76,60 @@ const Home = () => {
         Welcome, <span className="font-semibold">{capitalize(profile.userDetails.firstName) + " " + capitalize(profile.userDetails.lastName)}</span>
       </div>
       <div className="flex gap-4 justify-around p-2">
-        <div className="w-1/2 flex-1">
-          <Card title={`Account: ${profile.accounts[0].accountName}`}>
-            <div className="flex flex-col justify-between h-full">
-              <div className="flex flex-col gap-4">
-                <div className="text-grey-500 text-xl font-light">
-                  <span className="font-semibold">ID: </span>
-                  {profile.accounts[0].id}
-                </div>
-                <div className="text-grey-500 text-xl font-light">
-                  <span className="font-semibold">Balance: </span>
-                  {profile.accounts[0].balance}
-                </div>
-                {profile.accounts[0].loans.length !== 0 ? (
-                  <div className="text-grey-500 flex gap-2 text-xl font-light">
-                    <span className="font-semibold">Active Loans: </span>
-                    {profile.accounts[0].loans.map((loan) => {
-                      return <div key={loan.id}>{loan.name + ","}</div>;
-                    })}
-                  </div>
-                ) : null}
-              </div>
-              <div>
-                <Button onClick={handleManageAccountClick} title={"Manage Account"} />
-              </div>
-            </div>
+        <div className="w-2/3" name="chart">
+          <Card title={"Your money this month"}>
+            <BalancesChart transactions={transactions.filter((txn) => txn.debitId === selectedAccount.id || txn.creditId === selectedAccount.id)} />
           </Card>
         </div>
-        <div className="w-1/2 flex-1">
-          <Card title={"Quick Actions"}>
-            <div className="grid grid-cols-12">
-              <div className="col-span-10 gap-2 grid grid-cols-1">
-                {quickActions.map((action) => {
-                  return (
-                    <div key={action.name} className="text-lg flex items-center">
-                      {action.name}
-                    </div>
-                  );
-                })}
+        <div className="w-1/3">
+          <div className="h-1/2 pb-2">
+            <Card title={<Dropdown options={profile.accounts} setSelectedAccount={setSelectedAccount} />}>
+              <div className="flex flex-col justify-between h-full">
+                <div className="flex flex-col gap-4">
+                  <div className="text-grey-500 text-xl font-light">
+                    <span className="font-semibold">ID: </span>
+                    {selectedAccount.id}
+                  </div>
+                  <div className="text-grey-500 text-xl font-light">
+                    <span className="font-semibold">Balance: </span>
+                    {selectedAccount.balance}
+                  </div>
+                </div>
+                <div>
+                  <Button onClick={handleManageAccountClick} title={"Manage Account"} />
+                </div>
               </div>
-              <div className="col-span-2 gap-2 grid grid-cols-1">
-                {quickActions.map((action) => {
-                  return (
-                    <div key={action.name} className="py-1">
-                      <Button
-                        title={"->"}
-                        onClick={() => {
-                          handleActionClick(action.link);
-                        }}
-                      ></Button>
-                    </div>
-                  );
-                })}
+            </Card>
+          </div>
+          <div className="h-1/2">
+            <Card title={"Quick Actions"}>
+              <div className="grid grid-cols-12">
+                <div className="col-span-10 gap-2 grid grid-cols-1">
+                  {quickActions.map((action) => {
+                    return (
+                      <div key={action.name} className="text-lg flex items-center">
+                        {action.name}
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className="col-span-2 gap-2 grid grid-cols-1">
+                  {quickActions.map((action) => {
+                    return (
+                      <div key={action.name} className="py-1">
+                        <Button
+                          title={"->"}
+                          onClick={() => {
+                            handleActionClick(action.link);
+                          }}
+                        ></Button>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
-          </Card>
+            </Card>
+          </div>
         </div>
       </div>
     </div>
@@ -123,3 +137,33 @@ const Home = () => {
 };
 
 export default Home;
+
+// <div className="w-1/2 flex-1">
+//   <Card title={"Quick Actions"}>
+//     <div className="grid grid-cols-12">
+//       <div className="col-span-10 gap-2 grid grid-cols-1">
+//         {quickActions.map((action) => {
+//           return (
+//             <div key={action.name} className="text-lg flex items-center">
+//               {action.name}
+//             </div>
+//           );
+//         })}
+//       </div>
+//       <div className="col-span-2 gap-2 grid grid-cols-1">
+//         {quickActions.map((action) => {
+//           return (
+//             <div key={action.name} className="py-1">
+//               <Button
+//                 title={"->"}
+//                 onClick={() => {
+//                   handleActionClick(action.link);
+//                 }}
+//               ></Button>
+//             </div>
+//           );
+//         })}
+//       </div>
+//     </div>
+//   </Card>
+// </div>;

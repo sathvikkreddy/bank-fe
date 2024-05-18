@@ -30,7 +30,7 @@ const HealthInsurance = () => {
 
   const [selectedType, setSelectedType] = useState(null);
   const [pin, setPin] = useState('');
-  const [showPopup, setShowPopup] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const handleTypeSelect = (type) => {
     setSelectedType(type);
@@ -40,19 +40,14 @@ const HealthInsurance = () => {
     // Logic for buying the selected insurance plan
     // Assuming user's actual pin is '1234'
     if (pin === '1234') {
-      setShowPopup(true);
+      setShowSuccessModal(true);
     } else {
       alert("Incorrect PIN. Please try again.");
     }
   };
 
   const handlePopupClose = () => {
-    setShowPopup(false);
-  };
-
-  const handleNavigateToInsurance = () => {
-    // Navigate to the insurance main page (Insurance.jsx)
-    window.location.href = '/insurance';
+    setShowSuccessModal(false);
   };
 
   return (
@@ -86,7 +81,6 @@ const HealthInsurance = () => {
             <h2 className="text-2xl font-bold mb-4">Insurance Policy Details</h2>
             <p><strong>Plan name:</strong> {healthInsuranceTypes[selectedType - 1].name}</p>
             <p><strong>Coverage Amount:</strong> {healthInsuranceTypes[selectedType - 1].coverageAmount}</p>
-
             <p><strong>Premium Amount:</strong> {healthInsuranceTypes[selectedType - 1].premiumAmount}</p>
             <p><strong>Duration:</strong> {healthInsuranceTypes[selectedType - 1].duration}</p>
             <div className="mt-4">
@@ -109,18 +103,12 @@ const HealthInsurance = () => {
 
       </div>
 
-      {/* Popup for successful purchase */}
-      {showPopup && (
+      {/* Success modal */}
+      {showSuccessModal && (
         <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex items-center justify-center">
           <div className="bg-white p-8 rounded-lg">
             <p className="text-xl font-semibold mb-4">Successfully purchased health policy!</p>
             <div className="flex justify-end">
-              <button
-                className="text-black-500 font-semibold mr-4"
-                onClick={handleNavigateToInsurance}
-              >
-                My active plans
-              </button>
               <button
                 className="text-red-500 font-semibold"
                 onClick={handlePopupClose}
@@ -131,6 +119,7 @@ const HealthInsurance = () => {
           </div>
         </div>
       )}
+
     </div>
   );
 };

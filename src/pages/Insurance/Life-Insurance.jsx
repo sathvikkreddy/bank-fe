@@ -66,7 +66,7 @@ const LifeInsurance = () => {
 
   return (
     <div className="p-8 leading-relaxed">
-      <PageTitle title="Life Insurance" />
+        <PageTitle title="Life Insurance" />
       <div className="mt-8">
         <h2 className="text-2xl font-bold mb-4">Description of Life Insurance</h2>
         <p className="text-black">{lifeInsuranceDescription}</p>
@@ -84,7 +84,7 @@ const LifeInsurance = () => {
                 {type.name}
               </span>
               {expandedTypes.includes(type.id) && (
-                <div className="text-black mt-2">{type.description}</div>
+                <p className="text-black mt-2">{type.description}</p>
               )}
             </li>
           ))}
@@ -99,8 +99,11 @@ const LifeInsurance = () => {
           Register for New Insurance Policy
         </button>
       </div>
+
     </div>
   );
 };
 
 export default LifeInsurance;
+
+

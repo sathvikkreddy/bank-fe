@@ -8,6 +8,7 @@ export default function Signin() {
   const [fields, setFields] = useState({ phoneNumber: "", pin: "" });
   const [warnings, setWarnings] = useState({ phoneNumber: " ", pin: " " });
   const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   let isValidForm = validateSigninForm(warnings);
   useEffect(() => {
     const token = localStorage.getItem("authorization");
@@ -15,12 +16,12 @@ export default function Signin() {
   }, []);
   const onSignin = async (e, fields) => {
     e.preventDefault();
-    // navigate("/");
     const reqBody = {
       phoneNumber: Number(fields.phoneNumber),
       pin: Number(fields.pin),
     };
     try {
+      setIsLoading(true);
       const res = await axios.post("https://techbuzzers.somee.com/signin", reqBody, {
         headers: {
           "Content-Type": "application/json",
@@ -31,8 +32,10 @@ export default function Signin() {
       localStorage.setItem("authorization", token);
       const localStorageToken = localStorage.getItem("authorization");
       console.log("local storage token = ", localStorageToken);
+      setIsLoading(false);
       navigate("/");
     } catch (error) {
+      setIsLoading(false);
       console.log(error);
       setErrorMessage(JSON.stringify(error.response.data));
     }
@@ -112,8 +115,8 @@ export default function Signin() {
               </div>
             </div>
             <div>
-              <button className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md bg-black shadow-sm text-sm font-medium text-white ${isValidForm ? "cursor-pointer" : "cursor-not-allowed"} hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black`} type="submit" onClick={(e) => onSignin(e, fields)} disabled={!isValidForm}>
-                Sign In
+              <button className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md bg-black shadow-sm text-sm font-medium text-white ${isValidForm && !isLoading ? "cursor-pointer" : "cursor-not-allowed"} hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black`} type="submit" onClick={(e) => onSignin(e, fields)} disabled={!isValidForm}>
+                {`${isLoading ? "Signing In" : "Sign In"}`}
               </button>
             </div>
             <div className="font-light text-red-500 text-sm pt-4">{errorMessage}</div>

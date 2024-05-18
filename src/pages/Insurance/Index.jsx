@@ -1,11 +1,19 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import NotFound from "../NotFound";
+import MainInsurance from "./insurance";
+import LifeInsurance from "./Life-Insurance";
+import HealthInsurance from "./Health-Insurance"
+import VehicleInsurance from "./Vehicle-Insurance";
 
-const Insurance = () => {
+
+const Index = () => {
   return (
     <Routes>
-      <Route path="/" element={<div>Insurance</div>} />
+      <Route path="/" element={<MainInsurance/>} />
+      <Route path="/life" element={<LifeInsurance/>} />
+      <Route path="health/" element={<HealthInsurance/>} />
+      <Route path="/vehicle" element={<VehicleInsurance/>} />
       <Route path="*" element={<NotFound />} />
     </Routes>
     // create your own pages by adding new <Route/> by default the path has /yourmodule, just specify page name for path
@@ -14,4 +22,4 @@ const Insurance = () => {
   );
 };
 
-export default Insurance;
+export default Index;

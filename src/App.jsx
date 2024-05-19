@@ -9,6 +9,7 @@ import TransactionsIndex from "./pages/Transaction/Index";
 import InsuranceIndex from "./pages/Insurance/Index";
 import ProfileIndex from "./pages/Profile/Index";
 import HomeIndex from "./pages/Home/Index";
+import AccountIndex from "./pages/Account/Index";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/insurance/*" element={<InsuranceIndex />} />
         <Route path="/bills/*" element={<BillIndex />} />
         <Route path="/loan/*" element={<LoanIndex />} />
+        <Route path="/account/*" element={<AccountIndex />} />
         <Route path="/profile/*" element={<ProfileIndex />} />
       </Route>
       <Route exact path="/signup" element={<Signup />} />

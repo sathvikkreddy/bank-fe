@@ -21,33 +21,31 @@ function getDatesOfCurrentMonth() {
   return datesArray;
 }
 
-function getBalancesOfCurrentMonth(transactions) {
-  // Get the current date, month, and year
+function getBalancesOfCurrentMonth(transactions, accountId) {
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
   const currentMonth = currentDate.getMonth();
   const currentDay = currentDate.getDate();
 
-  // Initialize an array to store balances for each day of the current month up to today
   const balances = new Array(currentDay).fill(null);
 
-  // Filter transactions for the current month
+  // Filter transactions for the current month and for the specific account ID
   const currentMonthTransactions = transactions.filter((transaction) => {
     const transactionDate = new Date(transaction.timestamp);
-    return transactionDate.getFullYear() === currentYear && transactionDate.getMonth() === currentMonth;
+    return transactionDate.getFullYear() === currentYear && transactionDate.getMonth() === currentMonth && (transaction.debitId === accountId || transaction.creditId === accountId);
   });
 
   let startingBalance = 0;
 
   if (currentMonthTransactions.length > 0) {
-    // Start from the opening balance of the first transaction of the month
-    startingBalance = currentMonthTransactions[0].openingBalance;
+    const firstTransaction = currentMonthTransactions[0];
+    startingBalance = firstTransaction.debitId === accountId ? firstTransaction.debitOpeningBalance : firstTransaction.creditOpeningBalance;
   } else if (transactions.length > 0) {
-    // Start from the closing balance of the latest transaction if no transactions in the current month
-    startingBalance = transactions[transactions.length - 1].closingBalance;
+    const latestTransaction = transactions.find((transaction) => transaction.debitId === accountId || transaction.creditId === accountId);
+    if (latestTransaction) {
+      startingBalance = latestTransaction.debitId === accountId ? latestTransaction.debitClosingBalance : latestTransaction.creditClosingBalance;
+    }
   }
-
-  // Group transactions by their date
   const transactionsByDate = currentMonthTransactions.reduce((acc, transaction) => {
     const date = new Date(transaction.timestamp).getDate();
     if (!acc[date]) {
@@ -57,14 +55,12 @@ function getBalancesOfCurrentMonth(transactions) {
     return acc;
   }, {});
 
-  // Get the closing balance of the last transaction for each day
   Object.keys(transactionsByDate).forEach((date) => {
     const dayTransactions = transactionsByDate[date];
     const lastTransaction = dayTransactions[dayTransactions.length - 1];
-    balances[date - 1] = lastTransaction.closingBalance;
+    balances[date - 1] = lastTransaction.debitId === accountId ? lastTransaction.debitClosingBalance : lastTransaction.creditClosingBalance;
   });
 
-  // Fill in the days with no transactions
   for (let i = 0; i < balances.length; i++) {
     if (balances[i] === null) {
       balances[i] = i === 0 ? startingBalance : balances[i - 1];
@@ -84,14 +80,15 @@ export const options = {
   },
 };
 
-export const BalancesChart = ({ transactions }) => {
+export const BalancesChart = ({ transactions, selectedAccount }) => {
   const labels = getDatesOfCurrentMonth();
+  const response = getBalancesOfCurrentMonth(transactions, selectedAccount.id);
   const data = {
     labels,
     datasets: [
       {
         label: "Balance",
-        data: getBalancesOfCurrentMonth(transactions),
+        data: response,
         borderColor: "black",
         borderWidth: 1,
         pointRadius: 2,

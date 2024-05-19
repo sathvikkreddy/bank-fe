@@ -11,12 +11,98 @@ import { BalancesChart } from "../../components/BalancesChart";
 const Home = () => {
   const [profile, isLoading, transactions] = useOutletContext();
   const [selectedAccount, setSelectedAccount] = useState(profile.accounts[0]);
-  console.log("profile = ", profile);
-  console.log("isLoading = ", isLoading);
+  const fakeId = selectedAccount.id;
+  const fakeTransactions = [
+    {
+      id: "TRN23698460",
+      timestamp: "2024-05-13T21:37:37.8320749",
+      amount: 10,
+      debitId: fakeId,
+      creditId: "ACN38803722",
+      debitUserId: "USR92596727",
+      creditUserId: "USR87104898",
+      debitUserName: "",
+      creditUserName: "",
+      creditOpeningBalance: 0,
+      creditClosingBalance: 10,
+      debitOpeningBalance: 5000,
+      debitClosingBalance: 4990,
+      transactionType: "",
+      status: "completed",
+    },
+    {
+      id: "TRN28874454",
+      timestamp: "2024-05-14T05:58:49.7297965",
+      amount: 10,
+      debitId: fakeId,
+      creditId: "ACN38803722",
+      debitUserId: "USR68600851",
+      creditUserId: "USR87104898",
+      debitUserName: "string string",
+      creditUserName: "string string",
+      creditOpeningBalance: 10,
+      creditClosingBalance: 20,
+      debitOpeningBalance: 4990,
+      debitClosingBalance: 4980,
+      transactionType: "UserToUser Transfer",
+      status: "completed",
+    },
+    {
+      id: "TRN33759272",
+      timestamp: "2024-05-15T05:59:29.8009416",
+      amount: 2000,
+      debitId: "ACN98619068",
+      creditId: fakeId,
+      debitUserId: "USR68600851",
+      creditUserId: "USR87104898",
+      debitUserName: "string string",
+      creditUserName: "string string",
+      creditOpeningBalance: 20,
+      creditClosingBalance: 2020,
+      debitOpeningBalance: 4980,
+      debitClosingBalance: 2980,
+      transactionType: "UserToUser Transfer",
+      status: "completed",
+    },
+    {
+      id: "TRN45101796",
+      timestamp: "2024-05-16T05:59:47.5089639",
+      amount: 20,
+      debitId: fakeId,
+      creditId: "ACN98619068",
+      debitUserId: "USR68600851",
+      creditUserId: "USR87104898",
+      debitUserName: "string string",
+      creditUserName: "string string",
+      creditOpeningBalance: 2980,
+      creditClosingBalance: 3000,
+      debitOpeningBalance: 2020,
+      debitClosingBalance: 2000,
+      transactionType: "UserToUser Transfer",
+      status: "completed",
+    },
+    {
+      id: "TRN46080593",
+      timestamp: "2024-05-17T22:05:10.6263439",
+      amount: 500,
+      debitId: "ACN98619068",
+      creditId: fakeId,
+      debitUserId: "USR92596727",
+      creditUserId: "USR87104898",
+      debitUserName: "",
+      creditUserName: "",
+      creditOpeningBalance: 3000,
+      creditClosingBalance: 2500,
+      debitOpeningBalance: 2000,
+      debitClosingBalance: 2500,
+      transactionType: "",
+      status: "completed",
+    },
+  ];
   const navigate = useNavigate();
   const handleManageAccountClick = () => {
-    // navigate("/profile");
-    console.log("account managed");
+    navigate("/account");
+    // console.log("account managed");
   };
   const handleActionClick = (link) => {
     console.log(link);
@@ -50,15 +136,13 @@ const Home = () => {
   //       balance: 5000,
   //       transactions: [],
   //       loans: [
-  //         { id: "1", name: "Personal" },
-  //         { id: "2", name: "Gold" },
+  //         { id: "ACN98619068", name: "Personal" },
+  //         { id: "ACN38803722", name: "Gold" },
   //       ],
   //     },
   //   ],
   // };
-  return isLoading ? (
-    <div>loading</div>
-  ) : (
+  return (
     <div>
       <PageTitle title={"Home"} />
       <div className="font-light text-2xl p-2">
@@ -67,7 +151,7 @@ const Home = () => {
       <div className="flex gap-4 justify-around p-2">
         <div className="w-2/3" name="chart">
           <Card title={"Your money this month"}>
-            <BalancesChart transactions={transactions.filter((txn) => txn.debitId === selectedAccount.id || txn.creditId === selectedAccount.id)} />
+            <BalancesChart transactions={fakeTransactions} selectedAccount={selectedAccount} />
           </Card>
         </div>
         <div className="w-1/3">

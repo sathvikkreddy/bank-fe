@@ -10,12 +10,14 @@ import InsuranceIndex from "./pages/Insurance/Index";
 import ProfileIndex from "./pages/Profile/Index";
 import HomeIndex from "./pages/Home/Index";
 import AccountIndex from "./pages/Account/Index";
+import NotificationIndex from "./pages/Notification/Index";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Index />}>
         <Route path="/" element={<HomeIndex />} />
+        <Route path="/notifications" element={<NotificationIndex />} />
         <Route path="/transactions/*" element={<TransactionsIndex />} />
         <Route path="/insurance/*" element={<InsuranceIndex />} />
         <Route path="/bills/*" element={<BillIndex />} />

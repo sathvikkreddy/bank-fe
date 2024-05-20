@@ -4,8 +4,6 @@ import PageTitle from "../../components/PageTitle";
 import Button from "../../components/Button";
 import Dropdown from "../../components/Dropdown";
 import { useNavigate, useOutletContext } from "react-router-dom";
-import { fetchUserDetails } from "../../utils/fetchUserDetails";
-import { fetchUserTransactions } from "../../utils/fetchUserTransactions";
 import { capitalize } from "../../utils/stringUtils";
 import { BalancesChart } from "../../components/BalancesChart";
 const Home = () => {

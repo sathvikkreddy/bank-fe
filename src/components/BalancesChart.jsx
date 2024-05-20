@@ -96,7 +96,7 @@ export const BalancesChart = ({ transactions, selectedAccount }) => {
     ],
   };
   return (
-    <div className="pb-4">
+    <div className="w-full h-full">
       <Line options={options} data={data} />
     </div>
   );

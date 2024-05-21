@@ -149,7 +149,7 @@ const Home = () => {
       <div className="flex gap-4 justify-around p-2">
         <div className="w-2/3" name="chart">
           <Card title={"Your money this month"}>
-            <BalancesChart transactions={fakeTransactions} selectedAccount={selectedAccount} />
+            <BalancesChart transactions={transactions} selectedAccount={selectedAccount} />
           </Card>
         </div>
         <div className="w-1/3">

@@ -35,18 +35,21 @@ function getBalancesOfCurrentMonth(transactions, accountId) {
     return transactionDate.getFullYear() === currentYear && transactionDate.getMonth() === currentMonth && (transaction.debitId === accountId || transaction.creditId === accountId);
   });
 
+  console.log(currentMonthTransactions);
+  const sortedCurrentMonthTransactions = currentMonthTransactions.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+
   let startingBalance = 0;
 
-  if (currentMonthTransactions.length > 0) {
-    const firstTransaction = currentMonthTransactions[0];
-    startingBalance = firstTransaction.debitId === accountId ? firstTransaction.debitOpeningBalance : firstTransaction.creditOpeningBalance;
+  if (sortedCurrentMonthTransactions.length > 0) {
+    const firstTransaction = sortedCurrentMonthTransactions[0];
+    startingBalance = firstTransaction.debitId === accountId ? firstTransaction.openingBalance : firstTransaction.receiverOpeningBalance;
   } else if (transactions.length > 0) {
     const latestTransaction = transactions.find((transaction) => transaction.debitId === accountId || transaction.creditId === accountId);
     if (latestTransaction) {
-      startingBalance = latestTransaction.debitId === accountId ? latestTransaction.debitClosingBalance : latestTransaction.creditClosingBalance;
+      startingBalance = latestTransaction.debitId === accountId ? latestTransaction.closingBalance : latestTransaction.receiverClosingBalance;
     }
   }
-  const transactionsByDate = currentMonthTransactions.reduce((acc, transaction) => {
+  const transactionsByDate = sortedCurrentMonthTransactions.reduce((acc, transaction) => {
     const date = new Date(transaction.timestamp).getDate();
     if (!acc[date]) {
       acc[date] = [];
@@ -58,7 +61,9 @@ function getBalancesOfCurrentMonth(transactions, accountId) {
   Object.keys(transactionsByDate).forEach((date) => {
     const dayTransactions = transactionsByDate[date];
     const lastTransaction = dayTransactions[dayTransactions.length - 1];
-    balances[date - 1] = lastTransaction.debitId === accountId ? lastTransaction.debitClosingBalance : lastTransaction.creditClosingBalance;
+    console.log(lastTransaction);
+    balances[date - 1] = lastTransaction.debitId === accountId ? lastTransaction.closingBalance : lastTransaction.receiverClosingBalance;
+    console.log(balances[date - 1]);
   });
 
   for (let i = 0; i < balances.length; i++) {

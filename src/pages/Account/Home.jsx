@@ -127,10 +127,10 @@ const Home = () => {
                 </div>
               </div>
               <div className="flex gap-2" name="Buttons">
-                <div aria-disabled={isLoading} className={`w-3/5 ${isLoading ? "cursor-not-allowed" : ""}`}>
+                <div aria-disabled={isLoading} className={`${selectedAccount.id === profile.primaryAccountId ? "invisible w-0" : "w-3/5"}`}>
                   <Button onClick={handleSetPrimary} title={"Set as primary"} loading={loading} loadingTitle={"Setting"} />
                 </div>
-                <div className="w-2/5">
+                <div className={`${selectedAccount.id === profile.primaryAccountId ? "w-full" : "w-2/5"}`}>
                   <Button
                     onClick={() => {
                       setOpen(true);
@@ -147,68 +147,31 @@ const Home = () => {
           </Card>
         </div>
         <div className="col-span-2" name="Recent Activity">
-          <Card
-            title={
-              <div className="flex">
-                <div className="w-5/6 grid items-center">Recent Activity</div>
-                <div className="w-1/6">
-                  <Button title={"Show more"} />
+          <Card title="All Accounts">
+            {profile.accounts.map((acc) => {
+              return (
+                <div key={acc.id} className="text-lg py-2">
+                  {acc.accountName} {acc.id === profile.primaryAccountId ? <span className="text-sm">{"( Primary )"}</span> : ""}
                 </div>
-              </div>
-            }
-          >
-            {sortedSelectedAccountTransactions.splice(0, 6).map((txn) => {
-              const debit = selectedAccount.id === txn.debitId ? true : false;
-              return <div key={txn.id} className="text-lg">{`${debit ? "Sent" : "Received"} Rs.${txn.amount} ${debit ? `to ${txn.creditId}` : `from ${txn.debitId}`} `}</div>;
+              );
             })}
           </Card>
         </div>
       </div>
-      <div className="grid grid-cols-2 p-2 gap-2">
+      <div className="p-2">
         <Card
           title={
             <div className="flex">
-              <div className="w-4/6 grid items-center">Loans</div>
-              <div className="w-2/6">
-                <Button
-                  title={"Manage Loans"}
-                  onClick={() => {
-                    navigate("/loan");
-                  }}
-                />
+              <div className="w-5/6 grid items-center">Recent Activity</div>
+              <div className="w-1/6">
+                <Button title={"Show more"} />
               </div>
             </div>
           }
         >
-          {fakeLoans.splice(0, 2).map((loan) => {
-            return (
-              <div key={loan.id}>
-                <LoanCard loan={loan} />
-              </div>
-            );
-          })}
-        </Card>
-        <Card
-          title={
-            <div className="flex">
-              <div className="w-4/6 grid items-center">Insurances</div>
-              <div className="w-2/6">
-                <Button
-                  title={"Manage Insurances"}
-                  onClick={() => {
-                    navigate("/insurance");
-                  }}
-                />
-              </div>
-            </div>
-          }
-        >
-          {fakeInsurances.splice(0, 2).map((loan) => {
-            return (
-              <div key={loan.id}>
-                <LoanCard loan={loan} />
-              </div>
-            );
+          {sortedSelectedAccountTransactions.splice(0, 6).map((txn) => {
+            const debit = selectedAccount.id === txn.debitId ? true : false;
+            return <div key={txn.id} className="text-lg">{`${debit ? "Sent" : "Received"} Rs.${txn.amount} ${debit ? `to ${txn.creditId}` : `from ${txn.debitId}`} `}</div>;
           })}
         </Card>
       </div>

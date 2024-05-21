@@ -21,7 +21,7 @@ const Index = () => {
       <div className="flex-none fixed top-0 left-0 h-full">
         <Appbar />
       </div>
-      <div className="flex-auto ml-[178px] overflow-y-auto">{isLoading ? <div>loading</div> : <Outlet context={[profile, isLoading, transactions, setProfile, setIsLoading, setTransactions]} />}</div>
+      <div className="flex-auto ml-[190px] overflow-y-auto">{isLoading ? <div>loading</div> : <Outlet context={[profile, isLoading, transactions, setProfile, setIsLoading, setTransactions]} />}</div>
     </div>
   );
 };

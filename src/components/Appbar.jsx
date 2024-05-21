@@ -1,68 +1,46 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Appbar() {
   const navigate = useNavigate();
+  const AppbarItems = [
+    { title: "Loan", to: "loan", icon: <LoanIcon className="w-4 h-4" /> },
+    { title: "Insurance", to: "insurance", icon: <InsuranceIcon className="w-4 h-4" /> },
+    { title: "Transactions", to: "transactions", icon: <TransactionsIcon className="w-4 h-4" /> },
+    { title: "Bills", to: "bills", icon: <BillsIcon className="w-4 h-4" /> },
+    { title: "Accounts", to: "account", icon: <AccountIcon className="w-4 h-4" /> },
+  ];
+
+  const [selectedItem, setSelectedItem] = useState("");
+
+  const handleItemClick = (item) => {
+    setSelectedItem(item.to); // Use 'to' as a unique identifier
+  };
 
   return (
     <div className="flex flex-col h-full justify-between border-r shadow-md">
-      <div className="flex flex-col px-4 gap-8 top-0 z-50">
+      <div className="flex flex-col px-4 gap-4 top-0 z-50">
         <div
-          className="flex text-lg font-light bg-gray-300 p-3 mt-3 cursor-pointer rounded-md"
+          className={`flex justify-center text-lg ${selectedItem === "" ? "bg-gray-300" : ""} p-3 mt-3 cursor-pointer rounded-md border`}
           onClick={() => {
+            setSelectedItem("");
             navigate("/");
           }}
         >
           The Bank App
         </div>
-        <div
-          className="flex items-center gap-2 text-lg cursor-pointer"
-          onClick={() => {
-            navigate("/loan");
-          }}
-        >
-          <LoanIcon className="w-4 h-4" />
-          <span>Loan</span>
-        </div>
-        <div
-          className="flex items-center gap-2 text-lg cursor-pointer"
-          onClick={() => {
-            navigate("/insurance");
-          }}
-        >
-          <InsuranceIcon className="w-4 h-4" />
-          <span>Insurance</span>
-        </div>
-        <div
-          className="flex items-center gap-2 text-lg cursor-pointer"
-          onClick={() => {
-            navigate("/transactions");
-          }}
-        >
-          <TransactionsIcon className="w-4 h-4" />
-          <span>Transactions</span>
-        </div>
-        <div
-          className="flex items-center gap-2 text-lg cursor-pointer"
-          onClick={() => {
-            navigate("/bills");
-          }}
-        >
-          <BillsIcon className="w-4 h-4" />
-          <span>Bills</span>
-        </div>
-        <div
-          className="flex items-center gap-2 text-lg cursor-pointer"
-          onClick={() => {
-            navigate("/account");
-          }}
-        >
-          <AccountIcon className="w-4 h-4" />
-          <span>Accounts</span>
-        </div>
+        {AppbarItems.map((item, index) => {
+          return (
+            <div key={item.to} onClick={() => handleItemClick(item)}>
+              {<AppbarItem item={item} selected={selectedItem === item.to} />}
+            </div>
+          );
+        })}
       </div>
       <div
-        className="flex p-4 cursor-pointer"
+        className={`flex m-2 p-2 cursor-pointer rounded-md ${selectedItem === "profile" ? "bg-gray-400" : ""}`}
         onClick={() => {
+          setSelectedItem("profile");
           navigate("/profile");
         }}
       >
@@ -83,12 +61,10 @@ function ProfileIcon(props) {
   );
 }
 
-function TransferIcon(props) {
+function HomeIcon(props) {
   return (
-    <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="12" cy="12" r="10" />
-      <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8" />
-      <path d="M12 18V6" />
+    <svg {...props} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
     </svg>
   );
 }
@@ -136,3 +112,19 @@ function AccountIcon(props) {
     </svg>
   );
 }
+
+const AppbarItem = ({ item, selected }) => {
+  const navigate = useNavigate();
+  const { title, icon, to } = item;
+  return (
+    <div
+      className={`flex items-center ${selected ? "bg-gray-300" : ""} p-2 rounded-md gap-2 text-lg cursor-pointer`}
+      onClick={() => {
+        navigate(`/${to}`);
+      }}
+    >
+      {icon}
+      <span>{title}</span>
+    </div>
+  );
+};

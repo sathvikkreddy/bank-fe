@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import axios from "axios";
 import PageTitle from "../../components/PageTitle";
@@ -31,6 +32,7 @@ export default function Component() {
     };
     fetchTransactions();
   }, []);
+
   useEffect(() => {
     const fetchBankAccounts = async () => {
       try {
@@ -54,6 +56,7 @@ export default function Component() {
     };
     fetchAccounts();
   }, []);
+
   const handleTransfer = async (e) => {
     e.preventDefault();
     if (!receiverPhone || !amount) {
@@ -121,7 +124,7 @@ export default function Component() {
           },
         }
       );
-      if (response.data && response.data.phoneNumber === receiverPhone) {
+      if (response.data && response.data.phoneNumber == receiverPhone) {
         setSearchMessage("User found");
         setSearchMessageColor("green");
       } else {
@@ -137,6 +140,7 @@ export default function Component() {
       setSearchMessageColor("red");
     }
   };
+
   const handlePhoneChange = (e) => {
     const phone = e.target.value;
     setReceiverPhone(phone);
@@ -145,6 +149,7 @@ export default function Component() {
       setSearchMessageColor("");
     }
   };
+
   const filteredTransactions = transactions.filter((transaction) => {
     if (
       statusFilter &&
@@ -162,15 +167,19 @@ export default function Component() {
     }
     return true;
   });
+
   const indexOfLastTransaction = currentPage * transactionsPerPage;
   const indexOfFirstTransaction = indexOfLastTransaction - transactionsPerPage;
   const currentTransactions = filteredTransactions.slice(indexOfFirstTransaction, indexOfLastTransaction);
+
   const nextPage = () => {
     setCurrentPage(currentPage + 1);
   };
+
   const prevPage = () => {
     setCurrentPage(currentPage - 1);
   };
+
   return (
     <div>
       <PageTitle title={"Transactions"} />
@@ -178,37 +187,33 @@ export default function Component() {
         <div className="bg-white dark:bg-gray-950 rounded-lg shadow-md p-6">
           <div className="space-y-6 mb-6">
             <div className="flex items-center space-x-4">
-              <div className="flex-grow space-y-2">
-                <label className="text-sm font-medium" htmlFor="receiver-phone">
-                  Receiver Phone Number
-                </label>
-                <input
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200"
-                  id="receiver-phone"
-                  placeholder="Enter Receiver's Phone Number"
-                  type="tel"
-                  value={receiverPhone}
-                  onChange={handlePhoneChange}
-                />
-                {receiverPhone && !phoneRegex.test(receiverPhone) && (
-                  <p className="text-red-500 text-sm">Receiver phone number must be 10 digits.</p>
-                )}
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm font-medium" htmlFor="search-button">
-                  &nbsp;
-                </label>
-                <button
-                  className="w-full bg-gray-500 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded-md"
-                  onClick={handleSearch}>
-                  Search
-                </button>
-                {searchMessage && (
-                  <p className={`text-sm ${searchMessageColor === "green" ? "text-green-500" : "text-red-500"}`}>
-                    {searchMessage}
-                  </p>
-                )}
-              </div>
+            <div className="space-y-2">
+            <label className="text-sm font-medium" htmlFor="receiver-phone">
+             Receiver Phone Number</label>
+            <div className="inline-block align-middle">
+            <input
+              className="w-48 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200"
+              id="receiver-phone"
+              placeholder="Enter Receiver's Phone Number"
+              type="tel"
+              value={receiverPhone}
+              onChange={handlePhoneChange}
+             />
+            </div>
+            <div className="inline-block align-middle ml-2">
+            <button
+            className="bg-gray-500 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded-md"
+            onClick={handleSearch}>
+            Search
+            </button>
+            </div>
+            {receiverPhone && !phoneRegex.test(receiverPhone) && (
+            <p className="text-red-500 text-sm">Receiver phone number must be 10 digits.</p>)}
+            {searchMessage && (
+            <p className={`text-sm ${searchMessageColor === "green" ? "text-green-500" : "text-red-500"}`}>
+            {searchMessage}</p>)}
+            </div>
+
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               <div className="space-y-2">
@@ -236,7 +241,7 @@ export default function Component() {
                   <option value="">Select Account</option>
                   {bankAccounts.map((account, index) => (
                     <option key={index} value={account.id}>
-                      {account.accountName} - {account.id}
+                      {account.accountName}
                     </option>
                   ))}
                 </select>

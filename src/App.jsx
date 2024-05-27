@@ -9,7 +9,6 @@ import TransactionsIndex from "./pages/Transaction/Index";
 import InsuranceIndex from "./pages/Insurance/Index";
 import ProfileIndex from "./pages/Profile/Index";
 import HomeIndex from "./pages/Home/Index";
-import AccountIndex from "./pages/Account/Index";
 import NotificationIndex from "./pages/Notification/Index";
 import SettingsIndex from "./pages/Settings/Index";
 
@@ -23,7 +22,6 @@ function App() {
         <Route path="/insurance/*" element={<InsuranceIndex />} />
         <Route path="/bills/*" element={<BillIndex />} />
         <Route path="/loan/*" element={<LoanIndex />} />
-        <Route path="/account/*" element={<AccountIndex />} />
         <Route path="/settings/*" element={<SettingsIndex />} />
         <Route path="/profile/*" element={<ProfileIndex />} />
       </Route>

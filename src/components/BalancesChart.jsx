@@ -35,7 +35,6 @@ function getBalancesOfCurrentMonth(transactions, accountId) {
     return transactionDate.getFullYear() === currentYear && transactionDate.getMonth() === currentMonth && (transaction.debitId === accountId || transaction.creditId === accountId);
   });
 
-  console.log(currentMonthTransactions);
   const sortedCurrentMonthTransactions = currentMonthTransactions.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
 
   let startingBalance = 0;
@@ -61,9 +60,7 @@ function getBalancesOfCurrentMonth(transactions, accountId) {
   Object.keys(transactionsByDate).forEach((date) => {
     const dayTransactions = transactionsByDate[date];
     const lastTransaction = dayTransactions[dayTransactions.length - 1];
-    console.log(lastTransaction);
     balances[date - 1] = lastTransaction.debitId === accountId ? lastTransaction.closingBalance : lastTransaction.receiverClosingBalance;
-    console.log(balances[date - 1]);
   });
 
   for (let i = 0; i < balances.length; i++) {

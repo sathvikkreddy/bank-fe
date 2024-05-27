@@ -7,11 +7,14 @@ import { useOutletContext } from "react-router-dom";
 import { capitalize } from "../../utils/stringUtils";
 import { BalancesChart } from "../../components/BalancesChart";
 import AddAccountModal from "../../components/AddAccountModal";
+import updateOutletContext from "../../utils/updateOutletContext";
+import axios from "axios";
 const Home = () => {
-  const [profile, isLoading, transactions] = useOutletContext();
+  const [profile, isLoading, transactions, setProfile, setIsLoading, setTransactions] = useOutletContext();
   const [selectedAccount, setSelectedAccount] = useState(profile.accounts[0]);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+
   const handleSetPrimary = async () => {
     const reqBody = {
       accountId: selectedAccount.id,
@@ -30,7 +33,6 @@ const Home = () => {
       updateOutletContext(setProfile, setTransactions, setIsLoading);
     } catch (err) {
       setLoading(false);
-      setError(err.response.data);
     }
   };
   return (

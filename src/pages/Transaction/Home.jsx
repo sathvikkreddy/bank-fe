@@ -5,6 +5,7 @@ import { fetchUserTransactions } from "../../utils/fetchUserTransactions";
 import updateOutletContext from "../../utils/updateOutletContext";
 import { useOutletContext } from "react-router-dom";
 import Button from "../../components/Button";
+import toast from "react-hot-toast";
 
 export default function Component() {
   const [receiverPhone, setReceiverPhone] = useState("");
@@ -15,8 +16,6 @@ export default function Component() {
   const [selectedAccount, setSelectedAccount] = useState({ id: "", type: "" });
   const [txnLoading, setTxnLoading] = useState(false);
   const [searchLoading, setSearchLoading] = useState(false);
-  const [searchMessage, setSearchMessage] = useState("");
-  const [searchMessageColor, setSearchMessageColor] = useState("");
   const [transferMessage, setTransferMessage] = useState("");
   const [transferMessageType, setTransferMessageType] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -53,14 +52,13 @@ export default function Component() {
           Authorization: `Bearer ${token}`,
         },
       });
-      const responseBody = transferResponse.data;
-      updateOutletContext(setProfile, setTransactions, setIsLoading);
+      toast.success("Transfer completed", { duration: 5000 });
     } catch (error) {
       console.error(error.response.data);
-      setTransferMessage(error.response.data);
-      setTransferMessageType("error");
+      toast.error(error.response.data, { duration: 5000 });
     } finally {
       setTxnLoading(false);
+      updateOutletContext(setProfile, setTransactions, setIsLoading);
     }
   };
 
@@ -76,32 +74,17 @@ export default function Component() {
           Authorization: `Bearer ${token}`,
         },
       });
-      if (response.status === 200) {
-        setSearchMessage("User found");
-        setSearchMessageColor("green");
-      } else {
-        setSearchMessage("User not found");
-        setSearchMessageColor("red");
-      }
+      toast.success("User found");
       setSearchLoading(false);
-      setTimeout(() => {
-        setSearchMessage("");
-        setSearchMessageColor("");
-      }, 3000);
     } catch (err) {
       setSearchLoading(false);
-      setSearchMessage("User not found");
-      setSearchMessageColor("red");
+      toast.error("User not found");
     }
   };
 
   const handlePhoneChange = (e) => {
     const phone = e.target.value;
     setReceiverPhone(phone);
-    if (!phone) {
-      setSearchMessage("");
-      setSearchMessageColor("");
-    }
   };
 
   const filteredTransactions = transactions.filter((transaction) => {
@@ -138,16 +121,15 @@ export default function Component() {
                   Receiver Phone Number
                 </label>
                 <input className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200" id="receiver-phone" placeholder="Enter Receiver's Phone Number" type="tel" value={receiverPhone} onChange={handlePhoneChange} />
-                {receiverPhone && !phoneRegex.test(receiverPhone) && <p className="text-red-500 text-sm">Receiver phone number must be 10 digits.</p>}
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-medium" htmlFor="search-button">
                   &nbsp;
                 </label>
                 <Button title={"Search"} onClick={handleSearch} loading={searchLoading} loadingTitle={"Searching"} />
-                {searchMessage && <p className={`text-sm ${searchMessageColor === "green" ? "text-green-500" : "text-red-500"}`}>{searchMessage}</p>}
               </div>
             </div>
+            {receiverPhone && !phoneRegex.test(receiverPhone) && <p className="text-red-500 text-sm">Receiver phone number must be 10 digits.</p>}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               <div className="space-y-2">
                 <label className="text-sm font-medium" htmlFor="amount">

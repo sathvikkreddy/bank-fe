@@ -113,14 +113,14 @@ export default function Component() {
     <div>
       <PageTitle title={"Transactions"} />
       <div className="flex flex-col gap-2 mx-auto px-4 py-8">
-        <div className="bg-white dark:bg-gray-950 rounded-lg shadow-md p-6">
+        <div className="bg-white rounded-lg shadow-md p-6">
           <div className="space-y-6 mb-6">
             <div className="flex items-center space-x-4">
               <div className="flex-grow space-y-2">
                 <label className="text-sm font-medium" htmlFor="receiver-phone">
                   Receiver Phone Number
                 </label>
-                <input className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200" id="receiver-phone" placeholder="Enter Receiver's Phone Number" type="tel" value={receiverPhone} onChange={handlePhoneChange} />
+                <input className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" id="receiver-phone" placeholder="Enter Receiver's Phone Number" type="tel" value={receiverPhone} onChange={handlePhoneChange} />
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-medium" htmlFor="search-button">
@@ -135,13 +135,13 @@ export default function Component() {
                 <label className="text-sm font-medium" htmlFor="amount">
                   Amount
                 </label>
-                <input className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200" id="amount" placeholder="100" type="number" value={amount} onChange={(e) => setAmount(e.target.value)} />
+                <input className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 " id="amount" placeholder="100" type="number" value={amount} onChange={(e) => setAmount(e.target.value)} />
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-medium" htmlFor="transaction-type">
                   Account
                 </label>
-                <select className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200" id="transaction-type" value={selectedAccount.id} onChange={(e) => setSelectedAccount({ id: e.target.value, name: e.target.options[e.target.selectedIndex].text })}>
+                <select className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 " id="transaction-type" value={selectedAccount.id} onChange={(e) => setSelectedAccount({ id: e.target.value, name: e.target.options[e.target.selectedIndex].text })}>
                   <option value="">Select Account</option>
                   {profile.accounts.map((account, index) => (
                     <option key={index} value={account.id}>
@@ -154,7 +154,7 @@ export default function Component() {
                 <label className="text-sm font-medium" htmlFor="amount">
                   Pin
                 </label>
-                <input className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200" id="amount" placeholder="xxxx" type="password" value={pin} onChange={(e) => setPin(e.target.value)} />
+                <input className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 " id="amount" placeholder="xxxx" type="password" value={pin} onChange={(e) => setPin(e.target.value)} />
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-medium invisible" htmlFor="transfer-button">
@@ -180,12 +180,12 @@ export default function Component() {
             )}
           </div>
         </div>
-        <div className="bg-white dark:bg-gray-950 rounded-lg shadow-md p-6">
+        <div className="bg-white rounded-lg shadow-md p-6">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-lg font-bold">Transaction History</h2>
             <div className="flex items-center space-x-4">
               <div className="relative">
-                <select className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200" id="status-filter" value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
+                <select className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 " id="status-filter" value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
                   <option value="">Status</option>
                   <option value="pending">Pending</option>
                   <option value="failed">Failed</option>
@@ -193,14 +193,14 @@ export default function Component() {
                 </select>
               </div>
               <div className="relative">
-                <input className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200" id="date-range-filter" type="month" value={dateRangeFilter} onChange={(e) => setDateRangeFilter(e.target.value)} />
+                <input className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 " id="date-range-filter" type="month" value={dateRangeFilter} onChange={(e) => setDateRangeFilter(e.target.value)} />
               </div>
             </div>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full table-auto">
               <thead>
-                <tr className="bg-gray-100 dark:bg-gray-800">
+                <tr className="bg-gray-100 ">
                   <th className="px-4 py-2 text-left text-sm font-medium">S.No.</th>
                   <th className="px-4 py-2 text-left text-sm font-medium">Transaction Id</th>
                   <th className="px-4 py-2 text-left text-sm font-medium">Receiver AccountId</th>
@@ -213,7 +213,7 @@ export default function Component() {
               </thead>
               <tbody>
                 {currentTransactions.map((transaction, index) => (
-                  <tr key={index} className="border-b dark:border-gray-700">
+                  <tr key={index} className="border-b">
                     <td className="px-4 py-2 text-sm">{index + 1}</td>
                     <td className="px-4 py-2 text-sm">{transaction.id}</td>
                     <td className="px-4 py-2 text-sm">{transaction.creditId}</td>
@@ -227,17 +227,17 @@ export default function Component() {
               </tbody>
             </table>
             <div className="flex justify-between items-center mt-4">
-              <button onClick={prevPage} disabled={currentPage === 1} className="px-4 py-2 rounded-md bg-gray-200 dark:bg-gray-700 disabled:opacity-50">
+              <button onClick={prevPage} disabled={currentPage === 1} className="px-4 py-2 rounded-md bg-gray-200 disabled:opacity-50">
                 Previous
               </button>
               <div>
                 Page {currentPage} of {Math.ceil(filteredTransactions.length / transactionsPerPage)}
               </div>
-              <button onClick={nextPage} disabled={indexOfLastTransaction >= filteredTransactions.length} className="px-4 py-2 rounded-md bg-gray-200 dark:bg-gray-700 disabled:opacity-50">
+              <button onClick={nextPage} disabled={indexOfLastTransaction >= filteredTransactions.length} className="px-4 py-2 rounded-md bg-gray-200 disabled:opacity-50">
                 Next
               </button>
             </div>
-            {transactions.length === 0 && <p className="text-sm text-gray-500 dark:text-gray-400 mt-4">No transactions found.</p>}
+            {transactions.length === 0 && <p className="text-sm text-gray-500 mt-4">No transactions found.</p>}
           </div>
         </div>
       </div>

@@ -2,9 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import NotFound from "../NotFound";
 import MainInsurance from "./Home";
-import LifeInsurance from "./Life-Insurance";
-import HealthInsurance from "./Health-Insurance";
-import VehicleInsurance from "./Vehicle-Insurance";
 import { fetchActiveInsurances } from "../../utils/fetchActiveInsurances";
 import { fetchAvailableInsurances } from "../../utils/fetchAvailableInsurances";
 import InsuranceDetail from "./InsuranceDetail";
@@ -30,9 +27,6 @@ const Index = () => {
   return (
     <Routes>
       <Route path="/" element={<MainInsurance activeInsurances={activeInsurances} availableInsurances={availableInsurances} setActiveInsurances={setActiveInsurances} activeLoading={activeLoading} availableLoading={availableLoading} setActiveLoading={setActiveLoading} />} />
-      <Route path="/life" element={<LifeInsurance />} />
-      <Route path="/health" element={<HealthInsurance />} />
-      <Route path="/vehicle" element={<VehicleInsurance />} />
       <Route path="/:id" element={<InsuranceDetail activeInsurances={activeInsurances} activeLoading={activeLoading} />} />
       <Route path="*" element={<NotFound />} />
     </Routes>

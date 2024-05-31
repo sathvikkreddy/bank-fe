@@ -114,35 +114,35 @@ const InsuranceDetail = ({ activeInsurances, activeLoading }) => {
     <div>
       <PageTitle title={currentInsurance.insuranceType} />
       <div className="grid grid-cols-2 border border-gray-300 shadow-md rounded-md m-2 p-2">
-        <div className="grid grid-cols-2 gap-2 py-2">
+        <div className="sm:grid sm:grid-cols-2 gap-2 py-2">
           <div className="font-medium">INSURANCE ID :</div>
           <div className="">{currentInsurance.insurance.id}</div>
         </div>
-        <div className="grid grid-cols-2 gap-2 py-2">
+        <div className="sm:grid sm:grid-cols-2 gap-2 py-2">
           <div className="font-medium">INSURANCE POLICY ID :</div>
           <div className="">{currentInsurance.insurance.insurancePolicyId}</div>
         </div>
-        <div className="grid grid-cols-2 gap-2 py-2">
+        <div className="sm:grid sm:grid-cols-2 gap-2 py-2">
           <div className="font-medium">{currentInsurance.insuranceType === "Vehicle Insurance" ? "VEHICLE REGISTRATION NUMBER" : "REGISTRATION NUMBER"} : </div>
           <div className="">{currentInsurance.insurance.uniqueIdentificationNumber}</div>
         </div>
-        <div className="grid grid-cols-2 gap-2 py-2">
+        <div className="sm:grid sm:grid-cols-2 gap-2 py-2">
           <div className="font-medium">{currentInsurance.insuranceType === "Vehicle Insurance" ? "VEHICLE MODEL YEAR" : "REGISTRATION YEAR"} : </div>
           <div className="">{currentInsurance.insurance.yearOfPurchase}</div>
         </div>
-        <div className="grid grid-cols-2 gap-2 py-2">
+        <div className="sm:grid sm:grid-cols-2 gap-2 py-2">
           <div className="font-medium">{currentInsurance.insuranceType === "Vehicle Insurance" ? "COST OF VEHICLE" : "MARKET VALUE"} : </div>
           <div className="">{currentInsurance.insurance.purchaseAmount}</div>
         </div>
-        <div className="grid grid-cols-2 gap-2 py-2">
+        <div className="sm:grid sm:grid-cols-2 gap-2 py-2">
           <div className="font-medium">COVERAGE AMOUNT : </div>
           <div className="">{currentInsurance.insurance.amountCovered}</div>
         </div>
-        <div className="grid grid-cols-2 gap-2 py-2">
+        <div className="sm:grid sm:grid-cols-2 gap-2 py-2">
           <div className="font-medium">VALIDITY DATE : </div>
           <div className="">{convertToDate(currentInsurance.insurance.valididTill)}</div>
         </div>
-        <div className="grid grid-cols-2 gap-2 py-2">
+        <div className="sm:grid sm:grid-cols-2 gap-2 py-2">
           <div className="font-medium">YEARLY PREMIUM : </div>
           <div className="">{currentInsurance.insurance.installmentAmount} INR</div>
         </div>
@@ -175,19 +175,19 @@ const InstallmentTable = ({ installments, handleOpenModal }) => {
       <table className="min-w-full bg-white border border-gray-300">
         <thead>
           <tr className="bg-gray-200 leading-normal">
-            <th className="py-3 px-6 text-left">Installment ID</th>
-            <th className="py-3 px-6 text-left">Installment Year</th>
-            <th className="py-3 px-6 text-left">Installment Amount</th>
-            <th className="py-3 px-6 text-left">Status</th>
+            <th className="py-3 sm:px-6 px-1 text-left">Installment ID</th>
+            <th className="py-3 sm:px-6 px-1 text-left">Installment Year</th>
+            <th className="py-3 sm:px-6 px-1 text-left">Installment Amount</th>
+            <th className="py-3 sm:px-6 px-1 text-left">Status</th>
           </tr>
         </thead>
         <tbody className="">
           {installments.map((installment) => (
             <tr key={installment.id} className="border-b border-gray-200">
-              <td className="py-3 px-6 text-left">{installment.id}</td>
-              <td className="py-3 px-6 text-left">{installment.installmentYear}</td>
-              <td className="py-3 px-6 text-left">${installment.installmentAmount}</td>
-              <td className="py-3 px-6 text-left">
+              <td className="py-3 sm:px-6 px-1 text-left">{installment.id}</td>
+              <td className="py-3 sm:px-6 px-1 text-left">{installment.installmentYear}</td>
+              <td className="py-3 sm:px-6 px-1 text-left">${installment.installmentAmount}</td>
+              <td className="py-3 sm:px-6 px-1 text-left">
                 {installment.status === "Due" ? (
                   <Button
                     title={"Pay"}

@@ -185,20 +185,23 @@ export default function Component() {
           </div>
         </div>
         <div className="bg-white rounded-lg shadow-md p-6">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-lg font-bold">Transaction History</h2>
-            <div className="flex items-center space-x-4">
-            <div className="relative">
-            <select className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200" id="account-filter" value={accountFilter} onChange={(e) => setAccountFilter(e.target.value)}>
-            <option value="">Account</option>
-            {profile.accounts.map((account, index) => (
-            <option key={index} value={account.id}>
-            {account.accountName}
-           </option>))}
-           </select>
-          </div>
+          <div className="sm:flex justify-between">
+            <h2 className="sm:mt-2 mx-2 text-lg font-bold">Transaction History</h2>
+            <div className="flex justify-between items-center sm:gap-2 gap-1 mb-4">
+              <div className="flex items-center sm:space-x-4">
+                <div className="relative">
+                  <select className="w-full sm:px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" id="account-filter" value={accountFilter} onChange={(e) => setAccountFilter(e.target.value)}>
+                    <option value="">Account</option>
+                    {profile.accounts.map((account, index) => (
+                      <option key={index} value={account.id}>
+                        {account.accountName}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
               <div className="relative">
-                <select className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 " id="status-filter" value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
+                <select className="w-full sm:px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 " id="status-filter" value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
                   <option value="">Status</option>
                   <option value="pending">Pending</option>
                   <option value="failed">Failed</option>
@@ -206,7 +209,7 @@ export default function Component() {
                 </select>
               </div>
               <div className="relative">
-                <input className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 " id="date-range-filter" type="month" value={dateRangeFilter} onChange={(e) => setDateRangeFilter(e.target.value)} />
+                <input className="w-full sm:px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 " id="date-range-filter" type="month" value={dateRangeFilter} onChange={(e) => setDateRangeFilter(e.target.value)} />
               </div>
             </div>
           </div>

@@ -38,17 +38,17 @@ const Home = () => {
   return (
     <div>
       <PageTitle title={"Home"} />
-      <div className="font-light text-2xl p-2">
-        Welcome, <span className="font-semibold">{capitalize(profile.userDetails.firstName) + " " + capitalize(profile.userDetails.lastName)}</span>
+      <div className="sm:flex font-light text-2xl p-2">
+        <div>{"Welcome, "}</div> <div className="font-semibold">{capitalize(profile.userDetails.firstName) + " " + capitalize(profile.userDetails.lastName)}</div>
       </div>
-      <div className="flex gap-4 justify-around p-2">
-        <div className="w-2/3 h-full" name="chart">
+      <div className="sm:flex gap-4 justify-around p-2">
+        <div className="sm:w-2/3 w-full h-full mb-2" name="chart">
           <Card title={"Your money this month"}>
             <BalancesChart transactions={transactions} selectedAccount={selectedAccount} />
           </Card>
         </div>
-        <div className="w-1/3">
-          <div className="h-1/2 pb-2">
+        <div className="sm:w-1/3 sm:flex sm:flex-col flex gap-2">
+          <div className="sm:h-1/2 sm:w-full w-1/2 pb-2">
             <Card title={<Dropdown options={profile.accounts} setSelectedAccount={setSelectedAccount} />}>
               <div className="flex flex-col justify-between h-full">
                 <div className="flex flex-col gap-4">
@@ -72,7 +72,7 @@ const Home = () => {
                       }}
                       title={
                         <div className="flex">
-                          <AddIcon /> Add new
+                          <AddIcon /> <div className="hidden sm:block">Add new</div>
                         </div>
                       }
                     />
@@ -81,7 +81,7 @@ const Home = () => {
               </div>
             </Card>
           </div>
-          <div className="h-1/2">
+          <div className="sm:h-1/2 sm:w-full w-1/2">
             <Card title="All Accounts">
               {profile.accounts.map((acc) => {
                 return (

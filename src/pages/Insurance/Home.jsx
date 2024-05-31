@@ -96,8 +96,8 @@ const MainInsurance = ({ activeInsurances, availableInsurances, activeLoading, s
       <div className="p-8">
         <Card
           title={
-            <div className="grid grid-cols-6">
-              <div className="flex items-center text-nowrap col-span-5">Active Insurances</div>
+            <div className="grid sm:grid-cols-6 grid-cols-5">
+              <div className="flex items-center text-nowrap sm:col-span-5 col-span-4 ">Active Insurances</div>
               <Button
                 title={showAllActive ? "See less" : "See more"}
                 onClick={() => {
@@ -114,7 +114,7 @@ const MainInsurance = ({ activeInsurances, availableInsurances, activeLoading, s
           ) : activeInsurances.length < 1 ? (
             <div className="h-32 flex justify-center items-center">No active insurances, Apply for available insurances</div>
           ) : (
-            <div className="grid grid-cols-3 gap-2">
+            <div className="grid sm:grid-cols-3 grid-cols-3 gap-2">
               {activeInsurances.slice(0, showAllActive ? activeInsurances.length + 1 : 3).map((insuranceObj) => {
                 return (
                   <div key={insuranceObj.insurance.id}>
@@ -220,10 +220,10 @@ const Form = ({ fields, handleChange, handleApply, fieldsTitles, handleCancel })
           placeholder="2024"
         />
       </div>
-      <div className="grid grid-cols-8 gap-2">
+      <div className="sm:grid sm:grid-cols-8 flex flex-col gap-2 sm:gap-2">
         <div className="font-medium grid items-center text-nowrap">{fieldsTitles.purchaseAmount}: </div>
         <input
-          className="border p-2 rounded-md focus:border-black col-span-2"
+          className="border p-2 rounded-md focus:border-black sm:col-span-2 sm:w-full w-52"
           type="text"
           value={fields.purchaseAmount}
           onChange={(e) => {
@@ -236,7 +236,7 @@ const Form = ({ fields, handleChange, handleApply, fieldsTitles, handleCancel })
           title={"Get Coverage Details"}
           loading={coverageDetailsLoading}
           loadingTitle={"loading..."}
-          className={"col-span-2"}
+          className={"sm:col-span-2"}
           onClick={async () => {
             setCoverageDetailsLoading(true);
             const details = await getCoverageDetails({
@@ -312,17 +312,17 @@ const ActiveInsuranceCard = ({ insurance, title }) => {
         navigate(`/insurance/${insurance.id}`);
       }}
     >
-      <div className="font-semibold text-lg text-center border-b">{title}</div>
-      <div className="font-semibold">
+      <div className="font-semibold sm:text-lg text-sm text-center border-b">{title}</div>
+      <div className="font-semibold sm:text-base text-xs">
         {title === "Vehicle Insurance" ? "Vehicle Number" : "Registration Number"}: <span className="font-normal">{insurance.uniqueIdentificationNumber}</span>
       </div>
-      <div className="font-semibold">
+      <div className="font-semibold sm:text-base text-xs">
         Coverage Amount: <span className="font-normal">{insurance.amountCovered}</span>
       </div>
-      <div className="font-semibold">
+      <div className="font-semibold sm:text-base text-xs">
         Validity: <span className="font-normal">{convertToDate(insurance.valididTill)}</span>
       </div>
-      <div className="font-semibold">
+      <div className="font-semibold sm:text-base text-xs">
         Yearly Premium: <span className="font-normal">{insurance.installmentAmount}</span>
       </div>
     </div>

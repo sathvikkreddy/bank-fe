@@ -19,15 +19,16 @@ export default function Appbar() {
 
   return (
     <div className="flex flex-col h-full justify-between border-r shadow-md">
-      <div className="flex flex-col px-4 gap-4 top-0 z-50">
+      <div className="flex flex-col sm:px-4 gap-4 top-0 z-50 mx-1 sm:m-0">
         <div
-          className={`flex justify-center text-lg ${selectedItem === "" ? "bg-gray-300" : ""} p-3 mt-3 cursor-pointer rounded-md border`}
+          className={`flex text-lg ${selectedItem === "" ? "bg-gray-300" : ""} sm:p-3 p-2 mt-3 cursor-pointer rounded-md sm:border`}
           onClick={() => {
             setSelectedItem("");
             navigate("/");
           }}
         >
-          The Bank App
+          <HomeIcon className="w-4 h-4 block sm:hidden" />
+          <div className="hidden sm:block">The Bank App</div>
         </div>
         {AppbarItems.map((item, index) => {
           return (
@@ -38,16 +39,16 @@ export default function Appbar() {
         })}
       </div>
       <div
-        className={`flex m-2 p-2 cursor-pointer rounded-md ${selectedItem === "profile" ? "bg-gray-400" : ""}`}
+        className={`flex sm:m-2 sm:p-2 cursor-pointer rounded-md ${selectedItem === "profile" ? "bg-gray-400" : ""}`}
         onClick={() => {
           setSelectedItem("profile");
           navigate("/profile");
         }}
       >
-        <div className="rounded-full flex items-center pr-2" size="icon" variant="ghost">
+        <div className="rounded-full flex items-center sm:pr-2 pl-2 pr-1 py-1" size="icon" variant="ghost">
           <ProfileIcon className="w-5 h-5" />
         </div>
-        <div className="text-lg">Profile</div>
+        <div className="text-lg hidden sm:block">Profile</div>
       </div>
     </div>
   );
@@ -119,13 +120,13 @@ const AppbarItem = ({ item, selected }) => {
   const { title, icon, to } = item;
   return (
     <div
-      className={`flex items-center ${selected ? "bg-gray-300" : ""} p-2 rounded-md gap-2 text-lg cursor-pointer`}
+      className={`flex items-center ${selected ? "bg-gray-300" : ""} sm:p-2 py-2 px-2 rounded-md gap-2 text-lg cursor-pointer`}
       onClick={() => {
         navigate(`/${to}`);
       }}
     >
       {icon}
-      <span>{title}</span>
+      <span className="hidden sm:block">{title}</span>
     </div>
   );
 };

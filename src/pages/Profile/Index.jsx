@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import PageTitle from "../../components/PageTitle";
 
 function Profile() {
   const [userDetails, setUserDetails] = useState(null);
@@ -13,14 +14,11 @@ function Profile() {
   const fetchData = async () => {
     try {
       const token = localStorage.getItem("authorization");
-      const response = await axios.get(
-        "https://techbuzzers.somee.com/GetUserDetails",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axios.get("https://techbuzzers.somee.com/GetUserDetails", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setUserDetails(response.data.userDetails);
       setBalance(response.data.accounts[0].balance);
     } catch (error) {
@@ -58,7 +56,6 @@ function Profile() {
     }
   };
 
-
   const handleProfileUpdate = async () => {
     const { value: formValues } = await Swal.fire({
       title: "Update Profile",
@@ -72,33 +69,29 @@ function Profile() {
       preConfirm: () => {
         return {
           firstname: document.getElementById("swal-input1").value,
-          lastname:document.getElementById("swal-input01").value,
+          lastname: document.getElementById("swal-input01").value,
           email: document.getElementById("swal-input2").value,
           address: document.getElementById("swal-input3").value,
         };
       },
     });
-  
+
     if (formValues) {
       try {
         const token = localStorage.getItem("authorization");
         const updatedUserDetails = {
           ...userDetails,
           firstName: formValues.firstname,
-          lastname:formValues.lastname,
+          lastname: formValues.lastname,
           email: formValues.email,
           address: formValues.address,
         };
-        const response = await axios.put(
-          "https://techbuzzers.somee.com/UpdateUser",
-          updatedUserDetails,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        const response = await axios.put("https://techbuzzers.somee.com/UpdateUser", updatedUserDetails, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
         Swal.fire({
           title: "Profile Updated",
           text: "Your profile has been updated successfully!",
@@ -114,7 +107,6 @@ function Profile() {
       }
     }
   };
-  
 
   const handleLogout = () => {
     Swal.fire({
@@ -127,19 +119,14 @@ function Profile() {
     }).then((result) => {
       if (result.isConfirmed) {
         localStorage.removeItem("authorization");
-        navigate("/signin"); 
+        navigate("/signin");
       }
     });
   };
 
   return (
     <>
-      <button
-        className="absolute top-0 right-0 py-3 px-5 border border-transparent rounded-md bg-blue-500 text-white cursor-pointer transition duration-300 hover:bg-blue-600 m-5"
-        onClick={handleLogout}
-      >
-        Logout
-      </button>
+      <PageTitle title={"Profile"} />
 
       <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
         <div className="bg-white p-8  w-full max-w-2xl">
@@ -148,8 +135,7 @@ function Profile() {
             <div className="info-box border p-4 rounded-lg">
               <h3 className="text-lg font-bold mb-2">Personal Information</h3>
               <p>
-                <strong>Name:</strong> {userDetails.firstName}{" "}
-                {userDetails.lastName}
+                <strong>Name:</strong> {userDetails.firstName} {userDetails.lastName}
               </p>
               <p>
                 <strong>Email:</strong> {userDetails.email}
@@ -172,16 +158,14 @@ function Profile() {
             </div>
           </div>
           <div className="mt-6">
-         <center>
-          
-         <button
-           class="profile-button py-2 px-5 border border-transparent rounded-md bg-gray-200 text-gray-700 hover:bg-gray-300 transition duration-300"
-               onClick={handleProfileUpdate}
-            >
-              Update Profile
-            </button>
-          </center>  
-       
+            <center>
+              <button class="m-2 profile-button py-2 px-5 border border-transparent rounded-md bg-gray-200 text-gray-700 hover:bg-gray-300 transition duration-300" onClick={handleProfileUpdate}>
+                Update Profile
+              </button>
+              <button className="m-2 py-2 px-5 border border-transparent rounded-md bg-gray-200 text-gray-700 hover:bg-gray-300 transition duration-300" onClick={handleLogout}>
+                Logout
+              </button>
+            </center>
           </div>
         </div>
       </div>

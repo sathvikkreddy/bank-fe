@@ -20,10 +20,10 @@ const Index = () => {
   }, []);
   return (
     <div className="flex w-full h-screen">
-      <div className="flex-none fixed top-0 left-0 h-full">
+      <div className="flex-none fixed top-0 left-0 h-full ">
         <Appbar />
       </div>
-      <div className="flex-auto ml-[190px] overflow-y-auto">
+      <div className="flex-auto sm:ml-[190px] ml-10 overflow-y-auto">
         {isLoading ? (
           <div className="h-screen flex justify-center items-center">
             <LoadingSpinner />

@@ -46,6 +46,9 @@ const LoanDetails = () => {
     return loanPayables.filter((payable) => payable.status === status).length;
   };
   const handleFilterChange = (status) => {
+    if(status==="Upcoming"){
+      status="Pending";
+    }
     setFilter(status);
     setStat(status)
     

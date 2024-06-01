@@ -56,7 +56,8 @@ const LoanHome = () => {
             Loans You Applied for
           </Link>
         </div> */}
-        <div className="loan-card-container">
+        <div className="pl-4"><h1 className="text-2xl ml-2 font-bold mb-4">Apply For Loans</h1></div>
+        <div className="loan-card-container pl-3">
           <div className="flex flex-row gap-8 w-400px h-600px">
             {loanTypes.map((loanType) => (
               <LoanCard

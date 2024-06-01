@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import PageTitle from "../../components/PageTitle";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 function Profile() {
   const [userDetails, setUserDetails] = useState(null);
@@ -35,7 +36,11 @@ function Profile() {
   }
 
   if (!userDetails) {
-    return <div>Loading...</div>;
+    return (
+      <div className="h-screen flex justify-center items-center">
+        <LoadingSpinner />
+      </div>
+    );
   }
 
   const handleCheckBalance = async () => {

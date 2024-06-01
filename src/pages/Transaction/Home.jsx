@@ -24,6 +24,7 @@ export default function Component() {
   const phoneRegex = /^\d{10}$/;
   const [profile, isLoading, transactions, setProfile, setIsLoading, setTransactions] = useOutletContext();
 
+  console.log(profile);
   const handleTransfer = async (e) => {
     e.preventDefault();
     if (!receiverPhone || !amount || !pin) {
@@ -124,14 +125,14 @@ export default function Component() {
                 <label className="text-sm font-medium" htmlFor="receiver-phone">
                   Receiver Phone Number
                 </label>
-                <input className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" id="receiver-phone" placeholder="Enter Receiver's Phone Number" type="tel" value={receiverPhone} onChange={handlePhoneChange} />
+                <div className="sm:grid sm:items-center sm:gap-2 sm:grid-cols-5">
+                  <input className="sm:col-span-3 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" id="receiver-phone" placeholder="Enter Receiver's Phone Number" type="tel" value={receiverPhone} onChange={handlePhoneChange} />
+                  <div className="sm:col-span-2 sm:pt-0 pt-2">
+                    <Button title={"Search"} onClick={handleSearch} loading={searchLoading} loadingTitle={"Searching"} />
+                  </div>
+                </div>
               </div>
-              <div className="space-y-2">
-                <label className="text-sm font-medium" htmlFor="search-button">
-                  &nbsp;
-                </label>
-                <Button title={"Search"} onClick={handleSearch} loading={searchLoading} loadingTitle={"Searching"} />
-              </div>
+              <div className="space-y-2"></div>
             </div>
             {receiverPhone && !phoneRegex.test(receiverPhone) && <p className="text-red-500 text-sm">Receiver phone number must be 10 digits.</p>}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -187,7 +188,7 @@ export default function Component() {
         <div className="bg-white rounded-lg shadow-md p-6">
           <div className="sm:flex justify-between">
             <h2 className="sm:mt-2 mx-2 text-lg font-bold">Transaction History</h2>
-            <div className="flex justify-between items-center sm:gap-2 gap-1 mb-4">
+            <div className="grid grid-cols-3 items-center sm:gap-2 gap-1 mb-4">
               <div className="flex items-center sm:space-x-4">
                 <div className="relative">
                   <select className="w-full sm:px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" id="account-filter" value={accountFilter} onChange={(e) => setAccountFilter(e.target.value)}>
@@ -209,7 +210,7 @@ export default function Component() {
                 </select>
               </div>
               <div className="relative">
-                <input className="w-full sm:px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 " id="date-range-filter" type="month" value={dateRangeFilter} onChange={(e) => setDateRangeFilter(e.target.value)} />
+                <input className="w-full sm:px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 " id="date-range-filter" type="month" value={dateRangeFilter || "Range"} onChange={(e) => setDateRangeFilter(e.target.value)} />
               </div>
             </div>
           </div>
@@ -219,8 +220,8 @@ export default function Component() {
                 <tr className="bg-gray-100 ">
                   <th className="px-4 py-2 text-left text-sm font-medium">S.No.</th>
                   <th className="px-4 py-2 text-left text-sm font-medium">Transaction Id</th>
-                  <th className="px-4 py-2 text-left text-sm font-medium">Receiver AccountId</th>
-                  <th className="px-4 py-2 text-left text-sm font-medium">Transaction Type</th>
+                  <th className="px-4 py-2 text-left text-sm font-medium">Credit/Debit</th>
+                  <th className="px-4 py-2 text-left text-sm font-medium">From/To</th>
                   <th className="px-4 py-2 text-left text-sm font-medium">Amount</th>
                   <th className="px-4 py-2 text-left text-sm font-medium">Date</th>
                   <th className="px-4 py-2 text-left text-sm font-medium">Time</th>
@@ -232,8 +233,8 @@ export default function Component() {
                   <tr key={index} className="border-b">
                     <td className="px-4 py-2 text-sm">{index + 1}</td>
                     <td className="px-4 py-2 text-sm">{transaction.id}</td>
-                    <td className="px-4 py-2 text-sm">{transaction.creditId}</td>
-                    <td className="px-4 py-2 text-sm">{transaction.transactionType}</td>
+                    <td className="px-4 py-2 text-sm">{transaction.creditUserId === profile.userId ? "Credit" : "Debit"}</td>
+                    <td className="px-4 py-2 text-sm">{transaction.creditUserId === profile.userId ? transaction.creditId : transaction.debitId}</td>
                     <td className="px-4 py-2 text-sm">{transaction.amount}</td>
                     <td className="px-4 py-2 text-sm">{new Date(transaction.timestamp).toLocaleDateString()}</td>
                     <td className="px-4 py-2 text-sm">{new Date(transaction.timestamp).toLocaleTimeString()}</td>

@@ -40,15 +40,9 @@ const LoanDetails = () => {
     });
   };
   const countStatus = (status) => {
-    if(status==="Upcoming"){
-      status="Pending";
-    }
     return loanPayables.filter((payable) => payable.status === status).length;
   };
   const handleFilterChange = (status) => {
-    if(status==="Upcoming"){
-      status="Pending";
-    }
     setFilter(status);
     setStat(status)
     
@@ -131,7 +125,7 @@ const LoanDetails = () => {
       </button>
       <div className="flex justify-around pt-4 mb-4 bg-gray-100">
         
-        {['Upcoming', 'Due', 'Paid'].map((status) => (
+        {['Pending', 'Due', 'Paid'].map((status) => (
           <button
             key={status}
             className={`px-4 py-2 rounded ${filter === status ? 'bg-black text-white shadow-md mb-4 transition-transform duration-300 hover:-translate-y-2 hover:shadow-lg relative group p-4 border rounded hover:bg-white hover:text-black' : 'bg-black text-white shadow-md mb-4 transition-transform duration-300 hover:-translate-y-2 hover:shadow-lg relative group p-4 border rounded hover:bg-white hover:text-black hover:font-semibold'}`}
@@ -154,7 +148,7 @@ const LoanDetails = () => {
                   <p><strong>{emp}{emp}  Amount:</strong> ₹{formatNumber(payable.amount)}</p>
                   <p><strong>{emp} Due Date:</strong> {new Date(payable.dueDate).toLocaleDateString()}</p>
                   <p><strong>{emp} Status:</strong> {payable.status}</p>
-                  {payable.status != "Paid" && (
+                  {payable.status == "Due" && (
                     <button
                       className=" px-4 py-2 mt-2 bg-black text-white shadow-md mb-4 transition-transform duration-300 hover:-translate-y-2 hover:shadow-lg relative group p-4 border rounded hover:bg-white hover:text-black hover:font-semibold"
                       onClick={() => handlePayEMI(payable.id)}
@@ -177,7 +171,7 @@ const LoanDetails = () => {
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className={`bg-white p-6 rounded shadow-md ${dialog.isError ? 'border-red-500' : 'border-green-500'}`}>
             <p className="mb-4">{dialog.message}</p>
-            <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700" onClick={closeDialog}>
+            <button className=" px-4 py-2 rounded bg-black text-white shadow-md mb-4 transition-transform duration-300 hover:-translate-y-2 hover:shadow-lg relative group p-4 border hover:bg-white hover:text-black hover:font-semibold" onClick={closeDialog}>
               Close
             </button>
           </div>

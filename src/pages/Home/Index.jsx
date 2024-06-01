@@ -47,10 +47,10 @@ const Home = () => {
             <BalancesChart transactions={transactions} selectedAccount={selectedAccount} />
           </Card>
         </div>
-        <div className="sm:w-1/3 sm:flex sm:flex-col flex gap-2">
-          <div className="sm:h-1/2 sm:w-full w-1/2 pb-2">
+        <div className="sm:w-1/3 sm:flex sm:flex-col">
+          <div className="sm:h-1/2 w-full sm:pb-2">
             <Card title={<Dropdown options={profile.accounts} setSelectedAccount={setSelectedAccount} />}>
-              <div className="flex flex-col justify-between h-full">
+              <div className="flex flex-col justify-between">
                 <div className="flex flex-col gap-4">
                   <div className="text-grey-500 text-xl font-light">
                     <span className="font-semibold">ID: </span>
@@ -61,11 +61,11 @@ const Home = () => {
                     {selectedAccount.balance}
                   </div>
                 </div>
-                <div className="flex gap-2" name="Buttons">
-                  <div aria-disabled={isLoading} className={`${selectedAccount.id === profile.primaryAccountId ? "invisible w-0" : "w-3/5"}`}>
+                <div className="flex gap-2 mt-10" name="Buttons">
+                  <div aria-disabled={isLoading} className={`${selectedAccount.id === profile.primaryAccountId ? "hidden" : "block"}`}>
                     <Button onClick={handleSetPrimary} title={"Set as primary"} loading={loading} loadingTitle={"Setting"} />
                   </div>
-                  <div className={`${selectedAccount.id === profile.primaryAccountId ? "w-full" : "w-2/5"}`}>
+                  <div className="w-full">
                     <Button
                       onClick={() => {
                         setOpen(true);
@@ -81,7 +81,7 @@ const Home = () => {
               </div>
             </Card>
           </div>
-          <div className="sm:h-1/2 sm:w-full w-1/2">
+          <div className="sm:h-1/2 sm:w-full ">
             <Card title="All Accounts">
               {profile.accounts.map((acc) => {
                 return (

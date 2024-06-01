@@ -114,7 +114,7 @@ const MainInsurance = ({ activeInsurances, availableInsurances, activeLoading, s
           ) : activeInsurances.length < 1 ? (
             <div className="h-32 flex justify-center items-center">No active insurances, Apply for available insurances</div>
           ) : (
-            <div className="grid sm:grid-cols-3 grid-cols-3 gap-2">
+            <div className="grid sm:grid-cols-3 grid-cols-1 gap-2">
               {activeInsurances.slice(0, showAllActive ? activeInsurances.length + 1 : 3).map((insuranceObj) => {
                 return (
                   <div key={insuranceObj.insurance.id}>
@@ -199,7 +199,7 @@ const Form = ({ fields, handleChange, handleApply, fieldsTitles, handleCancel })
       <div>
         <span className="font-medium mr-2">{fieldsTitles.uniqueIdentificationNumber}: </span>
         <input
-          className="border p-2 rounded-md"
+          className="border p-2 rounded-md w-full"
           type="text"
           value={fields.uniqueIdentificationNumber}
           onChange={(e) => {
@@ -211,7 +211,7 @@ const Form = ({ fields, handleChange, handleApply, fieldsTitles, handleCancel })
       <div>
         <span className="font-medium mr-2">{fieldsTitles.yearOfPurchase}: </span>
         <input
-          className="border p-2 rounded-md focus:border-black"
+          className="border p-2 rounded-md focus:border-black w-full"
           type="text"
           value={fields.yearOfPurchase}
           onChange={(e) => {
@@ -276,7 +276,7 @@ const Form = ({ fields, handleChange, handleApply, fieldsTitles, handleCancel })
       <div>
         <span className="font-medium mr-2">{fieldsTitles.pin}: </span>
         <input
-          className="border p-2 rounded-md focus:border-black"
+          className="border p-2 rounded-md focus:border-black w-full"
           type="password"
           value={fields.pin}
           onChange={(e) => {

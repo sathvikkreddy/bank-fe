@@ -4,11 +4,15 @@ import LoadingSpinner from "../../components/LoadingSpinner";
 import PageTitle from "../../components/PageTitle";
 import Button from "../../components/Button";
 import Modal from "../../components/Modal";
+import axios from "axios";
+import NotFound from "../NotFound";
 
 const InsuranceDetail = ({ activeInsurances, activeLoading }) => {
   const { id } = useParams();
   const [currentInsurance, setCurrentInsurance] = useState(null);
   const [selectedTab, setSelectedTab] = useState("due");
+  const [installmentsLoading, setInstallmentsLoading] = useState(false);
+  const [installments, setInstallments] = useState(null);
 
   const handleTabChange = (tab) => {
     setSelectedTab(tab);
@@ -23,62 +27,70 @@ const InsuranceDetail = ({ activeInsurances, activeLoading }) => {
     return `${day}-${month}-${year}`;
   };
 
-  const installments = {
-    pending: [
-      {
-        id: "IIN21086614",
-        insuranceId: "INO28952577",
-        installmentYear: 2,
-        installmentAmount: 15,
-        dueDate: "2025-05-28T16:38:04.4308566",
-        status: "Pending",
-      },
-      {
-        id: "IIN71650745",
-        insuranceId: "INO28952577",
-        installmentYear: 3,
-        installmentAmount: 15,
-        dueDate: "2026-05-28T16:38:04.4308566",
-        status: "Pending",
-      },
-    ],
-    due: [
-      {
-        id: "IIN21086614",
-        insuranceId: "INO28952577",
-        installmentYear: 2,
-        installmentAmount: 15,
-        dueDate: "2025-05-28T16:38:04.4308566",
-        status: "Due",
-      },
-      {
-        id: "IIN71650745",
-        insuranceId: "INO28952577",
-        installmentYear: 3,
-        installmentAmount: 15,
-        dueDate: "2026-05-28T16:38:04.4308566",
-        status: "Due",
-      },
-    ],
-    paid: [
-      {
-        id: "IIN21086614",
-        insuranceId: "INO28952577",
-        installmentYear: 2,
-        installmentAmount: 15,
-        dueDate: "2025-05-28T16:38:04.4308566",
-        status: "Paid",
-      },
-      {
-        id: "IIN71650745",
-        insuranceId: "INO28952577",
-        installmentYear: 3,
-        installmentAmount: 15,
-        dueDate: "2026-05-28T16:38:04.4308566",
-        status: "Paid",
-      },
-    ],
+  const filterByInsuranceId = (data, insuranceId) => {
+    return {
+      pending: data.pending.filter((item) => item.insuranceId === insuranceId),
+      due: data.due.filter((item) => item.insuranceId === insuranceId),
+      paid: data.paid.filter((item) => item.insuranceId === insuranceId),
+    };
   };
+
+  // const installments = {
+  //   pending: [
+  //     {
+  //       id: "IIN21086614",
+  //       insuranceId: "INO28952577",
+  //       installmentYear: 2,
+  //       installmentAmount: 15,
+  //       dueDate: "2025-05-28T16:38:04.4308566",
+  //       status: "Pending",
+  //     },
+  //     {
+  //       id: "IIN71650745",
+  //       insuranceId: "INO28952577",
+  //       installmentYear: 3,
+  //       installmentAmount: 15,
+  //       dueDate: "2026-05-28T16:38:04.4308566",
+  //       status: "Pending",
+  //     },
+  //   ],
+  //   due: [
+  //     {
+  //       id: "IIN21086614",
+  //       insuranceId: "INO28952577",
+  //       installmentYear: 2,
+  //       installmentAmount: 15,
+  //       dueDate: "2025-05-28T16:38:04.4308566",
+  //       status: "Due",
+  //     },
+  //     {
+  //       id: "IIN71650745",
+  //       insuranceId: "INO28952577",
+  //       installmentYear: 3,
+  //       installmentAmount: 15,
+  //       dueDate: "2026-05-28T16:38:04.4308566",
+  //       status: "Due",
+  //     },
+  //   ],
+  //   paid: [
+  //     {
+  //       id: "IIN21086614",
+  //       insuranceId: "INO28952577",
+  //       installmentYear: 2,
+  //       installmentAmount: 15,
+  //       dueDate: "2025-05-28T16:38:04.4308566",
+  //       status: "Paid",
+  //     },
+  //     {
+  //       id: "IIN71650745",
+  //       insuranceId: "INO28952577",
+  //       installmentYear: 3,
+  //       installmentAmount: 15,
+  //       dueDate: "2026-05-28T16:38:04.4308566",
+  //       status: "Paid",
+  //     },
+  //   ],
+  // };
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedInstallment, setSelectedInstallment] = useState(null);
@@ -100,6 +112,29 @@ const InsuranceDetail = ({ activeInsurances, activeLoading }) => {
     }
   }, [id, activeInsurances, activeLoading]);
 
+  useEffect(() => {
+    try {
+      const token = localStorage.getItem("authorization");
+      if (!token) throw new Error("Unauthorized: Token not found");
+      setInstallmentsLoading(true);
+      const userResponse = axios
+        .get("https://techbuzzers.somee.com/getAllInsuranceInstallments", {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          const filteredData = filterByInsuranceId(response.data, id);
+          setInstallments(filteredData);
+          setInstallmentsLoading(false);
+        });
+    } catch (err) {
+      setInstallmentsLoading(false);
+      console.log(err.message);
+    }
+  }, []);
+
   if (activeLoading) {
     return (
       <div className="h-screen flex justify-center items-center">
@@ -108,7 +143,7 @@ const InsuranceDetail = ({ activeInsurances, activeLoading }) => {
     );
   }
 
-  if (!currentInsurance) return "Not Found";
+  if (!currentInsurance) return <NotFound />;
 
   return (
     <div>
@@ -160,7 +195,7 @@ const InsuranceDetail = ({ activeInsurances, activeLoading }) => {
             Paid
           </button>
         </div>
-        <InstallmentTable installments={installments[selectedTab]} handleOpenModal={handleOpenModal} />
+        {installmentsLoading ? <LoadingSpinner /> : <InstallmentTable type={selectedTab} installments={installments[selectedTab]} handleOpenModal={handleOpenModal} />}
       </div>
       <InstallmentPaymentModal open={isModalOpen} onClose={handleCloseModal} installment={selectedInstallment} />
     </div>
@@ -169,15 +204,18 @@ const InsuranceDetail = ({ activeInsurances, activeLoading }) => {
 
 export default InsuranceDetail;
 
-const InstallmentTable = ({ installments, handleOpenModal }) => {
+const InstallmentTable = ({ type, installments, handleOpenModal }) => {
+  if (installments.length < 1) {
+    return <div className="uppercase m-2 ">No {type} Premiums</div>;
+  }
   return (
     <div className="overflow-x-auto rounded-md">
       <table className="min-w-full bg-white border border-gray-300">
         <thead>
           <tr className="bg-gray-200 leading-normal">
-            <th className="py-3 sm:px-6 px-1 text-left">Installment ID</th>
-            <th className="py-3 sm:px-6 px-1 text-left">Installment Year</th>
-            <th className="py-3 sm:px-6 px-1 text-left">Installment Amount</th>
+            <th className="py-3 sm:px-6 px-1 text-left">Premium ID</th>
+            <th className="py-3 sm:px-6 px-1 text-left">Premium Year</th>
+            <th className="py-3 sm:px-6 px-1 text-left">Premium Amount</th>
             <th className="py-3 sm:px-6 px-1 text-left">Status</th>
           </tr>
         </thead>
@@ -186,7 +224,7 @@ const InstallmentTable = ({ installments, handleOpenModal }) => {
             <tr key={installment.id} className="border-b border-gray-200">
               <td className="py-3 sm:px-6 px-1 text-left">{installment.id}</td>
               <td className="py-3 sm:px-6 px-1 text-left">{installment.installmentYear}</td>
-              <td className="py-3 sm:px-6 px-1 text-left">${installment.installmentAmount}</td>
+              <td className="py-3 sm:px-6 px-1 text-left">{installment.installmentAmount} INR</td>
               <td className="py-3 sm:px-6 px-1 text-left">
                 {installment.status === "Due" ? (
                   <Button

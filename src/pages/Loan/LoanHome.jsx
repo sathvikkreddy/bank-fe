@@ -9,7 +9,7 @@ const LoanHome = () => {
     {
       type: "Personal Loan",
       name: "Personal Loan",
-      image: "src/assets/personal_loan_image.jpeg", // Update path if necessary
+      image: "https://www.livemint.com/lm-img/img/2024/05/12/600x338/zzz_1714133883091_1715542711598.png", // Update path if necessary
       minAmount: 1000,
       maxAmount: 10000000,
       interestRate: 10,
@@ -27,7 +27,7 @@ const LoanHome = () => {
     {
       type: "Gold Loan",
       name: "Gold Loan",
-      image: "src/assets/gold_loan_image.jpg", // Update path if necessary
+      image: "https://t4.ftcdn.net/jpg/05/67/11/69/240_F_567116963_INzvhlhZBqOXheQTugl4B2SWkTKCqsKd.jpg", // Update path if necessary
       msg1: "1 Year Tenure",
       img1: <GImg1 />, // Update path if necessary
       msg2: "Minimum paperwork",

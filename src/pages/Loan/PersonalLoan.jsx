@@ -20,7 +20,6 @@ const Personalloan = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("authorization");
-
     const fetchData = async () => {
       try {
         const loanType = "Personal Loan";
@@ -94,6 +93,12 @@ const Personalloan = () => {
     }
   };
 
+  const formatNumber = (number) => {
+    return number.toLocaleString("en-IN", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  };
   const handleTenureChange = (event) => {
     setSelectedTenure(event.target.value);
   };
@@ -105,7 +110,9 @@ const Personalloan = () => {
       enteredAmount > selectedAmount
     ) {
       setMessage(
-        `Please enter an amount between ${previousAmount} and ${selectedAmount}`
+        `Please enter an amount between ${formatNumber(
+          previousAmount
+        )} and ${formatNumber(selectedAmount)}`
       );
       setShowDialog(true);
       return;
@@ -114,7 +121,7 @@ const Personalloan = () => {
     const R = roi / 12 / 100;
     const N = selectedTenure;
     const emiCalc = (P * R * Math.pow(1 + R, N)) / (Math.pow(1 + R, N) - 1);
-    setEmi(emiCalc.toFixed(2));
+    setEmi(emiCalc);
   };
 
   const handleApplyLoan = async () => {
@@ -124,10 +131,13 @@ const Personalloan = () => {
     );
 
     if (existingPersonalLoan) {
-      setMessage("OOPS! you have \"Applied Personal Loan\". Request to Apply after its clearance...");
+      setMessage(
+        'OOPS! you have "Applied Personal Loan". Request to Apply after its clearance...'
+      );
       setShowDialog(true);
       return;
     }
+
     const selectedLoan = loanDetails.find(
       (loan) => loan.loanDetails.amouuntGranted === selectedAmount
     );
@@ -214,7 +224,7 @@ const Personalloan = () => {
             </div>
             <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700">
-                Select Tenure
+                Select Tenure <span className="text-red-600">*</span>
               </label>
               <select
                 className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -229,11 +239,11 @@ const Personalloan = () => {
               </select>
             </div>
             <div className="mb-4">
-            <label className=" flex-row block text-sm font-medium text-gray-700">
+              <label className=" flex-row block text-sm font-medium text-gray-700">
                 ( Enter Specific Amount )
                 <span>
                   {valid ? (
-                    <span className="flex-row">✔️</span>
+                    <span className="flex-row">✅</span>
                   ) : (
                     <span className="text-red-600">
                       {" "}
@@ -262,7 +272,7 @@ const Personalloan = () => {
             </div>
             <div className="mb-4">
               <button
-                className="bg-blue-500 text-white py-2 px-4 rounded"
+                className="bg-black text-white py-2 px-4 rounded"
                 onClick={handleEmiCalculation}
               >
                 Calculate EMI
@@ -274,13 +284,13 @@ const Personalloan = () => {
                   Your monthly payable EMI is:
                 </label>
                 <div className="mt-1 p-2 border border-gray-300 rounded-md">
-                  ₹{emi}
+                  ₹{formatNumber(emi)}
                 </div>
               </div>
             )}
             <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700">
-                Select Account ID
+                Select Account ID <span className="text-red-600">*</span>
               </label>
               <select
                 className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -296,7 +306,7 @@ const Personalloan = () => {
             </div>
             <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700">
-                Enter PIN to verify
+                Enter PIN to verify <span className="text-red-600">*</span>
               </label>
               <input
                 type="password"
@@ -307,7 +317,7 @@ const Personalloan = () => {
             </div>
             <div className="mb-4">
               <button
-                className="bg-green-500 text-white py-2 px-4 rounded"
+                className="bg-black text-white py-2 px-4 rounded"
                 onClick={handleApplyLoan}
               >
                 Apply Loan

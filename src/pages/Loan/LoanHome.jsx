@@ -1,6 +1,5 @@
 import React from "react";
 import LoanCard from "../../components/LoanCard";
-import { Link } from "react-router-dom";
 import PageTitle from "../../components/PageTitle";
 import LoanHistory from "./LoanHistory";
 
@@ -9,7 +8,8 @@ const LoanHome = () => {
     {
       type: "Personal Loan",
       name: "Personal Loan",
-      image: "https://www.livemint.com/lm-img/img/2024/05/12/600x338/zzz_1714133883091_1715542711598.png", // Update path if necessary
+      image:
+        "https://www.livemint.com/lm-img/img/2024/05/12/600x338/zzz_1714133883091_1715542711598.png",
       minAmount: 1000,
       maxAmount: 10000000,
       interestRate: 10,
@@ -18,52 +18,47 @@ const LoanHome = () => {
       msg2: "Minimum documentation",
       msg3: "Avail loan up to ₹ 40 Lakhs",
       msg4: "Get EMI starting at ₹ 2,149/Lakh",
-      img1: <PImg1 />, // Update path if necessary
-      img2: <PImg2 />, // Update path if necessary
-      img3: <Pimg3 />, // Update path if necessary
-      img4: <PImg4 />, // Update path if necessary
-      route: "Personalloan", // Redirect route for Personal Loan
+      img1: <PImg1 />,
+      img2: <PImg2 />,
+      img3: <Pimg3 />,
+      img4: <PImg4 />,
+      route: "Personalloan",
     },
     {
       type: "Gold Loan",
       name: "Gold Loan",
-      image: "https://t4.ftcdn.net/jpg/05/67/11/69/240_F_567116963_INzvhlhZBqOXheQTugl4B2SWkTKCqsKd.jpg", // Update path if necessary
+      image:
+        "https://t4.ftcdn.net/jpg/05/67/11/69/240_F_567116963_INzvhlhZBqOXheQTugl4B2SWkTKCqsKd.jpg",
       msg1: "1 Year Tenure",
-      img1: <GImg1 />, // Update path if necessary
+      img1: <GImg1 />,
       msg2: "Minimum paperwork",
-      img2: <GImg2 />, // Update path if necessary
+      img2: <GImg2 />,
       msg3: "Get instant Loan Approval",
-      img3: <Gimg3 />, // Update path if necessary
+      img3: <Gimg3 />,
       msg4: "Enjoy competitive interest rates",
-      img4: <GImg4 />, // Update path if necessary
+      img4: <GImg4 />,
       interestRate: 8,
       ir2: 10.691,
-      route: "Goldloan", // Redirect route for Gold Loan
+      route: "Goldloan",
     },
   ];
 
   return (
     <>
       <div>
-        <div className="">
+        <div>
           <PageTitle title="Loans" />
         </div>
-        <LoanHistory/>
-        {/* <div className="mt-8">
-          <Link
-            to="/loan/history"
-            className="ml-5 mb-4 bg-blue-500 text-white py-2 px-4 rounded">
-            Loans You Applied for
-          </Link>
-        </div> */}
-        <div className="pl-4"><h1 className="text-2xl ml-2 font-bold mb-4">Apply For Loans</h1></div>
+        <LoanHistory />
+        <div className="pl-4">
+          <h1 className="text-2xl ml-2 font-semibold mb-4">Available Loans</h1>
+        </div>
         <div className="loan-card-container pl-3">
-          <div className="flex flex-row gap-8 w-400px h-600px">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {loanTypes.map((loanType) => (
               <LoanCard
                 key={loanType.type}
                 {...loanType} // Spread loanType props to LoanCard
-                style={{ width: "600px", height: "900px" }} // Adjust as needed
               />
             ))}
           </div>
@@ -75,8 +70,6 @@ const LoanHome = () => {
 
 export default LoanHome;
 
-
-// export default LoanHome;
 function PImg1(props) {
   return (
     <svg

@@ -1,41 +1,57 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { useOutletContext } from 'react-router-dom';
-
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
+import Card from "../../components/Card";
 const LoanHistory = () => {
   const [profile] = useOutletContext();
-
+  const [emp, setEmp] = useState(" ");
   const formatNumber = (number) => {
-    return number.toLocaleString('en-IN', {
+    return number.toLocaleString("en-IN", {
       minimumFractionDigits: 2,
-      maximumFractionDigits: 2
+      maximumFractionDigits: 2,
     });
   };
 
   return (
-    <div className="p-8">
-      <h1 className="text-2xl font-bold mb-4">Applied Loans</h1>
-      <div className="p-6 rounded shadow-md bg-gray-50">
+    <div className="container p-8">
+      <h1 className="flex text-2xl font-semibold mb-4">Active Loans</h1>
+
+      <div className="p-6 rounded border shadow-md bg-white">
         {profile.loans.length > 0 ? (
-          <ul>
-            {profile.loans.map(loan => (
-              <li key={loan.loanDetailsId} className="mb-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {profile.loans.map((loan) => (
+              <div
+                key={loan.loanDetailsId}
+                className="p-4 border rounded shadow-md hover:bg-gray-50"
+              >
                 <Link to={`LoanDetails/${loan.loanDetailsId}`}>
-                  <div className="transition-transform duration-300 hover:-translate-y-2 hover:shadow-lg relative group p-4 border rounded hover:bg-white">
+                  <div>
                     <div className="flex justify-center">
-                      <strong><p>Applied {loan.loanType}</p></strong>
+                      <strong>
+                        <p>{loan.loanType}</p>
+                      </strong>
                     </div>
-                    
-                    <hr/>
+                    <hr />
                     <br />
-                    <p>Account ID: {loan.accountId}</p>
-                    <p>Loan Amount: ₹{formatNumber(loan.loanAmount)}</p>
-                    <p>Tenure: {loan.tenure} months</p>
+                    <div className="font-semibold sm:text-base text-xs">
+                      Account ID :{" "}
+                      <span className="font-normal">{loan.accountId}</span>
+                    </div>
+                    <div className="font-semibold sm:text-base text-xs">
+                      Loan Amount:{" "}
+                      <span className="font-normal">
+                        ₹{formatNumber(loan.loanAmount)}
+                      </span>
+                    </div>
+                    <div className="font-semibold sm:text-base text-xs">
+                      Tenure:{" "}
+                      <span className="font-normal">{loan.tenure} Months</span>
+                    </div>
                   </div>
                 </Link>
-              </li>
+              </div>
             ))}
-          </ul>
+          </div>
         ) : (
           <p>Apply From Below</p>
         )}

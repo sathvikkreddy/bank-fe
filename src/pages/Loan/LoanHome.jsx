@@ -9,7 +9,7 @@ const LoanHome = () => {
       type: "Personal Loan",
       name: "Personal Loan",
       image:
-        "https://www.livemint.com/lm-img/img/2024/05/12/600x338/zzz_1714133883091_1715542711598.png",
+        "https://cdn-icons-png.flaticon.com/128/2746/2746100.png",
       minAmount: 1000,
       maxAmount: 10000000,
       interestRate: 10,
@@ -28,7 +28,8 @@ const LoanHome = () => {
       type: "Gold Loan",
       name: "Gold Loan",
       image:
-        "https://t4.ftcdn.net/jpg/05/67/11/69/240_F_567116963_INzvhlhZBqOXheQTugl4B2SWkTKCqsKd.jpg",
+        // "https://cdn-icons-png.flaticon.com/128/3189/3189106.png",
+        "https://cdn-icons-png.flaticon.com/128/646/646671.png",
       msg1: "1 Year Tenure",
       img1: <GImg1 />,
       msg2: "Minimum paperwork",

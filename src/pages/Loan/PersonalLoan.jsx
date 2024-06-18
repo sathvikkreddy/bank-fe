@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useOutletContext } from "react-router-dom";
 
 const Personalloan = () => {
@@ -6,7 +6,7 @@ const Personalloan = () => {
   const [selectedAmount, setSelectedAmount] = useState(null);
   const [roi, setRoi] = useState(null);
   const [tenureOptions, setTenureOptions] = useState([]);
-  const [selectedTenure, setSelectedTenure] = useState(null);
+  const [selectedTenure, setSelectedTenure] = useState("");
   const [enteredAmount, setEnteredAmount] = useState("");
   const [emi, setEmi] = useState(null);
   const [pin, setPin] = useState("");
@@ -17,6 +17,13 @@ const Personalloan = () => {
   const [showDialog, setShowDialog] = useState(false);
   const [valid, setValid] = useState(true);
   const [profile] = useOutletContext();
+
+  
+  const tenureRef = useRef(null);
+  const amountRef = useRef(null);
+  const accountRef = useRef(null);
+  const pinRef = useRef(null);
+
 
   useEffect(() => {
     const token = localStorage.getItem("authorization");
@@ -104,6 +111,14 @@ const Personalloan = () => {
   };
 
   const handleEmiCalculation = () => {
+
+    if (!selectedTenure) {
+      tenureRef.current.focus();
+      setMessage("Please select a tenure");
+      setShowDialog(true);
+      return;
+    }
+
     if (
       enteredAmount <= 0 ||
       enteredAmount < previousAmount ||
@@ -129,6 +144,37 @@ const Personalloan = () => {
     const existingPersonalLoan = profile.loans.some(
       (loan) => loan.loanType === "Personal Loan"
     );
+
+
+    if (!pin) {
+      pinRef.current.focus();
+      setMessage("Please enter your PIN");
+      setShowDialog(true);
+      return;
+    }
+
+    if (!selectedTenure) {
+      tenureRef.current.focus();
+      setMessage("Please select a tenure");
+      setShowDialog(true);
+      return;
+    }
+
+    if (!enteredAmount || enteredAmount < previousAmount || enteredAmount > selectedAmount) {
+      amountRef.current.focus();
+      setMessage(`Please enter a valid amount between ${formatNumber(previousAmount)} and ${formatNumber(selectedAmount)}`);
+      setShowDialog(true);
+      return;
+    }
+
+    if (!accountId) {
+      accountRef.current.focus();
+      setMessage("Please select an account");
+      setShowDialog(true);
+      return;
+    }
+
+    
 
     if (existingPersonalLoan) {
       setMessage(
@@ -227,8 +273,10 @@ const Personalloan = () => {
                 Select Tenure <span className="text-red-600">*</span>
               </label>
               <select
+                ref={tenureRef}
                 className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 onChange={handleTenureChange}
+                required
               >
                 <option value="">Select tenure</option>
                 {tenureOptions.map((tenure) => (
@@ -239,7 +287,7 @@ const Personalloan = () => {
               </select>
             </div>
             <div className="mb-4">
-              <label className=" flex-row block text-sm font-medium text-gray-700">
+              <label className="flex-row block text-sm font-medium text-gray-700">
                 ( Enter Specific Amount )
                 <span>
                   {valid ? (
@@ -254,6 +302,7 @@ const Personalloan = () => {
                 </span>
               </label>
               <input
+                ref={amountRef}
                 type="number"
                 className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 value={enteredAmount}
@@ -268,6 +317,7 @@ const Personalloan = () => {
                     setValid(true);
                   }
                 }}
+                required
               />
             </div>
             <div className="mb-4">
@@ -293,8 +343,10 @@ const Personalloan = () => {
                 Select Account ID <span className="text-red-600">*</span>
               </label>
               <select
+              ref={accountRef}
                 className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 onChange={(e) => setAccountId(e.target.value)}
+                required
               >
                 <option value="">Select an account</option>
                 {accounts.map((account) => (
@@ -309,10 +361,12 @@ const Personalloan = () => {
                 Enter PIN to verify <span className="text-red-600">*</span>
               </label>
               <input
+                ref={pinRef}
                 type="password"
                 className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 value={pin}
                 onChange={(e) => setPin(e.target.value)}
+                required
               />
             </div>
             <div className="mb-4">

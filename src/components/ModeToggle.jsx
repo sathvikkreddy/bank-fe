@@ -14,7 +14,7 @@ const ModeToggle = () => {
   return (
     <div className="flex items-center justify-center h-screen">
       <div
-        className={`w-16 h-8 flex items-center bg-gray-300 rounded-full p-1 cursor-pointer transition-colors duration-300`}
+        className={`w-16 h-8 flex items-center bg-gray-300 dark:bg-gray-500 rounded-full p-1 cursor-pointer transition-colors duration-300`}
         onClick={darkModeHandler}
       >
         <div

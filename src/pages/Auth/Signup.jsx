@@ -1,7 +1,21 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { validateAadhar, validateAddress, validateDOB, validateEmail, validateFatherName, validateFirstName, validateGender, validateLastName, validatePIN, validatePan, validatePhoneNumber, validateSignupForm } from "../../inputValidators";
+import {
+  validateAadhar,
+  validateAddress,
+  validateDOB,
+  validateEmail,
+  validateFatherName,
+  validateFirstName,
+  validateGender,
+  validateLastName,
+  validatePIN,
+  validatePan,
+  validatePhoneNumber,
+  validateSignupForm,
+} from "../../inputValidators";
+import ModeToggle from "../../components/ModeToggle";
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -57,11 +71,15 @@ export default function Signup() {
     };
     try {
       setIsLoading(true);
-      const res = await axios.post("https://techbuzzers.somee.com/signup", reqBody, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const res = await axios.post(
+        "https://techbuzzers.somee.com/signup",
+        reqBody,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       console.log("signup success");
       setIsLoading(false);
       navigate("/signin");
@@ -75,13 +93,16 @@ export default function Signup() {
     return (
       <>
         <div>
-          <label className="block text-sm font-medium text-gray-700" htmlFor="firstName">
-            First Name <span className="text-red-500 text-xs font-light">{warnings.firstName}</span>
+          <label className="block text-sm font-medium " htmlFor="firstName">
+            First Name{" "}
+            <span className="text-red-500 text-xs font-light">
+              {warnings.firstName}
+            </span>
           </label>
           <div className="mt-1">
             <input
               autoComplete="firstName"
-              className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="dark:bg-gray-800 dark:border-gray-600 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
               id="firstName"
               name="firstName"
               placeholder="john"
@@ -106,13 +127,16 @@ export default function Signup() {
           </div>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700" htmlFor="lastName">
-            Last Name <span className="text-red-500 text-xs font-light">{warnings.lastName}</span>
+          <label className="block text-sm font-medium " htmlFor="lastName">
+            Last Name{" "}
+            <span className="text-red-500 text-xs font-light">
+              {warnings.lastName}
+            </span>
           </label>
           <div className="mt-1">
             <input
               autoComplete="lastName"
-              className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="dark:bg-gray-800 dark:border-gray-600 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
               id="lastName"
               name="lastName"
               placeholder="doe"
@@ -137,13 +161,16 @@ export default function Signup() {
           </div>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700" htmlFor="fatherName">
-            Father Name <span className="text-red-500 text-xs font-light">{warnings.fatherName}</span>
+          <label className="block text-sm font-medium " htmlFor="fatherName">
+            Father Name{" "}
+            <span className="text-red-500 text-xs font-light">
+              {warnings.fatherName}
+            </span>
           </label>
           <div className="mt-1">
             <input
               autoComplete="fatherName"
-              className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="dark:bg-gray-800 dark:border-gray-600 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
               id="fatherName"
               name="fatherName"
               placeholder="jack doe"
@@ -167,13 +194,16 @@ export default function Signup() {
             />
           </div>
           <div className="pt-2">
-            <label className="block text-sm font-medium text-gray-700" htmlFor="address">
-              Address <span className="text-red-500 text-xs font-light">{warnings.address}</span>
+            <label className="block text-sm font-medium " htmlFor="address">
+              Address{" "}
+              <span className="text-red-500 text-xs font-light">
+                {warnings.address}
+              </span>
             </label>
             <div className="mt-1">
               <input
                 autoComplete="address"
-                className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="dark:bg-gray-800 dark:border-gray-600 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                 id="address"
                 name="address"
                 placeholder="Enter your address"
@@ -198,13 +228,16 @@ export default function Signup() {
             </div>
           </div>
           <div className="pt-2">
-            <label className="block text-sm font-medium text-gray-700" htmlFor="dob">
-              DOB <span className="text-red-500 text-xs font-light">{warnings.dob}</span>
+            <label className="block text-sm font-medium " htmlFor="dob">
+              DOB{" "}
+              <span className="text-red-500 text-xs font-light">
+                {warnings.dob}
+              </span>
             </label>
             <div className="mt-1">
               <input
                 autoComplete="dob"
-                className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="dark:bg-gray-800 dark:border-gray-600 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                 id="dob"
                 name="dob"
                 placeholder="2001-05-21"
@@ -229,13 +262,16 @@ export default function Signup() {
             </div>
           </div>
           <div className="pt-2">
-            <label className="block text-sm font-medium text-gray-700" htmlFor="dob">
-              Gender <span className="text-red-500 text-xs font-light">{warnings.gender}</span>
+            <label className="block text-sm font-medium " htmlFor="dob">
+              Gender{" "}
+              <span className="text-red-500 text-xs font-light">
+                {warnings.gender}
+              </span>
             </label>
             <div className="mt-1">
               <input
                 autoComplete="gender"
-                className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="dark:bg-gray-800 dark:border-gray-600 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                 id="gender"
                 name="gender"
                 placeholder="Male, Female, Others"
@@ -267,13 +303,16 @@ export default function Signup() {
     return (
       <>
         <div>
-          <label className="block text-sm font-medium text-gray-700" htmlFor="phoneNumber">
-            Phone Number <span className="text-red-500 text-xs font-light">{warnings.phoneNumber}</span>
+          <label className="block text-sm font-medium " htmlFor="phoneNumber">
+            Phone Number{" "}
+            <span className="text-red-500 text-xs font-light">
+              {warnings.phoneNumber}
+            </span>
           </label>
           <div className="mt-1">
             <input
               autoComplete="phoneNumber"
-              className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="dark:bg-gray-800 dark:border-gray-600 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
               id="phoneNumber"
               name="phoneNumber"
               placeholder="9000340004"
@@ -298,13 +337,16 @@ export default function Signup() {
           </div>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700" htmlFor="email">
-            Email <span className="text-red-500 text-xs font-light">{warnings.email}</span>
+          <label className="block text-sm font-medium " htmlFor="email">
+            Email{" "}
+            <span className="text-red-500 text-xs font-light">
+              {warnings.email}
+            </span>
           </label>
           <div className="mt-1">
             <input
               autoComplete="email"
-              className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="dark:bg-gray-800 dark:border-gray-600 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
               id="email"
               name="email"
               placeholder="johndoe@gmail.com"
@@ -329,13 +371,16 @@ export default function Signup() {
           </div>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700" htmlFor="aadhar">
-            Aadhar <span className="text-red-500 text-xs font-light">{warnings.aadhar}</span>
+          <label className="block text-sm font-medium " htmlFor="aadhar">
+            Aadhar{" "}
+            <span className="text-red-500 text-xs font-light">
+              {warnings.aadhar}
+            </span>
           </label>
           <div className="mt-1">
             <input
               autoComplete="aadhar"
-              className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="dark:bg-gray-800 dark:border-gray-600 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
               id="aadhar"
               name="aadhar"
               placeholder="678956731235"
@@ -360,13 +405,16 @@ export default function Signup() {
           </div>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700" htmlFor="pan">
-            Pan <span className="text-red-500 text-xs font-light">{warnings.pan}</span>
+          <label className="block text-sm font-medium " htmlFor="pan">
+            Pan{" "}
+            <span className="text-red-500 text-xs font-light">
+              {warnings.pan}
+            </span>
           </label>
           <div className="mt-1">
             <input
               autoComplete="pan"
-              className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="dark:bg-gray-800 dark:border-gray-600 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
               id="pan"
               name="pan"
               placeholder="FBIRE2138A"
@@ -391,13 +439,16 @@ export default function Signup() {
           </div>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700" htmlFor="pin">
-            Set your pin <span className="text-red-500 text-xs font-light">{warnings.pin}</span>
+          <label className="block text-sm font-medium " htmlFor="pin">
+            Set your pin{" "}
+            <span className="text-red-500 text-xs font-light">
+              {warnings.pin}
+            </span>
           </label>
           <div className="mt-1">
             <input
               autoComplete="pin"
-              className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="dark:bg-gray-800 dark:border-gray-600 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
               id="pin"
               name="pin"
               placeholder="1234"
@@ -460,35 +511,54 @@ export default function Signup() {
             <div>{shortenString(fields.address)}</div>
           </div>
         </div>
-        {isValidForm ? null : <div className="font-light text-red-500 text-sm pt-4">* All fields must be valid to signup</div>}
-        {<div className="font-light text-red-500 text-sm pt-4">{errorMessage}</div>}
+        {isValidForm ? null : (
+          <div className="font-light text-red-500 text-sm pt-4">
+            * All fields must be valid to signup
+          </div>
+        )}
+        {
+          <div className="font-light text-red-500 text-sm pt-4">
+            {errorMessage}
+          </div>
+        }
       </div>
     );
   };
   const SignupButton = () => {
     return (
-      <button className={`w-3/5 flex justify-center py-2 px-4 border border-transparent rounded-md bg-black shadow-sm text-sm font-medium text-white ${isValidForm && !isLoading ? "cursor-pointer" : "cursor-not-allowed"} hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black`} type="submit" onClick={(e) => onSignup(e, fields)} disabled={!isValidForm}>
+      <button
+        className={`w-3/5 flex justify-center py-2 px-4 border border-transparent rounded-md bg-black shadow-sm text-sm font-medium text-white ${
+          isValidForm && !isLoading ? "cursor-pointer" : "cursor-not-allowed"
+        } hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black`}
+        type="submit"
+        onClick={(e) => onSignup(e, fields)}
+        disabled={!isValidForm}
+      >
         {`${isLoading ? "Signing Up" : "Confirm & Sign Up"}`}
       </button>
     );
   };
   return (
-    <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-700 dark:text-white py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2">
-        <div className="flex-1 space-y-8 bg-white p-10">
+        <div className="flex-1 space-y-8 bg-white dark:bg-gray-800 p-10">
           <div>
-            <h2 className="text-2xl font-extrabold text-gray-900">Create Your Account</h2>
-            <p className="mt-2 text-sm text-gray-600">
+            <h2 className="text-2xl font-extrabold ">Create Your Account</h2>
+            <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">
               Already have an account?
               <Link className="font-medium underline px-2" to="/signin">
                 Signin
               </Link>
             </p>
           </div>
-          <div className="space-y-3">{page === 1 ? page1() : page === 2 ? page2() : page3()}</div>
+          <div className="space-y-3">
+            {page === 1 ? page1() : page === 2 ? page2() : page3()}
+          </div>
           <div className="flex justify-between gap-2">
             <button
-              className={`w-1/5 flex justify-center py-2 px-4 border border-transparent rounded-md bg-black shadow-sm text-sm font-medium text-white ${page !== 1 ? "cursor-pointer" : "cursor-not-allowed"} hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black`}
+              className={`w-1/5 flex justify-center py-2 px-4 border border-transparent rounded-md bg-black shadow-sm text-sm font-medium text-white ${
+                page !== 1 ? "cursor-pointer" : "cursor-not-allowed"
+              } hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black`}
               disabled={page === 1 ? true : false}
               onClick={() => {
                 setPage(page - 1);
@@ -498,7 +568,9 @@ export default function Signup() {
             </button>
             {page !== 3 ? (
               <button
-                className={`w-3/5 flex justify-center py-2 px-4 border border-transparent rounded-md bg-black shadow-sm text-sm font-medium text-white ${page !== 3 ? "cursor-pointer" : "cursor-not-allowed"} hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black`}
+                className={`w-3/5 flex justify-center py-2 px-4 border border-transparent rounded-md bg-black shadow-sm text-sm font-medium text-white ${
+                  page !== 3 ? "cursor-pointer" : "cursor-not-allowed"
+                } hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black`}
                 onClick={() => {
                   setPage(page + 1);
                 }}
@@ -509,16 +581,33 @@ export default function Signup() {
               SignupButton()
             )}
           </div>
+          <div className="flex max-h-10 gap-4">
+            <div className="flex flex-col justify-center">Mode:</div>
+            <div className="flex flex-col justify-center">
+              <ModeToggle />
+            </div>
+          </div>
         </div>
-        <div className="flex items-center justify-center invisible sm:visible ">
-          <div className="relative bg-gray-100 rounded-lg p-8 text-gray-600">
-            <svg aria-hidden="true" className="absolute top-0 right-0 h-8 w-8 text-gray-200 transform translate-x-1/2 -translate-y-1/2" fill="currentColor" viewBox="0 0 32 32">
+        <div className="flex items-center justify-center invisible sm:visible m-4">
+          <div className="relative bg-gray-200 dark:bg-gray-600 rounded-lg p-8 text-gray-600">
+            <svg
+              aria-hidden="true"
+              className="absolute top-0 right-0 h-8 w-8 text-gray-300 transform translate-x-1/2 -translate-y-1/2"
+              fill="currentColor"
+              viewBox="0 0 32 32"
+            >
               <path d="M9.333 7h13.334C24.403 7 26 8.597 26 10.667v10.666C26 23.403 24.403 25 22.667 25H9.333C7.597 25 6 23.403 6 21.333V10.667C6 8.597 7.597 7 9.333 7z" />
             </svg>
-            <p className="text-2xl font-extrabold">Team Tech Buzzers</p>
+            <p className="text-2xl font-extrabold dark:text-gray-300">
+              Team Tech Buzzers
+            </p>
             <footer className="mt-4">
-              <p className="text-4xl font-thin">The Bank App</p>
-              <p className="text-base font-thin text-gray-500 py-5">Sign up to experience all the features and get benifits.</p>
+              <p className="text-4xl font-thin dark:text-gray-300">
+                The Bank App
+              </p>
+              <p className="text-base font-light text-gray-500 py-5 dark:text-gray-300">
+                Sign up to experience all the features and get benifits.
+              </p>
             </footer>
           </div>
         </div>

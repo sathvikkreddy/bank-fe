@@ -114,7 +114,8 @@ const BillType = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      setRecentPayments(response.data);
+      const sortedPayments = response.data.sort((a, b) => new Date(b.transaction.timestamp) - new Date(a.transaction.timestamp));
+      setRecentPayments(sortedPayments);
     } catch (error) {
       setError('Error fetching recent bill payments.');
     }

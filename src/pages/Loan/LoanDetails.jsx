@@ -153,8 +153,8 @@ const LoanDetails = () => {
     <>
       <PageTitle title={loan.loanType} />
       <div className="container mx-auto p-4">
-        <div className=" mb-4  relative group p-4 border rounded hover:bg-white">
-          <div className="grid grid-cols-2 border border-gray-300 shadow-md rounded-md m-2 p-2">
+        <div className="">
+          <div className="grid grid-cols-2 border border-gray-300 shadow-md dark:shadow-slate-600 rounded-md mb-4 p-2">
             <div className="sm:grid sm:grid-cols-2 gap-2 py-2">
               <div className="font-medium">LOAN ID :</div>
               <div className="">{pid}</div>
@@ -184,19 +184,21 @@ const LoanDetails = () => {
         </div>
 
         <button
-          className=" bg-white text-black px-4 py-2 rounded  shadow-md mb-4 p-4 border hover:bg-black hover:text-white hover:font-semibold"
+          className=" bg-white dark:bg-gray-800 text-black dark:text-white px-4 py-2 rounded shadow-md dark:shadow-slate-600 mb-4 p-4 border hover:bg-gray-300  dark:hover:bg-gray-700 "
           onClick={() => setFilteredPayables(loanPayables)}
         >
-          ALL EMI's
+          All EMI's
         </button>
 
-        <div className="text-xl font-medium uppercase mt-2">EMI's</div>
-        <div className="flex space-x-4 border border-gray-300 p-1 rounded-md shadow-md">
+        <div className="text-xl font-medium uppercase my-2">EMI's</div>
+        <div className="flex space-x-4 border border-gray-300 p-1 rounded-md shadow-md dark:shadow-slate-600">
           {["Pending", "Due", "Paid"].map((status) => (
             <button
               key={status}
               className={`px-4 py-2 rounded ${
-                filter === status ? "bg-gray-800 text-white" : "bg-gray-200"
+                filter === status
+                  ? "bg-gray-800 dark:bg-gray-300 text-white dark:text-black"
+                  : "bg-gray-200 dark:bg-gray-700"
               }`}
               onClick={() => handleFilterChange(status)}
             >
@@ -206,7 +208,7 @@ const LoanDetails = () => {
         </div>
 
         {/* <div className="bg-white p-6 rounded shadow-md"> */}
-        <div className="bg-white mt-4 p-6 border rounded shadow-md grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 ">
+        <div className="bg-white dark:bg-gray-800 my-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 ">
           {filteredPayables.length > 0 ? (
             filteredPayables.map((payable) => (
               <div

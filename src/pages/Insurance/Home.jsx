@@ -9,7 +9,14 @@ import axios from "axios";
 import { applyInsurance } from "../../utils/applyInsurance";
 import { fetchActiveInsurances } from "../../utils/fetchActiveInsurances";
 
-const MainInsurance = ({ activeInsurances, availableInsurances, activeLoading, setActiveLoading, availableLoading, setActiveInsurances }) => {
+const MainInsurance = ({
+  activeInsurances,
+  availableInsurances,
+  activeLoading,
+  setActiveLoading,
+  availableLoading,
+  setActiveInsurances,
+}) => {
   const [profile] = useOutletContext();
 
   const initialFields = {
@@ -53,7 +60,11 @@ const MainInsurance = ({ activeInsurances, availableInsurances, activeLoading, s
   };
 
   const handleChange = (name, value) => {
-    let c = { ...fields, [name]: value, insurancePolicyId: showHomeForm ? "IPN000002" : "IPN000001" };
+    let c = {
+      ...fields,
+      [name]: value,
+      insurancePolicyId: showHomeForm ? "IPN000002" : "IPN000001",
+    };
     setFields(c);
   };
 
@@ -97,7 +108,9 @@ const MainInsurance = ({ activeInsurances, availableInsurances, activeLoading, s
         <Card
           title={
             <div className="grid sm:grid-cols-6 grid-cols-5">
-              <div className="flex items-center text-nowrap sm:col-span-5 col-span-4 ">Active Insurances</div>
+              <div className="flex items-center text-nowrap sm:col-span-5 col-span-4 ">
+                Active Insurances
+              </div>
               <Button
                 title={showAllActive ? "See less" : "See more"}
                 onClick={() => {
@@ -112,16 +125,23 @@ const MainInsurance = ({ activeInsurances, availableInsurances, activeLoading, s
               <LoadingSpinner />
             </div>
           ) : activeInsurances.length < 1 ? (
-            <div className="h-32 flex justify-center items-center">No active insurances, Apply for available insurances</div>
+            <div className="h-32 flex justify-center items-center">
+              No active insurances, Apply for available insurances
+            </div>
           ) : (
             <div className="grid sm:grid-cols-3 grid-cols-1 gap-2">
-              {activeInsurances.slice(0, showAllActive ? activeInsurances.length + 1 : 3).map((insuranceObj) => {
-                return (
-                  <div key={insuranceObj.insurance.id}>
-                    <ActiveInsuranceCard insurance={insuranceObj.insurance} title={insuranceObj.insuranceType} />
-                  </div>
-                );
-              })}
+              {activeInsurances
+                .slice(0, showAllActive ? activeInsurances.length + 1 : 3)
+                .map((insuranceObj) => {
+                  return (
+                    <div key={insuranceObj.insurance.id}>
+                      <ActiveInsuranceCard
+                        insurance={insuranceObj.insurance}
+                        title={insuranceObj.insuranceType}
+                      />
+                    </div>
+                  );
+                })}
             </div>
           )}
         </Card>
@@ -135,10 +155,23 @@ const MainInsurance = ({ activeInsurances, availableInsurances, activeLoading, s
                 setShowHomeForm(true);
                 setFields(initialFields);
               }}
-              className={`py-4 rounded-lg text-center ${showHomeForm ? "bg-gray-100" : ""} border border-gray-300 flex flex-col items-center justify-center cursor-pointer hover:bg-gray-100`}
+              className={`py-4 rounded-lg text-center ${
+                showHomeForm ? "bg-gray-100 dark:bg-gray-700" : ""
+              } border border-gray-300 dark:border-gray-600 flex flex-col items-center justify-center cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 `}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 mb-2">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6 mb-2"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"
+                />
               </svg>
               <span>Home Insurance</span>
             </div>
@@ -148,15 +181,44 @@ const MainInsurance = ({ activeInsurances, availableInsurances, activeLoading, s
                 setShowVehicleForm(true);
                 setFields(initialFields);
               }}
-              className={`py-4 rounded-lg text-center ${showVehicleForm ? "bg-gray-100" : ""} hover:bg-gray-100 border border-gray-300 flex flex-col items-center justify-center cursor-pointer`}
+              className={`py-4 rounded-lg text-center ${
+                showVehicleForm ? "bg-gray-100 dark:bg-gray-700" : ""
+              } hover:bg-gray-100 dark:hover:bg-gray-700  border border-gray-300 dark:border-gray-600 flex flex-col items-center justify-center cursor-pointer`}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 mb-2">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6 mb-2"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"
+                />
               </svg>
               <span>Vehicle Insurance</span>
             </div>
           </div>
-          {showVehicleForm ? <Form fields={fields} handleChange={handleChange} handleApply={handleApply} handleCancel={handleCancel} fieldsTitles={VehicleFormFieldsTitles} /> : showHomeForm ? <Form fields={fields} handleChange={handleChange} handleApply={handleApply} handleCancel={handleCancel} fieldsTitles={HomeFormFieldsTitles} /> : null}
+          {showVehicleForm ? (
+            <Form
+              fields={fields}
+              handleChange={handleChange}
+              handleApply={handleApply}
+              handleCancel={handleCancel}
+              fieldsTitles={VehicleFormFieldsTitles}
+            />
+          ) : showHomeForm ? (
+            <Form
+              fields={fields}
+              handleChange={handleChange}
+              handleApply={handleApply}
+              handleCancel={handleCancel}
+              fieldsTitles={HomeFormFieldsTitles}
+            />
+          ) : null}
         </div>
       </div>
     </div>
@@ -165,7 +227,13 @@ const MainInsurance = ({ activeInsurances, availableInsurances, activeLoading, s
 
 export default MainInsurance;
 
-const Form = ({ fields, handleChange, handleApply, fieldsTitles, handleCancel }) => {
+const Form = ({
+  fields,
+  handleChange,
+  handleApply,
+  fieldsTitles,
+  handleCancel,
+}) => {
   const [profile] = useOutletContext();
   const [showCoverage, setShowCoverage] = useState(false);
   const [coverageDetails, setCoverageDetails] = useState("");
@@ -176,12 +244,16 @@ const Form = ({ fields, handleChange, handleApply, fieldsTitles, handleCancel })
     try {
       const token = localStorage.getItem("authorization");
       if (!token) throw new Error("Unauthorized: Token not found");
-      const userResponse = await axios.post("https://techbuzzers.somee.com/calculateAmountCovered", reqBody, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const userResponse = await axios.post(
+        "https://techbuzzers.somee.com/calculateAmountCovered",
+        reqBody,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       setShowCoverage(true);
       setCoverageDetailsLoading(false);
       return userResponse.data;
@@ -194,24 +266,34 @@ const Form = ({ fields, handleChange, handleApply, fieldsTitles, handleCancel })
   };
 
   return (
-    <div className="flex flex-col gap-2 border shadow-md rounded-md p-2">
-      <div className="text-2xl border-b border-gray-300 p-2">{fieldsTitles.title}</div>
+    <div className="flex flex-col gap-2 border dark:border-gray-600 shadow-md rounded-md p-2">
+      <div className="text-2xl border-b border-gray-300 dark:border-gray-600 p-2">
+        {fieldsTitles.title}
+      </div>
       <div>
-        <span className="font-medium mr-2">{fieldsTitles.uniqueIdentificationNumber}: </span>
+        <span className="font-medium mr-2">
+          {fieldsTitles.uniqueIdentificationNumber}:{" "}
+        </span>
         <input
-          className="border p-2 rounded-md w-full"
+          className="border p-2 rounded-md w-full dark:border-gray-600 dark:bg-gray-800"
           type="text"
           value={fields.uniqueIdentificationNumber}
           onChange={(e) => {
             handleChange("uniqueIdentificationNumber", e.target.value);
           }}
-          placeholder={fieldsTitles.title === "Vehicle Insurance" ? "TS01AB1234" : "REG878W287"}
+          placeholder={
+            fieldsTitles.title === "Vehicle Insurance"
+              ? "TS01AB1234"
+              : "REG878W287"
+          }
         />
       </div>
       <div>
-        <span className="font-medium mr-2">{fieldsTitles.yearOfPurchase}: </span>
+        <span className="font-medium mr-2">
+          {fieldsTitles.yearOfPurchase}:{" "}
+        </span>
         <input
-          className="border p-2 rounded-md focus:border-black w-full"
+          className="border p-2 rounded-md w-full dark:border-gray-600 dark:bg-gray-800"
           type="text"
           value={fields.yearOfPurchase}
           onChange={(e) => {
@@ -221,9 +303,11 @@ const Form = ({ fields, handleChange, handleApply, fieldsTitles, handleCancel })
         />
       </div>
       <div className="sm:grid sm:grid-cols-8 flex flex-col gap-2 sm:gap-2">
-        <div className="font-medium grid items-center text-nowrap">{fieldsTitles.purchaseAmount}: </div>
+        <div className="font-medium grid items-center text-nowrap">
+          {fieldsTitles.purchaseAmount}:{" "}
+        </div>
         <input
-          className="border p-2 rounded-md focus:border-black sm:col-span-2 sm:w-full w-52"
+          className="border p-2 rounded-md focus:border-black sm:col-span-2 sm:w-full w-52 dark:border-gray-600 dark:bg-gray-800"
           type="text"
           value={fields.purchaseAmount}
           onChange={(e) => {
@@ -250,20 +334,29 @@ const Form = ({ fields, handleChange, handleApply, fieldsTitles, handleCancel })
         />
       </div>
       {showCoverage ? (
-        <div className="flex justify-around border border-gray-300 p-2">
-          <div className="font-medium mr-2">Coverage Amount: {coverageDetails ? coverageDetails.amountCovered : ""}</div>
-          <div className="font-medium mr-2">Yearly Premium: {coverageDetails ? coverageDetails.installMentAmount : ""}</div>
+        <div className="flex justify-around border border-gray-300 dark:border-gray-600 p-2">
+          <div className="font-medium mr-2">
+            Coverage Amount:{" "}
+            {coverageDetails ? coverageDetails.amountCovered : ""}
+          </div>
+          <div className="font-medium mr-2">
+            Yearly Premium:{" "}
+            {coverageDetails ? coverageDetails.installMentAmount : ""}
+          </div>
         </div>
       ) : null}
       <div>
         <span className="font-medium mr-2">{fieldsTitles.userAccountId}: </span>
         <select
-          className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 dark:border-gray-600 dark:bg-gray-800"
           id="transaction-type"
           value={selectedAccount.id}
           onChange={(e) => {
             handleChange("userAccountId", e.target.value);
-            setSelectedAccount({ id: e.target.value, name: e.target.options[e.target.selectedIndex].text });
+            setSelectedAccount({
+              id: e.target.value,
+              name: e.target.options[e.target.selectedIndex].text,
+            });
           }}
         >
           {profile.accounts.map((account, index) => (
@@ -276,7 +369,7 @@ const Form = ({ fields, handleChange, handleApply, fieldsTitles, handleCancel })
       <div>
         <span className="font-medium mr-2">{fieldsTitles.pin}: </span>
         <input
-          className="border p-2 rounded-md focus:border-black w-full"
+          className="border p-2 rounded-md focus:border-black w-full dark:border-gray-600 dark:bg-gray-800"
           type="password"
           value={fields.pin}
           onChange={(e) => {
@@ -307,23 +400,36 @@ const ActiveInsuranceCard = ({ insurance, title }) => {
 
   return (
     <div
-      className="border flex flex-col gap-1 p-2 rounded-lg cursor-pointer hover:bg-gray-100"
+      className="border dark:border-gray-600 flex flex-col gap-1 p-2 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 "
       onClick={() => {
         navigate(`/insurance/${insurance.id}`);
       }}
     >
-      <div className="font-semibold sm:text-lg text-sm text-center border-b">{title}</div>
-      <div className="font-semibold sm:text-base text-xs">
-        {title === "Vehicle Insurance" ? "Vehicle Number" : "Registration Number"}: <span className="font-normal">{insurance.uniqueIdentificationNumber}</span>
+      <div className="font-semibold sm:text-lg text-sm text-center border-b dark:border-b-gray-600">
+        {title}
       </div>
       <div className="font-semibold sm:text-base text-xs">
-        Coverage Amount: <span className="font-normal">{insurance.amountCovered}</span>
+        {title === "Vehicle Insurance"
+          ? "Vehicle Number"
+          : "Registration Number"}
+        :{" "}
+        <span className="font-normal">
+          {insurance.uniqueIdentificationNumber}
+        </span>
       </div>
       <div className="font-semibold sm:text-base text-xs">
-        Validity: <span className="font-normal">{convertToDate(insurance.valididTill)}</span>
+        Coverage Amount:{" "}
+        <span className="font-normal">{insurance.amountCovered}</span>
       </div>
       <div className="font-semibold sm:text-base text-xs">
-        Yearly Premium: <span className="font-normal">{insurance.installmentAmount}</span>
+        Validity:{" "}
+        <span className="font-normal">
+          {convertToDate(insurance.valididTill)}
+        </span>
+      </div>
+      <div className="font-semibold sm:text-base text-xs">
+        Yearly Premium:{" "}
+        <span className="font-normal">{insurance.installmentAmount}</span>
       </div>
     </div>
   );

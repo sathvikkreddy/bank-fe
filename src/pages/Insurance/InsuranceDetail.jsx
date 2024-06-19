@@ -107,7 +107,9 @@ const InsuranceDetail = ({ activeInsurances, activeLoading }) => {
 
   useEffect(() => {
     if (!activeLoading) {
-      const foundInsurance = activeInsurances.find((insuranceObj) => insuranceObj.insurance.id === id);
+      const foundInsurance = activeInsurances.find(
+        (insuranceObj) => insuranceObj.insurance.id === id
+      );
       setCurrentInsurance(foundInsurance || null);
     }
   }, [id, activeInsurances, activeLoading]);
@@ -148,7 +150,7 @@ const InsuranceDetail = ({ activeInsurances, activeLoading }) => {
   return (
     <div>
       <PageTitle title={currentInsurance.insuranceType} />
-      <div className="grid grid-cols-2 border border-gray-300 shadow-md rounded-md m-2 p-2">
+      <div className="grid grid-cols-2 border border-gray-300 dark:border-gray-600 shadow-md dark:shadow-slate-600 rounded-md m-2 p-2">
         <div className="sm:grid sm:grid-cols-2 gap-2 py-2">
           <div className="font-medium">INSURANCE ID :</div>
           <div className="">{currentInsurance.insurance.id}</div>
@@ -158,15 +160,32 @@ const InsuranceDetail = ({ activeInsurances, activeLoading }) => {
           <div className="">{currentInsurance.insurance.insurancePolicyId}</div>
         </div>
         <div className="sm:grid sm:grid-cols-2 gap-2 py-2">
-          <div className="font-medium">{currentInsurance.insuranceType === "Vehicle Insurance" ? "VEHICLE REGISTRATION NUMBER" : "REGISTRATION NUMBER"} : </div>
-          <div className="">{currentInsurance.insurance.uniqueIdentificationNumber}</div>
+          <div className="font-medium">
+            {currentInsurance.insuranceType === "Vehicle Insurance"
+              ? "VEHICLE REGISTRATION NUMBER"
+              : "REGISTRATION NUMBER"}{" "}
+            :{" "}
+          </div>
+          <div className="">
+            {currentInsurance.insurance.uniqueIdentificationNumber}
+          </div>
         </div>
         <div className="sm:grid sm:grid-cols-2 gap-2 py-2">
-          <div className="font-medium">{currentInsurance.insuranceType === "Vehicle Insurance" ? "VEHICLE MODEL YEAR" : "REGISTRATION YEAR"} : </div>
+          <div className="font-medium">
+            {currentInsurance.insuranceType === "Vehicle Insurance"
+              ? "VEHICLE MODEL YEAR"
+              : "REGISTRATION YEAR"}{" "}
+            :{" "}
+          </div>
           <div className="">{currentInsurance.insurance.yearOfPurchase}</div>
         </div>
         <div className="sm:grid sm:grid-cols-2 gap-2 py-2">
-          <div className="font-medium">{currentInsurance.insuranceType === "Vehicle Insurance" ? "COST OF VEHICLE" : "MARKET VALUE"} : </div>
+          <div className="font-medium">
+            {currentInsurance.insuranceType === "Vehicle Insurance"
+              ? "COST OF VEHICLE"
+              : "MARKET VALUE"}{" "}
+            :{" "}
+          </div>
           <div className="">{currentInsurance.insurance.purchaseAmount}</div>
         </div>
         <div className="sm:grid sm:grid-cols-2 gap-2 py-2">
@@ -175,29 +194,66 @@ const InsuranceDetail = ({ activeInsurances, activeLoading }) => {
         </div>
         <div className="sm:grid sm:grid-cols-2 gap-2 py-2">
           <div className="font-medium">VALIDITY DATE : </div>
-          <div className="">{convertToDate(currentInsurance.insurance.valididTill)}</div>
+          <div className="">
+            {convertToDate(currentInsurance.insurance.valididTill)}
+          </div>
         </div>
         <div className="sm:grid sm:grid-cols-2 gap-2 py-2">
           <div className="font-medium">YEARLY PREMIUM : </div>
-          <div className="">{currentInsurance.insurance.installmentAmount} INR</div>
+          <div className="">
+            {currentInsurance.insurance.installmentAmount} INR
+          </div>
         </div>
       </div>
-      <div className="border border-gray-300 shadow-md rounded-md m-2 p-2 flex flex-col gap-4">
+      <div className="border border-gray-300 dark:border-gray-600 shadow-md dark:shadow-slate-600 rounded-md m-2 p-2 flex flex-col gap-4">
         <div className="text-xl font-medium uppercase mt-2">Premiums</div>
-        <div className="flex space-x-4 border border-gray-300 p-1 rounded-md shadow-md">
-          <button className={`px-4 py-2 ${selectedTab === "due" ? "bg-gray-800 text-white" : "bg-gray-200"} rounded`} onClick={() => handleTabChange("due")}>
+        <div className="flex space-x-4 border border-gray-300 dark:border-gray-600 p-1 rounded-md shadow-md dark:shadow-slate-600">
+          <button
+            className={`px-4 py-2 ${
+              selectedTab === "due"
+                ? "bg-gray-800 dark:bg-gray-300 text-white dark:text-black"
+                : "bg-gray-200 dark:bg-gray-700"
+            } rounded`}
+            onClick={() => handleTabChange("due")}
+          >
             Due
           </button>
-          <button className={`px-4 py-2 ${selectedTab === "pending" ? "bg-gray-800 text-white" : "bg-gray-200"} rounded`} onClick={() => handleTabChange("pending")}>
+          <button
+            className={`px-4 py-2 ${
+              selectedTab === "pending"
+                ? "bg-gray-800 dark:bg-gray-300 text-white dark:text-black"
+                : "bg-gray-200 dark:bg-gray-700"
+            } rounded`}
+            onClick={() => handleTabChange("pending")}
+          >
             Pending
           </button>
-          <button className={`px-4 py-2 ${selectedTab === "paid" ? "bg-gray-800 text-white" : "bg-gray-200"} rounded`} onClick={() => handleTabChange("paid")}>
+          <button
+            className={`px-4 py-2 ${
+              selectedTab === "paid"
+                ? "bg-gray-800 dark:bg-gray-300 text-white dark:text-black"
+                : "bg-gray-200 dark:bg-gray-700"
+            } rounded`}
+            onClick={() => handleTabChange("paid")}
+          >
             Paid
           </button>
         </div>
-        {installmentsLoading ? <LoadingSpinner /> : <InstallmentTable type={selectedTab} installments={installments[selectedTab]} handleOpenModal={handleOpenModal} />}
+        {installmentsLoading ? (
+          <LoadingSpinner />
+        ) : (
+          <InstallmentTable
+            type={selectedTab}
+            installments={installments[selectedTab]}
+            handleOpenModal={handleOpenModal}
+          />
+        )}
       </div>
-      <InstallmentPaymentModal open={isModalOpen} onClose={handleCloseModal} installment={selectedInstallment} />
+      <InstallmentPaymentModal
+        open={isModalOpen}
+        onClose={handleCloseModal}
+        installment={selectedInstallment}
+      />
     </div>
   );
 };
@@ -210,9 +266,9 @@ const InstallmentTable = ({ type, installments, handleOpenModal }) => {
   }
   return (
     <div className="overflow-x-auto rounded-md">
-      <table className="min-w-full bg-white border border-gray-300">
+      <table className="min-w-full border dark:border-gray-600 border-gray-300">
         <thead>
-          <tr className="bg-gray-200 leading-normal">
+          <tr className="bg-gray-200 dark:bg-gray-700 leading-normal">
             <th className="py-3 sm:px-6 px-1 text-left">Premium ID</th>
             <th className="py-3 sm:px-6 px-1 text-left">Premium Year</th>
             <th className="py-3 sm:px-6 px-1 text-left">Premium Amount</th>
@@ -221,10 +277,17 @@ const InstallmentTable = ({ type, installments, handleOpenModal }) => {
         </thead>
         <tbody className="">
           {installments.map((installment) => (
-            <tr key={installment.id} className="border-b border-gray-200">
+            <tr
+              key={installment.id}
+              className="border-b dark:border-b-gray-600 border-gray-200 dark:bg-gray-800"
+            >
               <td className="py-3 sm:px-6 px-1 text-left">{installment.id}</td>
-              <td className="py-3 sm:px-6 px-1 text-left">{installment.installmentYear}</td>
-              <td className="py-3 sm:px-6 px-1 text-left">{installment.installmentAmount} INR</td>
+              <td className="py-3 sm:px-6 px-1 text-left">
+                {installment.installmentYear}
+              </td>
+              <td className="py-3 sm:px-6 px-1 text-left">
+                {installment.installmentAmount} INR
+              </td>
               <td className="py-3 sm:px-6 px-1 text-left">
                 {installment.status === "Due" ? (
                   <Button
@@ -249,7 +312,9 @@ const InstallmentPaymentModal = ({ installment, open, onClose }) => {
   const [profile] = useOutletContext();
 
   const [pin, setPin] = useState("");
-  const [selectedAccount, setSelectedAccount] = useState(profile.accounts[0].id);
+  const [selectedAccount, setSelectedAccount] = useState(
+    profile.accounts[0].id
+  );
 
   const handlePay = () => {
     const reqBody = {
@@ -270,13 +335,17 @@ const InstallmentPaymentModal = ({ installment, open, onClose }) => {
   return (
     installment && (
       <Modal open={open} onClose={onClose}>
-        <div className="text-2xl font-semibold text-center px-6 py-4 min-w-96">Pay Premium</div>
+        <div className="text-2xl font-semibold text-center px-6 py-4 min-w-96">
+          Pay Premium
+        </div>
         <div className="font-medium p-2">Premium ID : {installment.id}</div>
-        <div className="font-medium p-2">Premium Amount: {installment.installmentAmount} INR</div>
+        <div className="font-medium p-2">
+          Premium Amount: {installment.installmentAmount} INR
+        </div>
         <div className="p-2">
           <span className="font-medium mr-2">Select Account : </span>
           <select
-            className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
             id="transaction-type"
             value={selectedAccount}
             onChange={(e) => {
@@ -298,7 +367,7 @@ const InstallmentPaymentModal = ({ installment, open, onClose }) => {
           onChange={(e) => {
             setPin(e.target.value);
           }}
-          className="font-medium p-2 border border-gray-300 rounded-md focus:border-black"
+          className="font-medium p-2 border border-gray-300 dark:border-gray-600 rounded-md focus:border-black dark:focus:border-white"
           placeholder="xxxx"
         />
         <div className="pt-4 px-2 flex justify-around gap-4">

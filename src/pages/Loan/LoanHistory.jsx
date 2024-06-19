@@ -16,13 +16,13 @@ const LoanHistory = () => {
     <div className="container p-8">
       <h1 className="flex text-2xl font-semibold mb-4">Active Loans</h1>
 
-      <div className="p-6 rounded border shadow-md bg-white">
+      <div className="">
         {profile.loans.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {profile.loans.map((loan) => (
               <div
                 key={loan.loanDetailsId}
-                className="p-4 border rounded shadow-md  hover:bg-gray-50"
+                className="p-4 border rounded shadow-md dark:shadow-slate-700  hover:bg-gray-50 dark:hover:bg-gray-700"
               >
                 <Link to={`LoanDetails/${loan.loanDetailsId}`}>
                   <div>

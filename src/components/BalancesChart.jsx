@@ -1,8 +1,25 @@
 import React from "react";
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from "chart.js";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
 import { Line } from "react-chartjs-2";
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 function getDatesOfCurrentMonth() {
   // Get the current date
@@ -32,35 +49,56 @@ function getBalancesOfCurrentMonth(transactions, accountId) {
   // Filter transactions for the current month and for the specific account ID
   const currentMonthTransactions = transactions.filter((transaction) => {
     const transactionDate = new Date(transaction.timestamp);
-    return transactionDate.getFullYear() === currentYear && transactionDate.getMonth() === currentMonth && (transaction.debitId === accountId || transaction.creditId === accountId);
+    return (
+      transactionDate.getFullYear() === currentYear &&
+      transactionDate.getMonth() === currentMonth &&
+      (transaction.debitId === accountId || transaction.creditId === accountId)
+    );
   });
 
-  const sortedCurrentMonthTransactions = currentMonthTransactions.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+  const sortedCurrentMonthTransactions = currentMonthTransactions.sort(
+    (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
+  );
 
   let startingBalance = 0;
 
   if (sortedCurrentMonthTransactions.length > 0) {
     const firstTransaction = sortedCurrentMonthTransactions[0];
-    startingBalance = firstTransaction.debitId === accountId ? firstTransaction.openingBalance : firstTransaction.receiverOpeningBalance;
+    startingBalance =
+      firstTransaction.debitId === accountId
+        ? firstTransaction.openingBalance
+        : firstTransaction.receiverOpeningBalance;
   } else if (transactions.length > 0) {
-    const latestTransaction = transactions.find((transaction) => transaction.debitId === accountId || transaction.creditId === accountId);
+    const latestTransaction = transactions.find(
+      (transaction) =>
+        transaction.debitId === accountId || transaction.creditId === accountId
+    );
     if (latestTransaction) {
-      startingBalance = latestTransaction.debitId === accountId ? latestTransaction.closingBalance : latestTransaction.receiverClosingBalance;
+      startingBalance =
+        latestTransaction.debitId === accountId
+          ? latestTransaction.closingBalance
+          : latestTransaction.receiverClosingBalance;
     }
   }
-  const transactionsByDate = sortedCurrentMonthTransactions.reduce((acc, transaction) => {
-    const date = new Date(transaction.timestamp).getDate();
-    if (!acc[date]) {
-      acc[date] = [];
-    }
-    acc[date].push(transaction);
-    return acc;
-  }, {});
+  const transactionsByDate = sortedCurrentMonthTransactions.reduce(
+    (acc, transaction) => {
+      const date = new Date(transaction.timestamp).getDate();
+      if (!acc[date]) {
+        acc[date] = [];
+      }
+      acc[date].push(transaction);
+      return acc;
+    },
+    {}
+  );
 
   Object.keys(transactionsByDate).forEach((date) => {
     const dayTransactions = transactionsByDate[date];
     const lastTransaction = dayTransactions[dayTransactions.length - 1];
-    balances[date - 1] = lastTransaction.debitId === accountId ? lastTransaction.closingBalance : lastTransaction.receiverClosingBalance;
+    balances[date - 1] =
+      lastTransaction.debitId === accountId
+        ? lastTransaction.closingBalance
+        : lastTransaction.receiverClosingBalance;
   });
 
   for (let i = 0; i < balances.length; i++) {
@@ -73,6 +111,19 @@ function getBalancesOfCurrentMonth(transactions, accountId) {
 }
 
 export const options = {
+  scales: {
+    x: {
+      grid: {
+        display: true,
+        color: "rgba(107, 114, 128, 0.1)",
+      },
+    },
+    y: {
+      grid: {
+        display: true,
+      },
+    },
+  },
   responsive: true,
   plugins: {
     legend: {
@@ -91,7 +142,7 @@ export const BalancesChart = ({ transactions, selectedAccount }) => {
       {
         label: "Balance",
         data: response,
-        borderColor: "black",
+        borderColor: "rgba(107, 114, 128, 1)",
         borderWidth: 1,
         pointRadius: 2,
       },

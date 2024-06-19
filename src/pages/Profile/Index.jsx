@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import PageTitle from "../../components/PageTitle";
 import LoadingSpinner from "../../components/LoadingSpinner";
+import ModeToggle from "../../components/ModeToggle";
 
 function Profile() {
   const [userDetails, setUserDetails] = useState(null);
@@ -15,11 +16,14 @@ function Profile() {
   const fetchData = async () => {
     try {
       const token = localStorage.getItem("authorization");
-      const response = await axios.get("https://techbuzzers.somee.com/GetUserDetails", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.get(
+        "https://techbuzzers.somee.com/GetUserDetails",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       setUserDetails(response.data.userDetails);
       setBalance(response.data.accounts[0].balance);
     } catch (error) {
@@ -91,12 +95,16 @@ function Profile() {
           email: formValues.email,
           address: formValues.address,
         };
-        const response = await axios.put("https://techbuzzers.somee.com/UpdateUser", updatedUserDetails, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        });
+        const response = await axios.put(
+          "https://techbuzzers.somee.com/UpdateUser",
+          updatedUserDetails,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
         Swal.fire({
           title: "Profile Updated",
           text: "Your profile has been updated successfully!",
@@ -133,14 +141,15 @@ function Profile() {
     <>
       <PageTitle title={"Profile"} />
 
-      <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
-        <div className="bg-white p-8  w-full max-w-2xl">
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 dark:bg-gray-700 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="bg-white dark:bg-gray-800 p-8 w-full max-w-2xl">
           <div className="profile-icon-container mb-6"></div>
           <div className="profile-details grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-            <div className="info-box border p-4 rounded-lg">
+            <div className="info-box border dark:border-gray-600 rounded p-4">
               <h3 className="text-lg font-bold mb-2">Personal Information</h3>
               <p>
-                <strong>Name:</strong> {userDetails.firstName} {userDetails.lastName}
+                <strong>Name:</strong> {userDetails.firstName}{" "}
+                {userDetails.lastName}
               </p>
               <p>
                 <strong>Email:</strong> {userDetails.email}
@@ -152,7 +161,7 @@ function Profile() {
                 <strong>Address:</strong> {userDetails.address}
               </p>
             </div>
-            <div className="info-box border p-4 rounded-lg">
+            <div className="info-box border dark:border-gray-600 rounded p-4">
               <h3 className="text-lg font-bold mb-2">Government IDs</h3>
               <p>
                 <strong>Pan Card:</strong> {userDetails.panNumber}
@@ -164,10 +173,16 @@ function Profile() {
           </div>
           <div className="mt-6">
             <center>
-              <button class="m-2 profile-button py-2 px-5 border border-transparent rounded-md bg-gray-200 text-gray-700 hover:bg-gray-300 transition duration-300" onClick={handleProfileUpdate}>
+              <button
+                class="m-2 profile-button py-2 px-5  rounded border dark:border-gray-600 rounded-transparent  bg-gray-200 text-gray-700 hover:bg-gray-300 transition duration-300"
+                onClick={handleProfileUpdate}
+              >
                 Update Profile
               </button>
-              <button className="m-2 py-2 px-5 border border-transparent rounded-md bg-gray-200 text-gray-700 hover:bg-gray-300 transition duration-300" onClick={handleLogout}>
+              <button
+                className="m-2 py-2 px-5 rounded border dark:border-gray-600 rounded-transparent  bg-gray-200 text-gray-700 hover:bg-gray-300 transition duration-300"
+                onClick={handleLogout}
+              >
                 Logout
               </button>
             </center>

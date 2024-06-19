@@ -18,18 +18,20 @@ const LoanCard = ({
   return (
     <div className="w-full p-2">
       <Link to={route}>
-        <div className="w-full border rounded-lg p-5 hover:shadow-xl hover:transition-all hover:border hover:bg-gray-50 relative group">
+        <div className="w-full border rounded-lg p-5 hover:shadow-xl hover:transition-all hover:border dark:shadow-slate-700 hover:bg-gray-50 dark:hover:bg-gray-700 relative group">
           <div className="font-semibold flex justify-center mb-2 text-xl">
             {name}
           </div>
           <hr />
           <br />
-          <div className="relative group"><img
-            src={image}
-            alt={type}
-            className="w-full h-48 md:h-48 lg:h-48 object-scale-down rounded-lg mb-4 group-hover:bg-white group-hover:ease-in-out group-hover:shadow-md"
-          /></div>
-          
+          <div className="relative group">
+            <img
+              src={image}
+              alt={type}
+              className="w-full h-48 md:h-48 lg:h-48 object-scale-down rounded-lg mb-4"
+            />
+          </div>
+
           <div className="flex flex-col justify-center items-center mt-3">
             <div className="text-md font-light text-gray-500 mb-3">
               <em>Interest Rate: </em> {interestRate}% to {ir2}%

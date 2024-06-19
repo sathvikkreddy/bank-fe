@@ -8,8 +8,7 @@ const LoanHome = () => {
     {
       type: "Personal Loan",
       name: "Personal Loan",
-      image:
-        "https://cdn-icons-png.flaticon.com/128/2746/2746100.png",
+      image: "https://cdn-icons-png.flaticon.com/128/2746/2746100.png",
       minAmount: 1000,
       maxAmount: 10000000,
       interestRate: 10,

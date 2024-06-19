@@ -19,7 +19,7 @@ const Index = () => {
     }
   }, []);
   return (
-    <div className="flex w-full h-screen">
+    <div className="flex w-full h-screen dark:bg-gray-800 dark:text-white">
       <div className="flex-none fixed top-0 left-0 h-full ">
         <Appbar />
       </div>
@@ -29,7 +29,16 @@ const Index = () => {
             <LoadingSpinner />
           </div>
         ) : (
-          <Outlet context={[profile, isLoading, transactions, setProfile, setIsLoading, setTransactions]} />
+          <Outlet
+            context={[
+              profile,
+              isLoading,
+              transactions,
+              setProfile,
+              setIsLoading,
+              setTransactions,
+            ]}
+          />
         )}
       </div>
     </div>

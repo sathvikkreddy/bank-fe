@@ -210,30 +210,24 @@ const InsuranceDetail = ({ activeInsurances, activeLoading }) => {
         <div className="flex space-x-4 border border-gray-300 dark:border-gray-600 p-1 rounded-md shadow-md dark:shadow-slate-600">
           <button
             className={`px-4 py-2 ${
-              selectedTab === "due"
-                ? "bg-gray-800 dark:bg-gray-300 text-white dark:text-black"
-                : "bg-gray-200 dark:bg-gray-700"
-            } rounded`}
+              selectedTab === "due" ? "bg-c500" : "dark:bg-c700 bg-c300"
+            } hover:bg-c600 rounded`}
             onClick={() => handleTabChange("due")}
           >
             Due
           </button>
           <button
             className={`px-4 py-2 ${
-              selectedTab === "pending"
-                ? "bg-gray-800 dark:bg-gray-300 text-white dark:text-black"
-                : "bg-gray-200 dark:bg-gray-700"
-            } rounded`}
+              selectedTab === "pending" ? " bg-c500 " : "dark:bg-c700 bg-c300"
+            } hover:bg-c600 rounded`}
             onClick={() => handleTabChange("pending")}
           >
-            Pending
+            Upcoming
           </button>
           <button
             className={`px-4 py-2 ${
-              selectedTab === "paid"
-                ? "bg-gray-800 dark:bg-gray-300 text-white dark:text-black"
-                : "bg-gray-200 dark:bg-gray-700"
-            } rounded`}
+              selectedTab === "paid" ? " bg-c500 " : "dark:bg-c700 bg-c300"
+            } hover:bg-c600 rounded`}
             onClick={() => handleTabChange("paid")}
           >
             Paid

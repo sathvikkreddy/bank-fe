@@ -12,32 +12,35 @@ const ModeToggle = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen">
+    <div className="flex items-center justify-center" onClick={darkModeHandler}>
       <div
-        className={`w-16 h-8 flex items-center bg-gray-300 dark:bg-gray-500 rounded-full p-1 cursor-pointer transition-colors duration-300`}
-        onClick={darkModeHandler}
+        className={`sm:w-16 sm:h-8 w-8 h-5 flex items-center bg-c300 dark:bg-c700 rounded-full p-1 cursor-pointer transition-colors duration-300`}
       >
         <div
-          className={`bg-white w-6 h-6 rounded-full shadow-md transform transition-transform duration-300 dark:bg-gray-900 dark:text-white ${
-            dark ? "translate-x-8" : "translate-x-0"
+          className={`bg-white sm:w-6 sm:h-6 w-4 h-4 rounded-full shadow-md transform transition-transform duration-300 dark:bg-gray-900 dark:text-white ${
+            dark ? "translate-x-2 sm:translate-x-8" : "translate-x-0"
           }`}
         >
-          {!dark ? <LightModeIcon /> : <DarkModeIcon />}
+          {!dark ? (
+            <LightModeIcon className="size-4 sm:size-6" />
+          ) : (
+            <DarkModeIcon className="size-4 sm:size-6" />
+          )}
         </div>
       </div>
     </div>
   );
 };
 
-function LightModeIcon() {
+function LightModeIcon(props) {
   return (
     <svg
+      {...props}
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
       stroke-width="1.5"
       stroke="currentColor"
-      className="size-6"
     >
       <path
         stroke-linecap="round"
@@ -51,12 +54,12 @@ function LightModeIcon() {
 function DarkModeIcon(props) {
   return (
     <svg
+      {...props}
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
       stroke-width="1.5"
       stroke="currentColor"
-      className="size-6"
     >
       <path
         stroke-linecap="round"

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ModeToggle from "./ModeToggle";
 
 export default function Appbar() {
   const navigate = useNavigate();
@@ -30,11 +31,11 @@ export default function Appbar() {
   };
 
   return (
-    <div className="flex flex-col h-full justify-between border-r dark:border-r-gray-600 shadow-md dark:bg-gray-800 dark:text-white">
+    <div className="flex flex-col h-full justify-between border-r dark:border-r-gray-600 shadow-md shadow-c100 dark:shadow-c700 dark:text-white">
       <div className="flex flex-col sm:px-4 gap-4 top-0 z-50 mx-1 sm:m-0">
         <div
           className={`flex text-lg ${
-            selectedItem === "" ? "bg-gray-300 dark:bg-gray-700" : ""
+            selectedItem === "" ? "bg-c400 dark:bg-c700" : ""
           } sm:p-3 p-2 mt-3 cursor-pointer rounded-md sm:border dark:border-gray-700`}
           onClick={() => {
             setSelectedItem("");
@@ -51,10 +52,16 @@ export default function Appbar() {
             </div>
           );
         })}
+        <div className="flex max-h-10 sm:gap-4 sm:p-2">
+          <div className="flex-col justify-center hidden sm:flex">Mode:</div>
+          <div className="flex flex-col sm:justify-center transform sm:rotate-0 rotate-90">
+            <ModeToggle />
+          </div>
+        </div>
       </div>
       <div
         className={`flex sm:m-2 sm:p-2 cursor-pointer rounded-md ${
-          selectedItem === "profile" ? "bg-gray-400 dark:bg-gray-700" : ""
+          selectedItem === "profile" ? "bg-c400 dark:bg-c700" : ""
         }`}
         onClick={() => {
           setSelectedItem("profile");
@@ -226,7 +233,7 @@ const AppbarItem = ({ item, selected }) => {
   return (
     <div
       className={`flex items-center ${
-        selected ? "bg-gray-300 dark:bg-gray-700" : ""
+        selected ? "bg-c300 dark:bg-teal-700" : ""
       } sm:p-2 py-2 px-2 rounded-md gap-2 text-lg cursor-pointer`}
       onClick={() => {
         navigate(`/${to}`);

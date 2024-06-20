@@ -112,7 +112,7 @@ const MainInsurance = ({
                 Active Insurances
               </div>
               <Button
-                title={showAllActive ? "See less" : "See more"}
+                title={showAllActive ? "less" : "more"}
                 onClick={() => {
                   setShowAllActive(!showAllActive);
                 }}
@@ -125,7 +125,7 @@ const MainInsurance = ({
               <LoadingSpinner />
             </div>
           ) : activeInsurances.length < 1 ? (
-            <div className="h-32 flex justify-center items-center">
+            <div className="h-32 flex justify-center items-center text-c500">
               No active insurances, Apply for available insurances
             </div>
           ) : (
@@ -156,8 +156,8 @@ const MainInsurance = ({
                 setFields(initialFields);
               }}
               className={`py-4 rounded-lg text-center ${
-                showHomeForm ? "bg-gray-100 dark:bg-gray-700" : ""
-              } border border-gray-300 dark:border-gray-600 flex flex-col items-center justify-center cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 `}
+                showHomeForm ? "bg-c400 dark:bg-c700" : ""
+              } border border-gray-300 dark:border-gray-600 flex flex-col items-center justify-center cursor-pointer hover:bg-c400 dark:hover:bg-c700 `}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -182,8 +182,8 @@ const MainInsurance = ({
                 setFields(initialFields);
               }}
               className={`py-4 rounded-lg text-center ${
-                showVehicleForm ? "bg-gray-100 dark:bg-gray-700" : ""
-              } hover:bg-gray-100 dark:hover:bg-gray-700  border border-gray-300 dark:border-gray-600 flex flex-col items-center justify-center cursor-pointer`}
+                showVehicleForm ? "bg-c400 dark:bg-c700" : ""
+              } hover:bg-c400 dark:hover:bg-c700  border border-gray-300 dark:border-gray-600 flex flex-col items-center justify-center cursor-pointer`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -275,7 +275,7 @@ const Form = ({
           {fieldsTitles.uniqueIdentificationNumber}:{" "}
         </span>
         <input
-          className="border p-2 rounded-md w-full dark:border-gray-600 dark:bg-gray-800"
+          className="border p-2 rounded-md w-full dark:border-gray-600 bg-c50 dark:bg-transparent"
           type="text"
           value={fields.uniqueIdentificationNumber}
           onChange={(e) => {
@@ -293,7 +293,7 @@ const Form = ({
           {fieldsTitles.yearOfPurchase}:{" "}
         </span>
         <input
-          className="border p-2 rounded-md w-full dark:border-gray-600 dark:bg-gray-800"
+          className="border p-2 rounded-md w-full dark:border-gray-600 bg-c50 dark:bg-transparent"
           type="text"
           value={fields.yearOfPurchase}
           onChange={(e) => {
@@ -307,7 +307,7 @@ const Form = ({
           {fieldsTitles.purchaseAmount}:{" "}
         </div>
         <input
-          className="border p-2 rounded-md focus:border-black sm:col-span-2 sm:w-full w-52 dark:border-gray-600 dark:bg-gray-800"
+          className="border p-2 rounded-md focus:border-black sm:col-span-2 sm:w-full w-52 dark:border-gray-600 bg-c50 dark:bg-transparent"
           type="text"
           value={fields.purchaseAmount}
           onChange={(e) => {
@@ -348,7 +348,7 @@ const Form = ({
       <div>
         <span className="font-medium mr-2">{fieldsTitles.userAccountId}: </span>
         <select
-          className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 dark:border-gray-600 dark:bg-gray-800"
+          className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 dark:border-gray-600 bg-c50 dark:bg-transparent"
           id="transaction-type"
           value={selectedAccount.id}
           onChange={(e) => {
@@ -360,7 +360,11 @@ const Form = ({
           }}
         >
           {profile.accounts.map((account, index) => (
-            <option key={index} value={account.id}>
+            <option
+              className="bg-c50 dark:bg-c700"
+              key={index}
+              value={account.id}
+            >
               {account.accountName}
             </option>
           ))}
@@ -369,7 +373,7 @@ const Form = ({
       <div>
         <span className="font-medium mr-2">{fieldsTitles.pin}: </span>
         <input
-          className="border p-2 rounded-md focus:border-black w-full dark:border-gray-600 dark:bg-gray-800"
+          className="border p-2 rounded-md focus:border-black w-full dark:border-gray-600 bg-c50 dark:bg-transparent"
           type="password"
           value={fields.pin}
           onChange={(e) => {
@@ -400,12 +404,12 @@ const ActiveInsuranceCard = ({ insurance, title }) => {
 
   return (
     <div
-      className="border dark:border-gray-600 flex flex-col gap-1 p-2 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 "
+      className="border dark:border-gray-600 flex flex-col gap-1 p-2 rounded-lg cursor-pointer hover:bg-c100 dark:hover:bg-c900 "
       onClick={() => {
         navigate(`/insurance/${insurance.id}`);
       }}
     >
-      <div className="font-semibold sm:text-lg text-sm text-center border-b dark:border-b-gray-600">
+      <div className="text-c500 font-semibold sm:text-lg text-sm text-center border-b dark:border-b-gray-600">
         {title}
       </div>
       <div className="font-semibold sm:text-base text-xs">

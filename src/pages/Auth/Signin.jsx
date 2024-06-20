@@ -49,10 +49,11 @@ export default function Signin() {
       setErrorMessage(JSON.stringify(error.response.data));
     }
   };
+
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-700 dark:text-white py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-home-image dark:bg-dark-home-image bg-cover bg-center dark:text-white py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2">
-        <div className="flex-1 space-y-8 bg-white dark:bg-gray-800 p-10">
+        <div className="flex-1 space-y-8 p-10">
           <div>
             <h2 className="text-2xl font-extrabold">
               Sign in into your account
@@ -60,7 +61,10 @@ export default function Signin() {
             <div className="flex">
               <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">
                 Don't have an account?
-                <Link className="font-medium underline px-2" to="/signup">
+                <Link
+                  className="font-medium underline px-2 text-c500"
+                  to="/signup"
+                >
                   Signup
                 </Link>
               </p>
@@ -80,7 +84,7 @@ export default function Signin() {
               <div className="mt-1">
                 <input
                   autoComplete="phoneNumber"
-                  className="dark:bg-gray-800 appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm dark:shadow-slate-600 placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  className="dark:bg-transparent bg-c50 appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md placeholder-gray-400 focus:outline-none focus:ring-c500 focus:border-c500 sm:text-sm"
                   id="phoneNumber"
                   name="phoneNumber"
                   placeholder="9786452506"
@@ -116,7 +120,7 @@ export default function Signin() {
               <div className="mt-1">
                 <input
                   autoComplete="pin"
-                  className="dark:bg-gray-800 appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm dark:shadow-slate-600 placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  className="dark:bg-transparent bg-c50 appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md placeholder-gray-400 focus:outline-none focus:ring-c500 focus:border-c500 sm:text-sm"
                   id="pin"
                   name="pin"
                   placeholder="1234"
@@ -141,11 +145,11 @@ export default function Signin() {
             </div>
             <div>
               <button
-                className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md bg-black shadow-sm text-sm font-medium text-white ${
+                className={`text-black w-full flex justify-center py-2 px-4 border border-transparent rounded-md bg-c300 dark:bg-c700 shadow-sm text-sm font-medium dark:text-white ${
                   isValidForm && !isLoading
                     ? "cursor-pointer"
                     : "cursor-not-allowed"
-                } hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black`}
+                } hover:bg-c400 dark:hover:bg-c600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black`}
                 type="submit"
                 onClick={(e) => onSignin(e, fields)}
                 disabled={!isValidForm}
@@ -165,7 +169,7 @@ export default function Signin() {
           </div>
         </div>
         <div className="flex items-center justify-center invisible sm:visible m-4">
-          <div className="relative bg-gray-200 dark:bg-gray-600 rounded-lg p-8 text-gray-600">
+          <div className="relative bg-c200 dark:bg-c700 rounded-lg p-8 text-gray-600">
             <svg
               aria-hidden="true"
               className="absolute top-0 right-0 h-8 w-8 text-gray-300 transform translate-x-1/2 -translate-y-1/2"

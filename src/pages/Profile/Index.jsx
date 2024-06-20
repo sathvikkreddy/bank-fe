@@ -141,8 +141,8 @@ function Profile() {
     <>
       <PageTitle title={"Profile"} />
 
-      <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 dark:bg-gray-700 py-12 px-4 sm:px-6 lg:px-8">
-        <div className="bg-white dark:bg-gray-800 p-8 w-full max-w-2xl">
+      <div className="min-h-screen flex flex-col items-center justify-center  py-12 px-4 sm:px-6 lg:px-8">
+        <div className="border-2 dark:border-gray-600 rounded-lg p-8 w-full max-w-2xl">
           <div className="profile-icon-container mb-6"></div>
           <div className="profile-details grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
             <div className="info-box border dark:border-gray-600 rounded p-4">

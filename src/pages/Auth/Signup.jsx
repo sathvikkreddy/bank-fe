@@ -102,7 +102,7 @@ export default function Signup() {
           <div className="mt-1">
             <input
               autoComplete="firstName"
-              className="dark:bg-gray-800 dark:border-gray-600 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+              className="dark:bg-transparent bg-c50 appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md placeholder-gray-400 focus:outline-none focus:ring-c500 focus:border-c500 sm:text-sm"
               id="firstName"
               name="firstName"
               placeholder="john"
@@ -136,7 +136,7 @@ export default function Signup() {
           <div className="mt-1">
             <input
               autoComplete="lastName"
-              className="dark:bg-gray-800 dark:border-gray-600 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+              className="dark:bg-transparent bg-c50 appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md placeholder-gray-400 focus:outline-none focus:ring-c500 focus:border-c500 sm:text-sm"
               id="lastName"
               name="lastName"
               placeholder="doe"
@@ -170,7 +170,7 @@ export default function Signup() {
           <div className="mt-1">
             <input
               autoComplete="fatherName"
-              className="dark:bg-gray-800 dark:border-gray-600 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+              className="dark:bg-transparent bg-c50 appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md placeholder-gray-400 focus:outline-none focus:ring-c500 focus:border-c500 sm:text-sm"
               id="fatherName"
               name="fatherName"
               placeholder="jack doe"
@@ -203,7 +203,7 @@ export default function Signup() {
             <div className="mt-1">
               <input
                 autoComplete="address"
-                className="dark:bg-gray-800 dark:border-gray-600 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+                className="dark:bg-transparent bg-c50 appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md placeholder-gray-400 focus:outline-none focus:ring-c500 focus:border-c500 sm:text-sm"
                 id="address"
                 name="address"
                 placeholder="Enter your address"
@@ -237,7 +237,7 @@ export default function Signup() {
             <div className="mt-1">
               <input
                 autoComplete="dob"
-                className="dark:bg-gray-800 dark:border-gray-600 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+                className="dark:bg-transparent bg-c50 appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md placeholder-gray-400 focus:outline-none focus:ring-c500 focus:border-c500 sm:text-sm"
                 id="dob"
                 name="dob"
                 placeholder="2001-05-21"
@@ -271,7 +271,7 @@ export default function Signup() {
             <div className="mt-1">
               <input
                 autoComplete="gender"
-                className="dark:bg-gray-800 dark:border-gray-600 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+                className="dark:bg-transparent bg-c50 appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md placeholder-gray-400 focus:outline-none focus:ring-c500 focus:border-c500 sm:text-sm"
                 id="gender"
                 name="gender"
                 placeholder="Male, Female, Others"
@@ -312,7 +312,7 @@ export default function Signup() {
           <div className="mt-1">
             <input
               autoComplete="phoneNumber"
-              className="dark:bg-gray-800 dark:border-gray-600 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+              className="dark:bg-transparent bg-c50 appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md placeholder-gray-400 focus:outline-none focus:ring-c500 focus:border-c500 sm:text-sm"
               id="phoneNumber"
               name="phoneNumber"
               placeholder="9000340004"
@@ -346,7 +346,7 @@ export default function Signup() {
           <div className="mt-1">
             <input
               autoComplete="email"
-              className="dark:bg-gray-800 dark:border-gray-600 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+              className="dark:bg-transparent bg-c50 appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md placeholder-gray-400 focus:outline-none focus:ring-c500 focus:border-c500 sm:text-sm"
               id="email"
               name="email"
               placeholder="johndoe@gmail.com"
@@ -380,7 +380,7 @@ export default function Signup() {
           <div className="mt-1">
             <input
               autoComplete="aadhar"
-              className="dark:bg-gray-800 dark:border-gray-600 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+              className="dark:bg-transparent bg-c50 appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md placeholder-gray-400 focus:outline-none focus:ring-c500 focus:border-c500 sm:text-sm"
               id="aadhar"
               name="aadhar"
               placeholder="678956731235"
@@ -414,7 +414,7 @@ export default function Signup() {
           <div className="mt-1">
             <input
               autoComplete="pan"
-              className="dark:bg-gray-800 dark:border-gray-600 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+              className="dark:bg-transparent bg-c50 appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md placeholder-gray-400 focus:outline-none focus:ring-c500 focus:border-c500 sm:text-sm"
               id="pan"
               name="pan"
               placeholder="FBIRE2138A"
@@ -448,7 +448,7 @@ export default function Signup() {
           <div className="mt-1">
             <input
               autoComplete="pin"
-              className="dark:bg-gray-800 dark:border-gray-600 appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+              className="dark:bg-transparent bg-c50 appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md placeholder-gray-400 focus:outline-none focus:ring-c500 focus:border-c500 sm:text-sm"
               id="pin"
               name="pin"
               placeholder="1234"
@@ -527,9 +527,9 @@ export default function Signup() {
   const SignupButton = () => {
     return (
       <button
-        className={`w-3/5 flex justify-center py-2 px-4 border border-transparent rounded-md bg-black shadow-sm text-sm font-medium text-white ${
+        className={`w-3/5 flex justify-center py-2 px-4 border border-transparent rounded-md bg-c300 dark:bg-c700 shadow-sm text-sm font-medium text-black dark:text-white ${
           isValidForm && !isLoading ? "cursor-pointer" : "cursor-not-allowed"
-        } hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black`}
+        } hover:bg-c400 dark:hover:bg-c600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black`}
         type="submit"
         onClick={(e) => onSignup(e, fields)}
         disabled={!isValidForm}
@@ -539,14 +539,17 @@ export default function Signup() {
     );
   };
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-700 dark:text-white py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-home-image dark:bg-dark-home-image bg-cover bg-center dark:text-white py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2">
-        <div className="flex-1 space-y-8 bg-white dark:bg-gray-800 p-10">
+        <div className="flex-1 space-y-8 p-10">
           <div>
             <h2 className="text-2xl font-extrabold ">Create Your Account</h2>
             <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">
               Already have an account?
-              <Link className="font-medium underline px-2" to="/signin">
+              <Link
+                className="font-medium underline px-2 text-c500"
+                to="/signin"
+              >
                 Signin
               </Link>
             </p>
@@ -556,9 +559,9 @@ export default function Signup() {
           </div>
           <div className="flex justify-between gap-2">
             <button
-              className={`w-1/5 flex justify-center py-2 px-4 border border-transparent rounded-md bg-black shadow-sm text-sm font-medium text-white ${
+              className={`w-1/5 flex justify-center py-2 px-4 border border-transparent rounded-md  bg-c300 dark:bg-c700 shadow-sm text-sm font-medium text-black dark:text-white ${
                 page !== 1 ? "cursor-pointer" : "cursor-not-allowed"
-              } hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black`}
+              } hover:bg-c400 dark:hover:bg-c600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black`}
               disabled={page === 1 ? true : false}
               onClick={() => {
                 setPage(page - 1);
@@ -568,9 +571,9 @@ export default function Signup() {
             </button>
             {page !== 3 ? (
               <button
-                className={`w-3/5 flex justify-center py-2 px-4 border border-transparent rounded-md bg-black shadow-sm text-sm font-medium text-white ${
+                className={`w-3/5 flex justify-center py-2 px-4 border border-transparent rounded-md bg-c300 dark:bg-c700 shadow-sm text-sm font-medium text-black dark:text-white ${
                   page !== 3 ? "cursor-pointer" : "cursor-not-allowed"
-                } hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black`}
+                } hover:bg-c400 dark:hover:bg-c600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black`}
                 onClick={() => {
                   setPage(page + 1);
                 }}
@@ -589,7 +592,7 @@ export default function Signup() {
           </div>
         </div>
         <div className="flex items-center justify-center invisible sm:visible m-4">
-          <div className="relative bg-gray-200 dark:bg-gray-600 rounded-lg p-8 text-gray-600">
+          <div className="relative bg-c200 dark:bg-c700 rounded-lg p-8 text-gray-600">
             <svg
               aria-hidden="true"
               className="absolute top-0 right-0 h-8 w-8 text-gray-300 transform translate-x-1/2 -translate-y-1/2"

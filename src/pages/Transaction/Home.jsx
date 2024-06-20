@@ -31,7 +31,6 @@ export default function Component() {
     setTransactions,
   ] = useOutletContext();
 
-  console.log(profile);
   const handleTransfer = async (e) => {
     e.preventDefault();
     if (!receiverPhone || !amount || !pin) {
@@ -146,7 +145,7 @@ export default function Component() {
     <div>
       <PageTitle title={"Transactions"} />
       <div className="flex flex-col gap-2 mx-auto px-4 py-8">
-        <div className="rounded-lg shadow-md dark:shadow-slate-600 p-6">
+        <div className="rounded-lg border dark:border-gray-800 shadow-md shadow-c100 dark:shadow-c800 p-6">
           <div className="space-y-6 mb-6">
             <div className="flex items-center space-x-4">
               <div className="flex-grow space-y-2">
@@ -155,7 +154,7 @@ export default function Component() {
                 </label>
                 <div className="sm:grid sm:items-center sm:gap-2 sm:grid-cols-5">
                   <input
-                    className="dark:bg-gray-800 sm:col-span-3 w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="dark:bg-transparent bg-c50 sm:col-span-3 w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-c500"
                     id="receiver-phone"
                     placeholder="Enter Receiver's Phone Number"
                     type="tel"
@@ -185,7 +184,7 @@ export default function Component() {
                   Amount
                 </label>
                 <input
-                  className="dark:bg-gray-800 w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 "
+                  className="dark:bg-transparent bg-c50 w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 "
                   id="amount"
                   placeholder="100"
                   type="number"
@@ -201,7 +200,7 @@ export default function Component() {
                   Account
                 </label>
                 <select
-                  className="dark:bg-gray-800 w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 "
+                  className="dark:bg-transparent bg-c50 w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 "
                   id="transaction-type"
                   value={selectedAccount.id}
                   onChange={(e) =>
@@ -213,7 +212,11 @@ export default function Component() {
                 >
                   <option value="">Select Account</option>
                   {profile.accounts.map((account, index) => (
-                    <option key={index} value={account.id}>
+                    <option
+                      className="bg-c50 dark:bg-c700"
+                      key={index}
+                      value={account.id}
+                    >
                       {account.accountName}
                     </option>
                   ))}
@@ -224,7 +227,7 @@ export default function Component() {
                   Pin
                 </label>
                 <input
-                  className="dark:bg-gray-800 w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 "
+                  className="dark:bg-transparent bg-c50 w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 "
                   id="amount"
                   placeholder="xxxx"
                   type="password"
@@ -270,7 +273,7 @@ export default function Component() {
             )}
           </div>
         </div>
-        <div className="rounded-lg shadow-md dark:shadow-slate-600 p-6">
+        <div className="rounded-lg shadow-md shadow-c100 dark:shadow-c800 p-6">
           <div className="sm:flex justify-between">
             <h2 className="sm:mt-2 mx-2 text-lg font-bold">
               Transaction History
@@ -279,14 +282,18 @@ export default function Component() {
               <div className="flex items-center sm:space-x-4">
                 <div className="relative">
                   <select
-                    className="dark:bg-gray-800 w-full sm:px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="dark:bg-transparent bg-c50 w-full sm:px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-c500"
                     id="account-filter"
                     value={accountFilter}
                     onChange={(e) => setAccountFilter(e.target.value)}
                   >
                     <option value="">Account</option>
                     {profile.accounts.map((account, index) => (
-                      <option key={index} value={account.id}>
+                      <option
+                        className="bg-c50 dark:bg-c700"
+                        key={index}
+                        value={account.id}
+                      >
                         {account.accountName}
                       </option>
                     ))}
@@ -295,20 +302,28 @@ export default function Component() {
               </div>
               <div className="relative">
                 <select
-                  className="dark:bg-gray-800 w-full sm:px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 "
+                  className="dark:bg-transparent bg-c50 w-full sm:px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-c500 "
                   id="status-filter"
                   value={statusFilter}
                   onChange={(e) => setStatusFilter(e.target.value)}
                 >
-                  <option value="">Status</option>
-                  <option value="pending">Pending</option>
-                  <option value="failed">Failed</option>
-                  <option value="completed">Completed</option>
+                  <option className="bg-c50 dark:bg-c700" value="">
+                    Status
+                  </option>
+                  <option className="bg-c50 dark:bg-c700" value="pending">
+                    Pending
+                  </option>
+                  <option className="bg-c50 dark:bg-c700" value="failed">
+                    Failed
+                  </option>
+                  <option className="bg-c50 dark:bg-c700" value="completed">
+                    Completed
+                  </option>
                 </select>
               </div>
               <div className="relative">
                 <input
-                  className="dark:bg-gray-800 w-full sm:px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 "
+                  className="dark:bg-transparent bg-c50 w-full sm:px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 "
                   id="date-range-filter"
                   type="month"
                   value={dateRangeFilter || "Range"}
@@ -320,7 +335,7 @@ export default function Component() {
           <div className="overflow-x-auto">
             <table className="w-full table-auto">
               <thead>
-                <tr className="bg-gray-100 dark:bg-gray-700">
+                <tr className="dark:bg-c700 bg-c300">
                   <th className="px-4 py-2 text-left text-sm font-medium">
                     S.No.
                   </th>
@@ -378,7 +393,7 @@ export default function Component() {
               <button
                 onClick={prevPage}
                 disabled={currentPage === 1}
-                className="px-4 py-2 rounded-md hover:bg-gray-500 bg-black disabled:opacity-50 disabled:bg-gray-900"
+                className="px-4 py-2 rounded-md bg-c300 dark:bg-c700 hover:bg-c400 dark:hover:bg-c600 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-c900"
               >
                 Previous
               </button>
@@ -389,7 +404,7 @@ export default function Component() {
               <button
                 onClick={nextPage}
                 disabled={indexOfLastTransaction >= filteredTransactions.length}
-                className="px-4 py-2 rounded-md hover:bg-gray-500 bg-black disabled:opacity-50 disabled:bg-gray-900"
+                className="px-4 py-2 rounded-md bg-c300 dark:bg-c700 hover:bg-c400 dark:hover:bg-c600 dark:text-white disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-c900"
               >
                 Next
               </button>

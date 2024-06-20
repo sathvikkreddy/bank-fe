@@ -41,7 +41,7 @@ const Dropdown = ({ options, setSelectedAccount }) => {
       </button>
       {isOpen && (
         <div
-          className="origin-top-right absolute right-0 mt-2 w-full rounded-md shadow-lg bg-white ring-1 ring-black dark:ring-white ring-opacity-5 focus:outline-none dark:bg-gray-800"
+          className="origin-top-right absolute right-0 mt-2 w-full rounded-md shadow-lg bg-teal-50 ring-1 ring-black dark:ring-white ring-opacity-5 focus:outline-none dark:bg-teal-800"
           role="menu"
           aria-orientation="vertical"
           aria-labelledby="options-menu"
@@ -50,7 +50,7 @@ const Dropdown = ({ options, setSelectedAccount }) => {
             {options.map((option, index) => (
               <button
                 key={index}
-                className="w-full text-left text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                className="w-full text-left text-gray-700 block px-4 py-2 text-sm hover:bg-teal-100 dark:text-white dark:hover:bg-teal-700"
                 role="menuitem"
                 onClick={() => handleOptionClick(option)}
               >

@@ -12,7 +12,7 @@ export default function Modal({ open, onClose, children }) {
       <div
         onClick={(e) => e.stopPropagation()}
         className={`
-            bg-white dark:bg-gray-800 text-black dark:text-white rounded-xl shadow p-6 transition-all
+            bg-home-image dark:bg-dark-home-image dark:bg-cover bg-center dark:bg-gray-800 text-black dark:text-white rounded-xl shadow p-6 transition-all
             ${open ? "scale-100 opacity-100" : "scale-125 opacity-0"}
           `}
       >

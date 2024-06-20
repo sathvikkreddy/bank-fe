@@ -19,7 +19,7 @@ const Index = () => {
     }
   }, []);
   return (
-    <div className="flex w-full h-screen dark:bg-gray-800 dark:text-white">
+    <div className="bg-home-image dark:bg-dark-home-image bg-cover bg-center flex w-full h-screen dark:bg-gray-800 dark:text-white">
       <div className="flex-none fixed top-0 left-0 h-full ">
         <Appbar />
       </div>

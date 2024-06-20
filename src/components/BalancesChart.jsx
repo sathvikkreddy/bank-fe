@@ -114,7 +114,7 @@ export const options = {
   scales: {
     x: {
       grid: {
-        display: true,
+        display: false,
         color: "rgba(107, 114, 128, 0.1)",
       },
     },
@@ -142,7 +142,7 @@ export const BalancesChart = ({ transactions, selectedAccount }) => {
       {
         label: "Balance",
         data: response,
-        borderColor: "rgba(107, 114, 128, 1)",
+        borderColor: "rgba(20, 184, 166, 1)",
         borderWidth: 1,
         pointRadius: 2,
       },

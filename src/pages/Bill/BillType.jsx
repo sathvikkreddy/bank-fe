@@ -172,7 +172,7 @@ const BillType = () => {
           <div className="flex flex-col mb-4 md:flex-row md:items-center md:justify-between gap-4">
             <h2 className="text-2xl font-bold mb-4">Types of Bills</h2>
             <button
-              className="bg-black text-white py-2 px-4 rounded"
+              className="bg-c300 dark:bg-c700 hover:bg-c400 dark:hover:bg-c600   py-2 px-4 rounded"
               onClick={handleRecentPaymentsClick}
             >
               Recent Bill Payments
@@ -181,7 +181,7 @@ const BillType = () => {
           <div className="grid grid-cols-3 gap-4">
             <div
               onClick={() => handleBillTypeSelection("Electric Bill")}
-              className="hover:bg-gray-100 dark:hover:bg-gray-700 py-4 rounded-lg text-center border border-gray-300 dark:border-gray-600 flex flex-col items-center justify-center cursor-pointer"
+              className="hover:bg-c400 dark:hover:bg-c700 py-4 rounded-lg text-center border border-gray-300 dark:border-gray-600 flex flex-col items-center justify-center cursor-pointer"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -201,7 +201,7 @@ const BillType = () => {
             </div>
             <div
               onClick={() => handleBillTypeSelection("Water Bill")}
-              className="hover:bg-gray-100 dark:hover:bg-gray-700 py-4 rounded-lg text-center border border-gray-300 dark:border-gray-600 flex flex-col items-center justify-center cursor-pointer"
+              className="hover:bg-c400 dark:hover:bg-c700 py-4 rounded-lg text-center border border-gray-300 dark:border-gray-600 flex flex-col items-center justify-center cursor-pointer"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -219,7 +219,7 @@ const BillType = () => {
             </div>
             <div
               onClick={() => handleBillTypeSelection("Gas Bill")}
-              className="hover:bg-gray-100 dark:hover:bg-gray-700 py-4 rounded-lg text-center border border-gray-300 dark:border-gray-600 flex flex-col items-center justify-center cursor-pointer"
+              className="hover:bg-c400 dark:hover:bg-c700py-4 rounded-lg text-center border border-gray-300 dark:border-gray-600 flex flex-col items-center justify-center cursor-pointer"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -240,7 +240,7 @@ const BillType = () => {
         {showForm && (
           <div className="flex flex-col gap-2 rounded-md p-6">
             <div className="w-full md:w-1/1">
-              <Card title={`Bill Details Form for ${selectedBillType}`}>
+              <Card title={`${selectedBillType} Details`}>
                 <form onSubmit={handleSubmit} className="mt-8">
                   <div className="mb-4">
                     <label
@@ -267,15 +267,21 @@ const BillType = () => {
                       htmlFor="billProvider"
                       className="block  font-semibold mb-2"
                     >
-                      Bill Provider
+                      
                     </label>
+                    <div  className="block  font-semibold mb-2">
+                     Bill Provider 
+                      <div className="text-teal-500">
+                        {formData.billProvider}
+                      </div>
+                    </div>
                     <input
                       type="text"
                       id="billProvider"
                       name="billProvider"
                       value={formData.billProvider}
                       onChange={handleChange}
-                      className="dark:bg-gray-800 appearance-none border dark:border-gray-600 rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
+                      className="hidden dark:bg-gray-800 appearance-none border dark:border-gray-600 rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
                       placeholder="Enter bill provider"
                       required
                       readOnly
@@ -295,7 +301,7 @@ const BillType = () => {
                       name="billNumber"
                       value={formData.billNumber}
                       onChange={handleChange}
-                      className="dark:bg-gray-800 appearance-none border dark:border-gray-600 rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
+                      className="bg-c50 dark:bg-transparent appearance-none border dark:border-gray-600 rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
                       placeholder="Enter bill number"
                       required
                     />
@@ -309,12 +315,13 @@ const BillType = () => {
                       Amount
                     </label>
                     <input
+                    autocomplete="off"
                       type="text"
                       id="amount"
                       name="amount"
                       value={formData.amount}
                       onChange={handleChange}
-                      className="dark:bg-gray-800 appearance-none border dark:border-gray-600 rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
+                      className="bg-c50 dark:bg-transparent appearance-none border dark:border-gray-600 rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
                       placeholder="Enter amount"
                       required
                     />
@@ -332,12 +339,12 @@ const BillType = () => {
                       name="selectedAccount"
                       value={formData.selectedAccount}
                       onChange={handleChange}
-                      className="dark:bg-gray-800 mt-1 block w-full py-2 px-3 border border-gray-300 dark:border-gray-600 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      className="bg-c300 dark:bg-transparent  mt-1 block w-full py-2 px-3 border border-gray-300 dark:border-gray-600 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       required
                     >
-                      <option value="">Select an account</option>
+                      <option className="bg-c300 dark:bg-c700 " value="">Select an account</option>
                       {bankAccounts.map((account) => (
-                        <option key={account.id} value={account.id}>
+                        <option key={account.id} value={account.id} className="bg-c300 dark:bg-c700 hover:bg-c400 ">
                           {account.accountName}
                         </option>
                       ))}
@@ -349,12 +356,13 @@ const BillType = () => {
                       PIN
                     </label>
                     <input
+                      autocomplete="off"
                       type="password"
                       id="pin"
                       name="pin"
                       value={formData.pin}
                       onChange={handleChange}
-                      className="dark:bg-gray-800 appearance-none border dark:border-gray-600 rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
+                      className="bg-c50 text-teal-500 dark:bg-transparent  appearance-none border dark:border-gray-600 rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
                       placeholder="Enter PIN"
                       required
                     />
@@ -378,15 +386,18 @@ const BillType = () => {
             <h2 className="text-2xl font-bold mb-4">Recent Bill Payments</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {recentPayments.map((payment) => (
-                <Card key={payment.billId} title="Paid">
-                  <p>Bill ID: {payment.billDetailsId}</p>
-                  <p>Bill Type: {payment.billType}</p>
-                  <p>Bill Number: {payment.billNumber}</p>
-                  <p>Amount: {payment.amount}</p>
-                  <p>
-                    Paid On:{" "}
-                    {formatTimestampToDate(payment.transaction.timestamp)}
-                  </p>
+                <Card key={payment.billId} title="Paid" >
+                  <p className="font-semibold">Bill ID: <span className="font-normal">{payment.billDetailsId}</span></p>
+                  <p  className="font-semibold">Bill Type: <span className="font-normal">{payment.billType}</span></p>
+                  <p  className="font-semibold">Bill Number: <span className="font-normal">{payment.billNumber}</span></p>
+                  <p  className="font-semibold">Amount: <span className="font-normal">{payment.amount}</span></p>
+                  <p className="font-semibold">
+                    Date:
+                    {" "}
+                    <span className="font-normal">
+                     {formatTimestampToDate(payment.transaction.timestamp)}
+                    </span>
+                    </p>
                 </Card>
               ))}
             </div>
@@ -423,15 +434,15 @@ const BillType = () => {
                         : "Error"}
                     </h3>
                     <div className="mt-2">
-                      <p className="text-sm text-gray-500">{dialog.message}</p>
+                      <p className="text-sm text-teal-500">{dialog.message}</p>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+              <div className="bg-c50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                 <button
                   type="button"
-                  className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-black text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:ml-3 sm:w-auto sm:text-sm"
+                  className="bg-c300 dark:bg-c700  hover:bg-c400 dark:hover:bg-c600  w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-black text-base font-medium   focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 sm:ml-3 sm:w-auto sm:text-sm"
                   onClick={closeDialog}
                 >
                   OK

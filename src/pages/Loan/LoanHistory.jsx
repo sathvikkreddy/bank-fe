@@ -13,7 +13,7 @@ const LoanHistory = () => {
   };
 
   return (
-    <div className="container p-8 border dark:border-teal-300">
+    <div className="container p-8">
       <h1 className="flex text-2xl font-bold mb-4 text-c300">Active Loans</h1>
 
       <div className="">

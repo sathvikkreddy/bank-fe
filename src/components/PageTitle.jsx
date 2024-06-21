@@ -8,7 +8,9 @@ const PageTitle = (props) => {
       <div className="text-3xl font-light flex flex-col justify-center p-2">
         {props.title}
       </div>
-      <div className="flex flex-col justify-center pr-6"></div>
+      <div className="flex flex-col w-8 h-8 text-transparent bg-light-logo dark:bg-dark-logo bg-cover justify-center mt-4 m-2 mr-6">
+        hiiiiiiiii
+      </div>
     </div>
   );
 };

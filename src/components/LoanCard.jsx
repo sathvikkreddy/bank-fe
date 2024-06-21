@@ -28,7 +28,7 @@ const LoanCard = ({
             <img
               src={image}
               alt={type}
-              className="w-full h-48 md:h-48 lg:h-48 object-scale-down shadow-md  dark:shadow-teal-600 dark:bg-c100 rounded-lg mb-4"
+              className="w-full h-48 md:h-48 lg:h-48 object-scale-down bg-transparent dark:invert dark:shadow-teal-600  rounded-lg mb-4"
             />
           </div>
 

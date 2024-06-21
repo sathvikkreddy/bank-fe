@@ -25,6 +25,8 @@ export default {
         "dark-signin-image": "url('/bg-images/dark-signin.jpg')",
         "home-image": "url('/bg-images/home.jpg')",
         "dark-home-image": "url('/bg-images/images.jpeg')",
+        "light-logo": "url('/tblogo.png')",
+        "dark-logo": "url('/dark-tblogo.png')",
       }),
     },
   },

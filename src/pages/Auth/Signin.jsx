@@ -160,10 +160,15 @@ export default function Signin() {
             <div className="font-light text-red-500 text-sm pt-4">
               {errorMessage}
             </div>
-            <div className="flex max-h-10 gap-4">
-              <div className="flex flex-col justify-center">Mode:</div>
-              <div className="flex flex-col justify-center">
-                <ModeToggle />
+            <div className="flex justify-between">
+              <div className="flex max-h-10 gap-4">
+                <div className="flex flex-col justify-center">Mode:</div>
+                <div className="flex flex-col justify-center">
+                  <ModeToggle />
+                </div>
+              </div>
+              <div className="bg-light-logo dark:bg-dark-logo bg-cover sm:text-xs text-[9px] text-transparent">
+                hiiiiiiiii
               </div>
             </div>
           </div>

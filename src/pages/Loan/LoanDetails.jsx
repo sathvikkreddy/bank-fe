@@ -184,21 +184,21 @@ const LoanDetails = () => {
         </div>
 
         <button
-          className=" bg-white dark:bg-gray-800 text-black dark:text-white px-4 py-2 rounded shadow-md dark:shadow-slate-600 mb-4 p-4 border hover:bg-gray-300  dark:hover:bg-gray-700 "
+          className=" bg-white dark:bg-c700 text-black dark:text-white px-4 py-2 rounded shadow-md dark:shadow-teal-300 mb-4 p-4 border hover:bg-teal-200 dark:hover:text-black dark:hover:bg-teal-500 "
           onClick={() => setFilteredPayables(loanPayables)}
         >
           All EMI's
         </button>
 
         <div className="text-xl font-medium uppercase my-2">EMI's</div>
-        <div className="flex space-x-4 border border-gray-300 p-1 rounded-md shadow-md dark:shadow-slate-600">
+        <div className="flex space-x-4 border border-gray-300 p-1 rounded-md shadow-md dark:shadow-sm dark:shadow-teal-300">
           {["Pending", "Due", "Paid"].map((status) => (
             <button
               key={status}
               className={`px-4 py-2 rounded ${
                 filter === status
-                  ? "bg-gray-800 dark:bg-gray-300 text-white dark:text-black"
-                  : "bg-gray-200 dark:bg-gray-700"
+                  ? "bg-c300 dark:bg-c500 text-white dark:text-black"
+                  : "bg-c300 dark:bg-c500"
               }`}
               onClick={() => handleFilterChange(status)}
             >
@@ -208,17 +208,17 @@ const LoanDetails = () => {
         </div>
 
         {/* <div className="bg-white p-6 rounded shadow-md"> */}
-        <div className="bg-white dark:bg-gray-800 my-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 ">
+        <div className=" dark:bg-black bg-transparent dark:text-white my-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 ">
           {filteredPayables.length > 0 ? (
             filteredPayables.map((payable) => (
               <div
                 key={payable.id}
-                className="p-4 border rounded mb-2 space-y-2 shadow-md  "
+                className="p-4 border dark:bg-gray-900 bg-white rounded mb-2 space-y-2 shadow-md"
               >
-                <p>
-                  <strong>Month:</strong> {payable.month}
+                <p  className="dark:text-c200">
+                  <strong className="text-c300 dark:text-c600">Month:</strong> {payable.month}
                 </p>
-                <hr />
+                <hr className="shadow-md group-hover:shadow-teal-300 border-gray-300 dark:border-teal-300"/>
 
                 <div className="font-semibold sm:text-base text-xs">
                   Amount:{" "}
@@ -246,7 +246,7 @@ const LoanDetails = () => {
                 </div>
                 {payable.status == "Due" && (
                   <button
-                    className="px-4 py-2 mt-2 bg-black text-white shadow-md p-4 border rounded hover:bg-white hover:text-black hover:font-semibold"
+                    className="px-4 py-2 bg-c300 dark:bg-c500 dark:hover:border-teal-300 text-white dark:text-black mt-2 shadow-md p-4 border rounded hover:bg-c300 dark:hover:text-black hover:font-semibold"
                     onClick={() => handlePayEMI(payable.id)}
                   >
                     Pay EMI
@@ -267,7 +267,7 @@ const LoanDetails = () => {
             >
               <p className="mb-4">{dialog.message}</p>
               <button
-                className=" px-4 py-2 rounded bg-black text-white shadow-md mb-4 transition-transform duration-300 hover:shadow-lg relative group p-4 border hover:bg-white hover:text-black hover:font-semibold"
+                className=" px-4 py-2 rounded border bg-c300 text-white hover:bg-teal-600 shadow-md dark:border-teal-200 dark:shadow-teal-300 mb-4 transition-transform duration-300 hover:shadow-lg relative group p-4  hover:text-black hover:font-semibold"
                 onClick={closeDialog}
               >
                 Close
@@ -291,7 +291,7 @@ const LoanDetails = () => {
               >
                 &#8203;
               </span>
-              <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+              <div className="dark:bg-gray-900 dark:border-teal-300 bg-c100 inline-block align-bottom border rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
                 <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                   <div className="sm:flex sm:items-start">
                     <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
@@ -301,6 +301,7 @@ const LoanDetails = () => {
                       >
                         {}
                       </h3>
+                      <hr className="shadow-md group-hover:shadow-teal-300 border-black dark:border-teal-300"/>
                       <div className="mt-2">
                         <p className="text-sm text-gray-500">
                           {dialog.message}
@@ -312,7 +313,7 @@ const LoanDetails = () => {
                 <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                   <button
                     type="button"
-                    className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-black text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:ml-3 sm:w-auto sm:text-sm"
+                    className="w-full inline-flex justify-center  rounded-md border bg-c300 text-white hover:bg-teal-600 shadow-md dark:border-teal-200 dark:shadow-teal-300 px-4 py-2  text-base font-medium  hover:focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 sm:ml-3 sm:w-auto sm:text-sm"
                     onClick={closeDialog}
                   >
                     OK

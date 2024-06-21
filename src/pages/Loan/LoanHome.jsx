@@ -17,10 +17,10 @@ const LoanHome = () => {
       msg2: "Minimum documentation",
       msg3: "Avail loan up to ₹ 40 Lakhs",
       msg4: "Get EMI starting at ₹ 2,149/Lakh",
-      img1: <PImg1 />,
+      img1: <Gimg3 />,
       img2: <PImg2 />,
       img3: <Pimg3 />,
-      img4: <PImg4 />,
+      img4: <GImg4 />,
       route: "Personalloan",
     },
     {
@@ -51,7 +51,7 @@ const LoanHome = () => {
         </div>
         <LoanHistory />
         <div className="pl-4">
-          <h1 className="text-2xl ml-2 font-semibold mb-4">Available Loans</h1>
+          <h1 className="text-2xl ml-2 pt-3 font-semibold mb-4">Available Loans</h1>
         </div>
         <div className="loan-card-container pl-3">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -70,24 +70,7 @@ const LoanHome = () => {
 
 export default LoanHome;
 
-function PImg1(props) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      strokeWidth={1.5}
-      stroke="currentColor"
-      className="w-6 h-6 text-white"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-      />
-    </svg>
-  );
-}
+
 function PImg2(props) {
   return (
     <svg
@@ -126,24 +109,6 @@ function Pimg3(props) {
   );
 }
 
-function PImg4(props) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      strokeWidth={1.5}
-      stroke="currentColor"
-      className="w-6 h-6"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z"
-      />
-    </svg>
-  );
-}
 
 function GImg1(props) {
   return (

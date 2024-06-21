@@ -13,8 +13,8 @@ const LoanHistory = () => {
   };
 
   return (
-    <div className="container p-8">
-      <h1 className="flex text-2xl font-semibold mb-4">Active Loans</h1>
+    <div className="container p-8 border dark:border-teal-300">
+      <h1 className="flex text-2xl font-bold mb-4 text-c300">Active Loans</h1>
 
       <div className="">
         {profile.loans.length > 0 ? (
@@ -22,16 +22,16 @@ const LoanHistory = () => {
             {profile.loans.map((loan) => (
               <div
                 key={loan.loanDetailsId}
-                className="p-4 border rounded shadow-md dark:shadow-slate-700  hover:bg-gray-50 dark:hover:bg-gray-700"
+                className="p-4 border dark:border-teal-300 rounded shadow-md dark:shadow-slate-700 hover:bg-teal-100 dark:hover:bg-c700"
               >
                 <Link to={`LoanDetails/${loan.loanDetailsId}`}>
-                  <div>
+                  <div >
                     <div className="flex justify-center">
                       <strong>
                         <p>{loan.loanType}</p>
                       </strong>
                     </div>
-                    <hr />
+                    <hr className="shadow-md group-hover:shadow-teal-300 border-black dark:border-teal-300"/>
                     <br />
                     <div className="font-semibold sm:text-base text-xs">
                       Account ID :{" "}

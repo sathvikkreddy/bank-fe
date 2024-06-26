@@ -228,6 +228,9 @@ const GoldLoan = () => {
   };
 
   const handleCloseDialog = () => {
+    if (message.includes('Applied Personal Loan')) {
+      navigate(-1);  // Navigate to the previous page
+    }
     setShowDialog(false);
   };
 

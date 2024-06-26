@@ -15,7 +15,7 @@ const LoanDetails = () => {
 
   const [loanPayables, setLoanPayables] = useState([]);
   const [filteredPayables, setFilteredPayables] = useState([]);
-  const [filter, setFilter] = useState("Pending");
+  const [filter, setFilter] = useState("Upcoming");
   const [dialog, setDialog] = useState({
     isOpen: false,
     message: "",
@@ -183,20 +183,27 @@ const LoanDetails = () => {
           </div>
         </div>
 
-        <button
+        {/* <button
           className=" bg-white dark:bg-c700 text-black dark:text-white px-4 py-2 rounded shadow-md dark:shadow-teal-300 mb-4 p-4 border hover:bg-teal-200 dark:hover:text-black dark:hover:bg-teal-500 "
           onClick={() => setFilteredPayables(loanPayables)}
         >
           All EMI's
-        </button>
+        </button> */}
 
         <div className="text-xl font-medium uppercase my-2">EMI's</div>
         <div className="flex space-x-4 border border-gray-300 p-1 rounded-md shadow-md dark:shadow-sm dark:shadow-teal-300">
-          {["Pending", "Due", "Paid"].map((status) => (
+        <button
+          className=" bg-c300 px-4 py-2 rounded dark:bg-c500 text-black dark:text-black"
+          onClick={() => setFilteredPayables(loanPayables)}
+        >
+          All EMI's
+        </button>
+          
+          {["Paid", "Due","Upcoming"].map((status) => (
             <button
               key={status}
               className={`px-4 py-2 rounded ${
-                filter === status
+                filter === status 
                   ? "bg-c300 dark:bg-c500 text-white dark:text-black"
                   : "bg-c300 dark:bg-c500"
               }`}

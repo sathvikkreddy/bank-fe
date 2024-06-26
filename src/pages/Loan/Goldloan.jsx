@@ -228,7 +228,7 @@ const GoldLoan = () => {
   };
 
   const handleCloseDialog = () => {
-    if (message.includes('Applied Personal Loan')) {
+    if (message.includes('Applied Gold Loan')) {
       navigate(-1);  // Navigate to the previous page
     }
     setShowDialog(false);

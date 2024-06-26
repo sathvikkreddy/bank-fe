@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext,useNavigate } from "react-router-dom";
 import PageTitle from "../../components/PageTitle";
 
 const GoldLoan = () => {
   const [loanDetails, setLoanDetails] = useState([]);
   const [profile] = useOutletContext();
-
+  const navigate=useNavigate();
   const [selectedAmount, setSelectedAmount] = useState(null);
   const [roi, setRoi] = useState(null);
   const [tenureOptions, setTenureOptions] = useState([]);

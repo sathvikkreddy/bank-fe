@@ -1,10 +1,19 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useOutletContext,useNavigate } from "react-router-dom";
 import PageTitle from "../../components/PageTitle";
+import updateOutletContext from "../../utils/updateOutletContext";
+
 
 const GoldLoan = () => {
   const [loanDetails, setLoanDetails] = useState([]);
-  const [profile] = useOutletContext();
+  const [
+    profile,
+    isLoading,
+    transactions,
+    setProfile,
+    setIsLoading,
+    setTransactions,
+  ] = useOutletContext();
   const navigate=useNavigate();
   const [selectedAmount, setSelectedAmount] = useState(null);
   const [roi, setRoi] = useState(null);
@@ -228,8 +237,11 @@ const GoldLoan = () => {
   };
 
   const handleCloseDialog = () => {
-
-    if (message.includes('Applied Gold Loan') || message.includes('Loan Applied Successfully')) {
+    if (message.includes('Applied Gold Loan')) {
+      navigate(-1);  // Navigate to the previous page
+    }
+    if (message.includes('Loan Applied Successfully')) {
+      updateOutletContext(setProfile, setTransactions, setIsLoading);
       navigate(-1);  // Navigate to the previous page
     }
     setShowDialog(false);

@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useOutletContext,useNavigate } from "react-router-dom";
 import PageTitle from "../../components/PageTitle";
+import updateOutletContext from "../../utils/updateOutletContext";
+
 
 const Personalloan = () => {
   const [loanDetails, setLoanDetails] = useState([]);
@@ -17,7 +19,14 @@ const Personalloan = () => {
   const [message, setMessage] = useState("");
   const [showDialog, setShowDialog] = useState(false);
   const [valid, setValid] = useState(true);
-  const [profile] = useOutletContext();
+  const [
+    profile,
+    isLoading,
+    transactions,
+    setProfile,
+    setIsLoading,
+    setTransactions,
+  ] = useOutletContext();
 
   const tenureRef = useRef(null);
   const amountRef = useRef(null);
@@ -229,10 +238,15 @@ const Personalloan = () => {
   };
 
   const handleCloseDialog = () => {
-    setShowDialog(false);
-    if (message.includes('Applied Personal Loan') || message.includes('Loan Applied Successfully')) {
+    if (message.includes('Applied Personal Loan')) {
       navigate(-1);  // Navigate to the previous page
     }
+    if (message.includes('Loan Applied Successfully')) {
+      updateOutletContext(setProfile, setTransactions, setIsLoading);
+      navigate(-1);  // Navigate to the previous page
+    }
+    setShowDialog(false);
+    
   };
 
   const formatAmount = (amount) => {

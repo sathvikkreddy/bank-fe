@@ -1,11 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useOutletContext } from "react-router-dom";
+import updateOutletContext from "../../utils/updateOutletContext";
+
 import NotFound from "../NotFound";
 
 import PageTitle from "../../components/PageTitle";
 const LoanDetails = () => {
-  const [profile] = useOutletContext();
+  const [
+    profile,
+    isLoading,
+    transactions,
+    setProfile,
+    setIsLoading,
+    setTransactions,
+  ] = useOutletContext();
   const { loanId } = useParams();
   const [loan, setLoan] = useState(null);
   const [stat, setStat] = useState("");
@@ -112,6 +121,7 @@ const LoanDetails = () => {
       }
 
       const responseData = await response.json();
+
       console.log("Payment successful:", responseData);
 
       // Update status of the paid payable in the UI
@@ -142,6 +152,8 @@ const LoanDetails = () => {
   };
 
   const closeDialog = () => {
+    updateOutletContext(setProfile, setTransactions, setIsLoading);
+
     setDialog({ isOpen: false, message: "", isError: false });
   };
 
@@ -268,7 +280,7 @@ const LoanDetails = () => {
         {dialog.isOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
             <div
-              className={`bg-white p-6 rounded shadow-md ${
+              className={`bg-c100 dark:bg-c700 p-6 rounded shadow-md ${
                 dialog.isError ? "border-red-500" : "border-green-500"
               }`}
             >
@@ -298,29 +310,29 @@ const LoanDetails = () => {
               >
                 &#8203;
               </span>
-              <div className="dark:bg-gray-900 dark:border-teal-300 bg-c100 inline-block align-bottom border rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+              <div className="dark:bg-gray-900 dark:border-teal-300 dark:text-white bg-c100 inline-block align-bottom border rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                <div className="bg-c100 dark:bg-c700 dark:text-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                   <div className="sm:flex sm:items-start">
                     <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                       <h3
-                        className="text-lg leading-6 font-medium text-gray-900"
+                        className="text-lg dark:text-white leading-6 font-medium text-gray-900"
                         id="modal-title"
                       >
                         {}
                       </h3>
-                      <hr className="shadow-md group-hover:shadow-teal-300 border-black dark:border-teal-300"/>
+                      <hr className="shadow-md group-hover:shadow-teal-300 dark:text-white border-black dark:border-teal-300"/>
                       <div className="mt-2">
-                        <p className="text-sm text-gray-500">
+                        <p className="text-sm dark:text-white text-gray-500">
                           {dialog.message}
                         </p>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                <div className="bg-c100 dark:bg-c700 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                   <button
                     type="button"
-                    className="w-full inline-flex justify-center  rounded-md border bg-c300 text-white hover:bg-teal-600 shadow-md dark:border-teal-200 dark:shadow-teal-300 px-4 py-2  text-base font-medium  hover:focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 sm:ml-3 sm:w-auto sm:text-sm"
+                    className="w-full inline-flex justify-center  rounded-md border bg-c300 text-white dark:bg-teal-700 hover:bg-teal-600 dark:border-teal-200  px-4 py-2  text-base font-medium  hover:focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 sm:ml-3 sm:w-auto sm:text-sm"
                     onClick={closeDialog}
                   >
                     OK

@@ -79,6 +79,7 @@ const MainInsurance = ({
     };
     setApplyLoading(true);
     const response = await applyInsurance(reqBody);
+    handleCancel();
     setApplyLoading(false);
     if (response.status < 300) {
       toast.success("Insurance Applied");
@@ -116,6 +117,7 @@ const MainInsurance = ({
                 onClick={() => {
                   setShowAllActive(!showAllActive);
                 }}
+                className={"text-black dark:text-white"}
               />
             </div>
           }

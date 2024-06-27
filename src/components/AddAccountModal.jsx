@@ -2,12 +2,32 @@ import React, { useState } from "react";
 import Modal from "./Modal";
 import { validateFirstName } from "../inputValidators";
 import axios from "axios";
+import updateOutletContext from "../utils/updateOutletContext";
+import { useOutletContext } from "react-router-dom";
 
 const AddAccountModal = ({ open, onClose }) => {
   const [accountName, setAccountName] = useState("");
   const [valid, setValid] = useState(true);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const [
+    profile,
+    isLoading,
+    transactions,
+    setProfile,
+    setIsLoading,
+    setTransactions,
+  ] = useOutletContext();
+
+  const handleClose = () => {
+    setAccountName("");
+    setValid(true);
+    setError("");
+    setLoading(false);
+    onClose();
+  };
+
   const addAccount = async () => {
     const reqBody = {
       accountName,
@@ -26,6 +46,8 @@ const AddAccountModal = ({ open, onClose }) => {
           },
         }
       );
+      handleClose();
+      updateOutletContext(setProfile, setTransactions, setIsLoading);
       setLoading(false);
     } catch (err) {
       setLoading(false);
@@ -66,13 +88,7 @@ const AddAccountModal = ({ open, onClose }) => {
             className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md bg-teal-500 cursor-${
               loading ? "not-allowed" : "pointer"
             } shadow-sm text-sm font-medium dark:text-white bg-teal-300 hover:bg-teal-400 dark:bg-teal-700 dark:hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-c500`}
-            onClick={() => {
-              setAccountName("");
-              setValid(true);
-              setError("");
-              setLoading(false);
-              onClose();
-            }}
+            onClick={handleClose}
           >
             Close
           </button>

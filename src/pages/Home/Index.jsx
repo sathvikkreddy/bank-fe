@@ -48,7 +48,7 @@ const Home = () => {
   };
   return (
     <div>
-      <PageTitle title={"Home"} />
+      <PageTitle title={"Dashboard"} />
       <div className="">
         <div className="sm:flex font-light text-2xl p-2">
           <div>{"Welcome, "}</div>{" "}

@@ -6,6 +6,7 @@ import Button from "../../components/Button";
 import Modal from "../../components/Modal";
 import axios from "axios";
 import NotFound from "../NotFound";
+import toast from "react-hot-toast";
 
 const InsuranceDetail = ({ activeInsurances, activeLoading }) => {
   const { id } = useParams();
@@ -262,7 +263,7 @@ const InstallmentTable = ({ type, installments, handleOpenModal }) => {
     <div className="overflow-x-auto rounded-md">
       <table className="min-w-full border dark:border-gray-600 border-gray-300">
         <thead>
-          <tr className="bg-gray-200 dark:bg-gray-700 leading-normal">
+          <tr className="bg-c200 dark:bg-c700 leading-normal">
             <th className="py-3 sm:px-6 px-1 text-left">Premium ID</th>
             <th className="py-3 sm:px-6 px-1 text-left">Premium Year</th>
             <th className="py-3 sm:px-6 px-1 text-left">Premium Amount</th>
@@ -273,7 +274,7 @@ const InstallmentTable = ({ type, installments, handleOpenModal }) => {
           {installments.map((installment) => (
             <tr
               key={installment.id}
-              className="border-b dark:border-b-gray-600 border-gray-200 dark:bg-gray-800"
+              className="border-b dark:border-b-gray-600 border-gray-200 dark:bg-transparent"
             >
               <td className="py-3 sm:px-6 px-1 text-left">{installment.id}</td>
               <td className="py-3 sm:px-6 px-1 text-left">
@@ -305,20 +306,41 @@ const InstallmentTable = ({ type, installments, handleOpenModal }) => {
 const InstallmentPaymentModal = ({ installment, open, onClose }) => {
   const [profile] = useOutletContext();
 
+  const [loading, setLoading] = useState(false);
   const [pin, setPin] = useState("");
   const [selectedAccount, setSelectedAccount] = useState(
     profile.accounts[0].id
   );
 
-  const handlePay = () => {
+  const handlePay = async () => {
     const reqBody = {
       installmentId: installment.id,
       accountId: selectedAccount,
       pin: Number(pin),
     };
+    try {
+      const token = localStorage.getItem("authorization");
+      if (!token) throw new Error("Unauthorized: Token not found");
+      setLoading(true);
+      const userResponse = await axios.post(
+        "https://techbuzzers.somee.com/payInstallment",
+        reqBody,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      toast.success("Premium paid");
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+      console.log(err);
+      toast.error(err.response.data);
+    }
     console.log(reqBody);
-    setPin("");
-    setSelectedAccount(profile.accounts[0].id);
+    handleClose();
   };
 
   const handleClose = () => {
@@ -365,7 +387,12 @@ const InstallmentPaymentModal = ({ installment, open, onClose }) => {
           placeholder="xxxx"
         />
         <div className="pt-4 px-2 flex justify-around gap-4">
-          <Button title={"Pay"} onClick={handlePay} />
+          <Button
+            title={"Pay"}
+            onClick={handlePay}
+            loading={loading}
+            loadingTitle={"Paying"}
+          />
           <Button title={"Cancel"} onClick={handleClose} />
         </div>
       </Modal>

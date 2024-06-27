@@ -215,7 +215,7 @@ const LoanDetails = () => {
         </div>
 
         {/* <div className="bg-white p-6 rounded shadow-md"> */}
-        <div className=" dark:bg-black bg-transparent dark:text-white my-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 ">
+        <div className="bg-transparent dark:text-white my-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 ">
           {filteredPayables.length > 0 ? (
             filteredPayables.map((payable) => (
               <div
@@ -262,7 +262,7 @@ const LoanDetails = () => {
               </div>
             ))
           ) : (
-            <p>No payables {stat}.</p>
+            <p className="bg-transparent">No payables {stat}.</p>
           )}
         </div>
         {dialog.isOpen && (

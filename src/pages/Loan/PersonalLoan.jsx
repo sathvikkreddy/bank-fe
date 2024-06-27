@@ -230,7 +230,7 @@ const Personalloan = () => {
 
   const handleCloseDialog = () => {
     setShowDialog(false);
-    if (message.includes('Applied Personal Loan')) {
+    if (message.includes('Applied Personal Loan') || message.includes('Loan Applied Successfully')) {
       navigate(-1);  // Navigate to the previous page
     }
   };
@@ -256,7 +256,7 @@ const Personalloan = () => {
               Select Loan Amount Range
             </label>
             <select
-              className="mt-1 block w-full py-2 px-3 dark:bg-gray-800 border border-gray-300 dark:border-gray-600  rounded-md shadow-sm dark:shadow-slate-600 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+              className="mt-1 block w-full py-2 bg-c100 dark:bg-black px-3 border border-gray-300 dark:border-gray-600  rounded-md shadow-sm dark:shadow-slate-600 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
               onChange={handleAmountChange}
             >
               <option value="">Select an amount</option>
@@ -273,7 +273,7 @@ const Personalloan = () => {
                 <label className="block text-sm font-medium ">
                   Rate of Interest
                 </label>
-                <div className="mt-1 p-2 border border-gray-300 dark:border-gray-600 rounded-md">
+                <div className="mt-1 p-2 bg-c100 dark:bg-black border border-gray-300 dark:border-gray-600 rounded-md">
                   {roi}%
                 </div>
               </div>
@@ -283,7 +283,7 @@ const Personalloan = () => {
                 </label>
                 <select
                   ref={tenureRef}
-                  className="mt-1 block w-full py-2 px-3 dark:bg-gray-800 border border-gray-300 dark:border-gray-600  rounded-md shadow-sm dark:shadow-slate-600 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+                  className="mt-1 block bg-c100 dark:bg-black w-full py-2 px-3  border border-gray-300 dark:border-gray-600  rounded-md shadow-sm dark:shadow-slate-600 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                   onChange={handleTenureChange}
                   required
                 >
@@ -313,7 +313,7 @@ const Personalloan = () => {
                 <input
                   ref={amountRef}
                   type="number"
-                  className="mt-1 block w-full py-2 px-3 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm dark:shadow-slate-600 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+                  className="mt-1 block w-full bg-c100 dark:bg-black py-2 px-3  border border-gray-300 dark:border-gray-600 rounded-md shadow-sm dark:shadow-slate-600 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                   value={enteredAmount}
                   onChange={(e) => {
                     setEnteredAmount(e.target.value);
@@ -342,7 +342,7 @@ const Personalloan = () => {
                   <label className="block text-sm font-medium ">
                     Your monthly payable EMI is:
                   </label>
-                  <div className="mt-1 p-2 border border-gray-300 dark:border-gray-600 rounded-md">
+                  <div className="mt-1 p-2 bg-c100 dark:bg-black border border-gray-300 dark:border-gray-600 rounded-md">
                     ₹{formatNumber(emi)}
                   </div>
                 </div>
@@ -353,7 +353,7 @@ const Personalloan = () => {
                 </label>
                 <select
                   ref={accountRef}
-                  className="mt-1 block w-full py-2 px-3 dark:bg-gray-800 border border-gray-300 dark:border-gray-600  rounded-md shadow-sm dark:shadow-slate-600 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+                  className="mt-1 block w-full py-2 px-3 bg-c100 dark:bg-black  border border-gray-300 dark:border-gray-600  rounded-md shadow-sm dark:shadow-slate-600 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                   onChange={(e) => setAccountId(e.target.value)}
                   required
                 >
@@ -372,7 +372,7 @@ const Personalloan = () => {
                 <input
                   ref={pinRef}
                   type="password"
-                  className="mt-1 block w-full py-2 px-3 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm dark:shadow-slate-600 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+                  className="mt-1 block w-full py-2 px-3 bg-c100 dark:bg-black border border-gray-300 dark:border-gray-600 rounded-md shadow-sm dark:shadow-slate-600 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                   value={pin}
                   onChange={(e) => setPin(e.target.value)}
                   required

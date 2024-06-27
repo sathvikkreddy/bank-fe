@@ -1,11 +1,20 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext,useNavigate } from "react-router-dom";
 import PageTitle from "../../components/PageTitle";
+import updateOutletContext from "../../utils/updateOutletContext";
+
 
 const GoldLoan = () => {
   const [loanDetails, setLoanDetails] = useState([]);
-  const [profile] = useOutletContext();
-
+  const [
+    profile,
+    isLoading,
+    transactions,
+    setProfile,
+    setIsLoading,
+    setTransactions,
+  ] = useOutletContext();
+  const navigate=useNavigate();
   const [selectedAmount, setSelectedAmount] = useState(null);
   const [roi, setRoi] = useState(null);
   const [tenureOptions, setTenureOptions] = useState([]);
@@ -228,6 +237,13 @@ const GoldLoan = () => {
   };
 
   const handleCloseDialog = () => {
+    if (message.includes('Applied Gold Loan')) {
+      navigate(-1);  // Navigate to the previous page
+    }
+    if (message.includes('Loan Applied Successfully')) {
+      updateOutletContext(setProfile, setTransactions, setIsLoading);
+      navigate(-1);  // Navigate to the previous page
+    }
     setShowDialog(false);
   };
 
@@ -252,10 +268,11 @@ const GoldLoan = () => {
               Select Loan Amount Range
             </label>
             <select
-              className="mt-1 block w-full py-2 px-3 border border-gray-300 dark:border-gray-700 dark:bg-gray-800 rounded-md shadow-sm  dark:shadow-slate-600 focus:outline-none sm:text-sm"
+              className="mt-1 block w-full py-2 bg-c100 px-3 border border-gray-300 dark:border-gray-700 dark:bg-black rounded-md shadow-sm  dark:shadow-slate-600 focus:outline-none sm:text-sm"
               onChange={handleAmountChange}
             >
-              <option value="">Select an amount </option>
+              <option value=""
+              className="dark:bg-transparent">Select an amount </option>
               {loanDetails.map((loan) => (
                 <option key={loan.loanDetails.id} value={loan.loanDetails.id}>
                   {formatAmount(loan.loanDetails.amouuntGranted)}
@@ -269,7 +286,7 @@ const GoldLoan = () => {
                 <label className="block text-sm font-medium ">
                   Rate of Interest
                 </label>
-                <div className="mt-1 p-2 border border-gray-300 dark:border-gray-700 rounded-md">
+                <div className="mt-1 p-2 dark:bg-black border bg-c100 border-gray-300 dark:border-gray-700 rounded-md">
                   {roi}%
                 </div>
               </div>
@@ -279,7 +296,7 @@ const GoldLoan = () => {
                 </label>
                 <select
                   ref={tenureRef}
-                  className="mt-1 block w-full py-2 px-3 border border-gray-300 dark:border-gray-700 rounded-md dark:bg-gray-800 shadow-sm dark:shadow-slate-600 focus:outline-none  sm:text-sm"
+                  className="mt-1 block w-full bg-c100 py-2 dark:bg-black px-3 border border-gray-300 dark:border-gray-700 rounded-md  shadow-sm dark:shadow-slate-600 focus:outline-none  sm:text-sm"
                   onChange={handleTenureChange}
                   required
                 >
@@ -310,7 +327,7 @@ const GoldLoan = () => {
                   ref={amountRef}
                   type="number"
                   placeholder="199990"
-                  className="mt-1 block w-full py-2 px-3 border dark:bg-gray-800 dark:text-white border-gray-300 dark:border-gray-700 rounded-md shadow-sm  dark:shadow-slate-600 focus:outline-none  sm:text-sm"
+                  className="mt-1 block bg-c100  dark:bg-black w-full py-2 px-3 border  dark:text-white border-gray-300 dark:border-gray-700 rounded-md shadow-sm  dark:shadow-slate-600 focus:outline-none  sm:text-sm"
                   value={enteredAmount}
                   onChange={(e) => {
                     setEnteredAmount(e.target.value);
@@ -339,7 +356,7 @@ const GoldLoan = () => {
                   <label className="block text-sm font-medium ">
                     Your monthly payable EMI is:
                   </label>
-                  <div className="mt-1 p-2 border border-gray-300 dark:border-gray-700 rounded-md">
+                  <div className="mt-1 p-2 border bg-c100 dark:bg-black border-gray-300 dark:border-gray-700 rounded-md">
                     ₹{formatNumber(emi)}
                   </div>
                 </div>
@@ -350,7 +367,7 @@ const GoldLoan = () => {
                 </label>
                 <select
                   ref={accountRef}
-                  className="mt-1 block w-full py-2 px-3 border dark:bg-gray-800 border-gray-300 dark:border-gray-700  rounded-md shadow-sm  dark:shadow-slate-600 focus:outline-none  sm:text-sm"
+                  className="mt-1 block w-full bg-c100 dark:bg-black py-2 px-3 border  border-gray-300 dark:border-gray-700  rounded-md shadow-sm  dark:shadow-slate-600 focus:outline-none  sm:text-sm"
                   onChange={(e) => setAccountId(e.target.value)}
                   required
                 >
@@ -369,7 +386,7 @@ const GoldLoan = () => {
                 <input
                   ref={pinRef}
                   type="password"
-                  className="mt-1 block w-full py-2 px-3 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm  dark:shadow-slate-600 focus:outline-none  sm:text-sm"
+                  className="mt-1 block bg-c100 w-full py-2 px-3  border dark:bg-black border-gray-300 dark:border-gray-700 rounded-md shadow-sm  dark:shadow-slate-600 focus:outline-none  sm:text-sm"
                   value={pin}
                   onChange={(e) => setPin(e.target.value)}
                   required
@@ -377,7 +394,7 @@ const GoldLoan = () => {
               </div>
               <div className="mb-4">
                 <button
-                    className="px-4 py-2 bg-c300 dark:bg-c500 dark:hover:border-teal-400 text-white dark:text-black mt-2 shadow-md p-4 border rounded hover:bg-c400 dark:hover:text-black font-semibold"
+                    className="px-4 py-2 bg-c300 dark:bg-c500 dark:hover:border-teal-400 text-white  dark:text-black mt-2 shadow-md p-4 border rounded hover:bg-c400 dark:hover:text-black font-semibold"
                     onClick={handleApplyLoan}
                 >
                   Apply Loan

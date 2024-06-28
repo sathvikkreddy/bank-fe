@@ -17,11 +17,6 @@ export default function Appbar() {
       icon: <TransactionsIcon className="w-4 h-4" />,
     },
     { title: "Bills", to: "bills", icon: <BillsIcon className="w-4 h-4" /> },
-    {
-      title: "Settings",
-      to: "settings",
-      icon: <SettingsIcon className="w-4 h-4" />,
-    },
   ];
 
   const [selectedItem, setSelectedItem] = useState("");

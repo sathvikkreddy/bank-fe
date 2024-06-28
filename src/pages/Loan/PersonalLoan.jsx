@@ -263,7 +263,7 @@ const Personalloan = () => {
     <div>
       <PageTitle title="Personal Loan" />
       <div className="min-h-screen p-8">
-        <h1 className="text-xl font-bold mb-4 text-c400">Personal Loan</h1>
+        {/* <h1 className="text-xl font-bold mb-4 text-c400">Personal Loan</h1> */}
         <div className=" p-6 rounded shadow-md dark:shadow-teal-600">
           <div className="mb-4">
             <label className="block text-sm font-medium ">

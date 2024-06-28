@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useOutletContext } from "react-router-dom";
 import Card from "../../components/Card";
+
 const LoanHistory = () => {
   const [profile] = useOutletContext();
   const [emp, setEmp] = useState(" ");
@@ -11,10 +12,17 @@ const LoanHistory = () => {
       maximumFractionDigits: 2,
     });
   };
+  const capitalize=(s)=>{
+    if (s==="Activee"){
+    return s.toUpperCase();
+    }else{
+      return s;
+    }
+  }
 
   return (
     <div className="container p-8">
-      <h1 className="flex text-2xl font-bold mb-4 text-c300">Active Loans</h1>
+      <h1 className="flex text-2xl font-bold mb-4 text-c300"> Loans Applied</h1>
 
       <div className="">
         {profile.loans.length > 0 ? (
@@ -26,9 +34,14 @@ const LoanHistory = () => {
               >
                 <Link to={`LoanDetails/${loan.loanDetailsId}`}>
                   <div >
-                    <div className="flex justify-center">
+                    <div className="flex justify-between">
                       <strong>
                         <p>{loan.loanType}</p>
+                      </strong>
+                      <strong className={`font-semibold ${
+                loan.status === "Active" || loan.status === "Clear" ? "text-green-600" : "text-orange-600"
+              }`}>
+                        <p>{capitalize(loan.status)}</p>
                       </strong>
                     </div>
                     <hr className="shadow-md group-hover:shadow-teal-300 border-black dark:border-teal-300"/>
@@ -44,9 +57,17 @@ const LoanHistory = () => {
                       </span>
                     </div>
                     <div className="font-semibold sm:text-base text-xs">
+                      Interest rate:{" "}
+                      <span className="font-normal">{loan.roi}%</span>
+                    </div>
+                    <div className="font-semibold sm:text-base text-xs">
                       Tenure:{" "}
                       <span className="font-normal">{loan.tenure} Months</span>
                     </div>
+                    {/* <div className="font-semibold sm:text-base text-xs">
+                      Status:{" "}
+                      <span className="font-normal">{loan.status} </span>
+                    </div> */}
                   </div>
                 </Link>
               </div>

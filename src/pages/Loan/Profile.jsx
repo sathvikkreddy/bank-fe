@@ -6,6 +6,7 @@ const Profile = () => {
   const [profile] = useOutletContext();
   const token = localStorage.getItem("authorization");
   console.log(token);
+  console.log(profile.userDetails.pin)
   const handleError = (error) => {
     console.error('Error displaying profile:', error);
     return <div>Error retrieving profile data.</div>; // Display user-friendly message

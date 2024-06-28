@@ -261,7 +261,7 @@ const GoldLoan = () => {
     <div>
       <PageTitle title="Gold Loan" />
       <div className="min-h-screen p-8">
-      <h1 className="text-xl font-bold mb-4 text-c400">Gold Loan</h1>
+      {/* <h1 className="text-xl font-bold mb-4 text-c400">Gold Loan</h1> */}
       <div className=" p-6 rounded shadow-md dark:shadow-teal-600">
           <div className="mb-4">
             <label className="block text-sm font-medium ">

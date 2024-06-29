@@ -182,13 +182,13 @@ const GoldLoan = () => {
       return;
     }
 
-    if (existingGoldLoan) {
-      setMessage(
-        'OOPS! you have "Applied Gold Loan". Request to Apply after its clearance...'
-      );
-      setShowDialog(true);
-      return;
-    }
+    // if (existingGoldLoan) {
+    //   setMessage(
+    //     'OOPS! you have "Applied Gold Loan". Request to Apply after its clearance...'
+    //   );
+    //   setShowDialog(true);
+    //   return;
+    // }
     const selectedLoan = loanDetails.find(
       (loan) => loan.loanDetails.amouuntGranted === selectedAmount
     );
@@ -206,7 +206,7 @@ const GoldLoan = () => {
             loanDetailsId: loanDetailsId,
             accountId: accountId,
             loanAmount: enteredAmount,
-            tenure: selectedTenure,
+            tenure: selectedTenure
           },
           pin: pin,
         }),
@@ -216,8 +216,7 @@ const GoldLoan = () => {
         if (response.status === 401) {
           throw new Error("Incorrect PIN");
         } else {
-          throw new Error(`Details Not Filled Properly!!\n
-          Fill All the Details`);
+          throw new Error(await response.text());
         }
       }
 

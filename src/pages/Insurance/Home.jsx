@@ -411,8 +411,11 @@ const ActiveInsuranceCard = ({ insurance, title }) => {
         navigate(`/insurance/${insurance.id}`);
       }}
     >
-      <div className="text-c500 font-semibold sm:text-lg text-sm text-center border-b dark:border-b-gray-600">
-        {title}
+      <div className=" flex justify-between text-c500 font-semibolb text-left sm:text-lg text-sm  border-b dark:border-b-gray-600">
+        {title} 
+        <div className={`font-semibold ${
+                insurance.status === "Active" || insurance.status === "Clear" ? "text-green-600" : "text-orange-600"
+              }`}>{insurance.status}</div>
       </div>
       <div className="font-semibold sm:text-base text-xs">
         {title === "Vehicle Insurance"

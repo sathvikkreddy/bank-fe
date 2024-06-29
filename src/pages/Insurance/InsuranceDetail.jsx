@@ -152,6 +152,14 @@ const InsuranceDetail = ({ activeInsurances, activeLoading }) => {
     <div>
       <PageTitle title={currentInsurance.insuranceType} />
       <div className="grid grid-cols-2 border border-gray-300 dark:border-gray-600 shadow-md dark:shadow-slate-600 rounded-md m-2 p-2">
+        
+      <div className="sm:grid sm:grid-cols-2 gap-2 py-2">
+          <div className="font-medium">STATUS :</div>
+          <div className={`font-semibold ${
+                currentInsurance.insurance.status === "Active" || currentInsurance.insurance.status === "Clear" ? "text-green-600" : "text-orange-600"
+              }`}>{currentInsurance.insurance.status}</div>
+        </div>
+        
         <div className="sm:grid sm:grid-cols-2 gap-2 py-2">
           <div className="font-medium">INSURANCE ID :</div>
           <div className="">{currentInsurance.insurance.id}</div>
@@ -171,7 +179,7 @@ const InsuranceDetail = ({ activeInsurances, activeLoading }) => {
             {currentInsurance.insurance.uniqueIdentificationNumber}
           </div>
         </div>
-        <div className="sm:grid sm:grid-cols-2 gap-2 py-2">
+        {/* <div className="sm:grid sm:grid-cols-2 gap-2 py-2">
           <div className="font-medium">
             {currentInsurance.insuranceType === "Vehicle Insurance"
               ? "VEHICLE MODEL YEAR"
@@ -179,7 +187,7 @@ const InsuranceDetail = ({ activeInsurances, activeLoading }) => {
             :{" "}
           </div>
           <div className="">{currentInsurance.insurance.yearOfPurchase}</div>
-        </div>
+        </div> */}
         <div className="sm:grid sm:grid-cols-2 gap-2 py-2">
           <div className="font-medium">
             {currentInsurance.insuranceType === "Vehicle Insurance"

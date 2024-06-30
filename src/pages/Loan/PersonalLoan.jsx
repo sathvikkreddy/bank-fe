@@ -189,13 +189,13 @@ const Personalloan = () => {
       return;
     }
 
-    if (existingPersonalLoan) {
-      setMessage(
-        'OOPS! you have "Applied Personal Loan". Request to Apply after its clearance...'
-      );
-      setShowDialog(true);
-      return;
-    }
+    // if (existingPersonalLoan) {
+    //   setMessage(
+    //     'OOPS! you have "Applied Personal Loan". Request to Apply after its clearance...'
+    //   );
+    //   setShowDialog(true);
+    //   return;
+    // }
 
     const selectedLoan = loanDetails.find(
       (loan) => loan.loanDetails.amouuntGranted === selectedAmount
@@ -214,7 +214,7 @@ const Personalloan = () => {
             loanDetailsId: loanDetailsId,
             accountId: accountId,
             loanAmount: enteredAmount,
-            tenure: selectedTenure,
+            tenure: selectedTenure
           },
           pin: pin,
         }),
@@ -224,8 +224,7 @@ const Personalloan = () => {
         if (response.status === 401) {
           throw new Error("Incorrect PIN");
         } else {
-          throw new Error(`Details Not Filled Properly!!\n
-          Fill All the Details`);
+          throw new Error(await response.text());
         }
       }
 
